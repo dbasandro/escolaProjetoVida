@@ -1,0 +1,206 @@
+<!-- Brand Logo -->
+<a href="/admin#" class="brand-link">
+    <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image elevation-0">
+    <span class="brand-text font-weight-light" style="font-size: 15px">
+        <strong>&nbsp;&nbsp; &nbsp;&nbsp;</strong>ESTOQUE</span>
+</a>
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+    <!-- Usuário logado -->
+    <div class="user-panel mt-2 pb-1 mb-2 d-flex">
+        <div class="image">
+            <img src="dist/img/usuarios/<%= foto_login %>" class="rounded-circle elevation-1" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block">
+                <%= nome_login %>
+            </a>
+            <span class="user-status">
+                <i class="fa fa-circle"></i>
+                <span>Online</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+--
+            <!-- /Menu Chat -->
+            <% if (Comunicacaomenu.length > 0) {%>
+                <% Comunicacaomenu.forEach((row, index) => { %>
+            <li class="nav-item has-treeview">
+
+                <!-- Chat -->
+                <a href="#" class="nav-link <%= Cadastro %>">
+                    <i class="nav-icon fas fa-comment-dots"></i>
+                    <p>Comunicação<i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+                <!-- /Sub menus -->
+                <ul class="nav nav-treeview" id="myMenu">
+                    <% if (Comunicacaosubmenu.length > 0) {%>
+                        <% Comunicacaosubmenu.forEach((row, index) => { %>
+                    <!-- Chat -->
+                    <li class="nav-item">
+                        <a href="<%= row.pagina %>" class="nav-link <%= CadChat %>">
+                            <i class="<%= row.icone %>" style="font-size: smaller;"></i>
+                            <p><%= row.nome %></p>
+                        </a>
+                    </li>
+                    <% }) %>
+                    <% } else { %>
+                    <% } %>   
+                </ul>
+            </li>
+            <% }) %>
+            <% } else { %>
+            <% } %>
+
+
+ <!---------------------------------------------------------------------------------------->           
+            <!-- /Menu cadastros -->
+            <% if (Cadastromenu.length > 0) {%>
+                <% Cadastromenu.forEach((row, index) => { %>
+            <li class="nav-item has-treeview ">
+
+                <!-- Cadastro -->
+                <a href="#" class="nav-link <%= Cadastro %>">
+                    <i class="nav-icon fas fa-tools"></i>
+                    <p>Cadastros<i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+                 <!-- /Sub menus -->
+                 <ul class="nav nav-treeview" id="myMenu">
+                    <% if (Cadastrosubmenu.length > 0) {%>
+                    <% Cadastrosubmenu.forEach((row, index) => { %>
+                                <li class="nav-item">
+                                    <a href="<%= row.pagina %>" class="nav-link <%= CadMaterial %>">
+                                        <i class="<%= row.icone %>" style="font-size: smaller;"></i>
+                                        <p><%= row.nome %></p>
+                                    </a>
+                                </li>
+                            </tr>
+                            <% }) %>
+                    <% } else { %>
+                    <% } %>    
+                </ul>      
+            </li>
+            <% }) %>
+            <% } else { %>
+            <% } %>
+
+
+
+    <!---->
+
+
+
+
+                   
+                <!-- /Menu Pedido -->
+                <li class="nav-item has-treeview"> 
+                    <% if (Pedidomenu.length > 0) {%>
+                        <% Pedidomenu.forEach((row, index) => { %>
+                    <a href="#" class="nav-link <%= Cadastro %>">
+                        <i class="fas far fa-edit nav-icon"></i>
+                        <p>Pedidos<i class="right fas fa-angle-left"></i>
+                         
+                        </p>
+                    </a>
+    
+                    <!-- /Sub menus -->
+                    <ul class="nav nav-treeview" id="myMenu">
+                        <% if (Pedidosubmenu.length > 0) {%>
+                            <% Pedidosubmenu.forEach((row, index) => { %>
+    
+                     <!-- Novo -->
+                     <li class="nav-item">
+                        <a href="<%= row.pagina %>" class="nav-link <%= CadMaterial %>">
+                            <i class="<%= row.icone %>" style="font-size: smaller;"></i>
+                            <p><%= row.nome %></p>
+                        </a>
+                    </li>
+                    <% }) %>
+                    <% } else { %>
+                    <% } %>  
+
+                  
+    
+                </li>      
+            </ul>   
+            <% }) %>
+            <% } else { %>
+            <% } %>       
+
+
+                <!-- /Menu Entrega -->
+                <li class="nav-item has-treeview">
+                    <% if (Entregamenu.length > 0) {%>
+                        <% Entregamenu.forEach((row, index) => { %>
+                    <a href="#" class="nav-link <%= Cadastro %>">
+                        <i class="fas far fa-truck-loading nav-icon"></i>
+                        <p>Entregas<i class="right fas fa-angle-left"></i>
+                         
+                        </p>
+                    </a>
+                    
+                    <!-- /Sub menus -->
+                    <ul class="nav nav-treeview" id="myMenu">
+                        <% if (Entregasubmenu.length > 0) {%>
+                            <% Entregasubmenu.forEach((row, index) => { %>
+                     <!-- Em aberto -->
+                     <li class="nav-item">
+                        <a href="<%= row.pagina %>" class="nav-link <%= CadMaterial %>">
+                            <i class="<%= row.icone %>" style="font-size: smaller;"></i>
+                            <p><%= row.nome %></p>
+                        </a>
+                    </li>
+
+                    <% }) %>
+                    <% } else { %>
+                    <% } %>  
+                </li>      
+            </ul>     
+            <% }) %>
+            <% } else { %>
+            <% } %>  
+
+
+                <!-- /Menu Relatorio -->
+            <li class="nav-item has-treeview ">
+                        <% if (Relatoriomenu.length > 0) {%>
+                            <% Relatoriomenu.forEach((row, index) => { %>
+                <!-- Relatorio -->
+                <a href="#" class="nav-link <%= Cadastro %>">
+                    <i class="fas fa-chart-pie nav-icon"></i>
+                    <p>Relatórios<i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+                <!-- /Sub menus -->
+                <ul class="nav nav-treeview" id="myMenu">
+                    <% if (Relatoriosubmenu.length > 0) {%>
+                        <% Relatoriosubmenu.forEach((row, index) => { %>
+                                        <!-- Categoria -->
+                                        <li class="nav-item">
+                                            <a href="<%= row.pagina %>" class="nav-link <%= CadMaterial %>">
+                                                <i class="<%= row.icone %>" style="font-size: smaller;"></i>
+                                                <p><%= row.nome %></p>
+                                            </a>
+                                        </li>
+                                        <% }) %>
+                                        <% } else { %>
+                                        <% } %>  
+            </li>
+
+        </ul>
+        <% }) %>
+        <% } else { %>
+        <% } %>  
+    </nav>
+</div>

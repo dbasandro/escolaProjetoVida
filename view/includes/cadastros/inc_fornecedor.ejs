@@ -1,0 +1,575 @@
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+       <div class="row sm-2">
+          <!-- Título -->
+          <div class="col-sm-6">
+             <h1>Cadastro de Fornecedores</h1>
+          </div>
+          <!-- Navegação histórica -->
+          <div class="col-sm-6">
+             <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="admin">Home</a></li>
+                <li class="breadcrumb-item active">Cadastros</li>
+                <li class="breadcrumb-item active">Fornecedor</li>
+             </ol>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- Page Content (conteúdo) -->
+ <section class="content">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-sm-12">
+             <!-- Para iniciar fechado, adicione collapsed-card na class-->
+             <div class="card card-primary card-outline">
+                <!-- ######################################################################### Cabeçalho -->
+                <div class="card-header">
+                   <!-- Botões -->
+                   <div class="btn-group">
+                      <!-- Abre o modal para INSERT -->
+                      <% DTPermissoes.forEach((row, index) => { %>
+                        <% if (row.adicionar  == 1) {%>
+                      <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                         data-target="#modalADD">&nbsp;Adicionar&nbsp;
+                      </button>
+                      <% } else { %>
+                        <% } %>
+                        <% }) %>
+                   </div>
+                   <div class="btn-group">
+                      <!-- Botão para exportar dados da tabela (tableExport) -->
+                      <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle"
+                         data-toggle="dropdown">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                      <span class="caret"></span>
+                      </button>
+                      <!-- Exportar -->
+                      <div class="dropdown-menu" role="menu">
+                         <!-- Exportar para Excel -->
+                         <a class="dropdown-item" style="cursor: pointer;" onclick="(function(){
+                            $('#TBtable').tableExport({type:'excel', fileName: 'Fornecedores', exportHiddenCells: true});                
+                            })()"><i class="fas fa-file-excel" style="color: #118311;"></i>&nbsp;&nbsp;Ms-Excel</a>
+                         <!-- Exportar para PDF -->
+                         <a class="dropdown-item" style="cursor: pointer;" onclick="(function(){
+                            $('#TBtable').tableExport({type:'pdf', fileName: 'Fornecedores', exportHiddenCells: true});               
+                            })()"><i class="fas fa-file-pdf" style="color: #d17021;"></i>&nbsp;&nbsp;PDF</a>
+                      </div>
+                   </div>
+                   <!-- Botão Ocultar ou exibir o card -->
+                   <div class="card-tools">
+                      <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                         title="Collapse">
+                      <i class="fas fa-minus"></i>
+                      </button>
+                      <!-- Botão destruir card -->
+                      <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                         title="Remove">
+                      <i class="fas fa-times"></i>
+                      </button>
+                   </div>
+                </div>
+                <!-- ######################################################################### Tabela -->
+                <div class="card-body">
+                   <% if (DTMaterial.length > 0) {%>
+                   <table id="TBtable" class="table-bordered">
+                      <!-- Cabeçalho: Titulos da tabela -->
+                      <thead class="thead-light">
+                         <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Razão Social</th>
+                            <th scope="col">Nome Fantasia</th>
+                            <th scope="col">CNPJ</th>
+                            <th scope="col">Inscrição</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">bairro</th>
+                            <th scope="col">cidade</th>
+                            <th scope="col">uf</th>
+                            <th scope="col">cep</th>
+                            <th scope="col">telefone</th>
+                            <th scope="col">e-mail</th>
+                            <th scope="col">contato</th>
+                            <th scope="col">Observação</th>
+                            <th scope="col">Opcões</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <!-- Detalhes: Dados da tabela -->
+                         <% DTMaterial.forEach((row, index) => { %>
+                         <tr>
+                            <td><%= row.cod %></td>
+                            <td><%= row.razao_social %></td>
+                            <td><%= row.nome_fantazia %></td>
+                            <td><%= row.cnpj %></td>
+                            <td><%= row.inscrissao %></td>
+                            <td><%= row.endereco %></td>
+                            <td><%= row.bairro %></td>
+                            <td><%= row.cidade %></td>
+                            <td><%= row.uf %></td>
+                            <td><%= row.cep %></td>
+                            <td><%= row.telefone %></td>
+                            <td><%= row.email %></td>
+                            <td><%= row.contato %></td>
+                            <td><%= row.observacao %></td>
+                            <!-- Coluna: Opções -->
+                            <td style="min-width: 130px;">
+                              <% if (row.editar  == 1) {%>
+                               <button class="btn btn-xs btn-warning" data-toggle="modal"
+                                  data-target="#modalEDIT" onclick="(function(){
+                                  //Setando o valor nos campos de texto 
+                                  document.getElementById('cod_EDIT').value = '<%= row.cod %>';
+                                  document.getElementById('razao_social_EDIT').value = '<%= row.razao_social %>';
+                                  document.getElementById('nome_fantazia_EDIT').value = '<%= row.nome_fantazia %>';
+                                  document.getElementById('cnpj_EDIT').value = '<%= row.cnpj %>';
+                                  document.getElementById('inscrissao_EDIT').value = '<%= row.inscrissao %>';
+                                  document.getElementById('endereco_EDIT').value = '<%= row.endereco %>';
+                                  document.getElementById('bairro_EDIT').value = '<%= row.bairro %>';
+                                  document.getElementById('cidade_EDIT').value = '<%= row.cidade %>';
+                                  document.getElementById('uf_EDIT').value = '<%= row.uf %>';
+                                  document.getElementById('cep_EDIT').value = '<%= row.cep %>';
+                                  document.getElementById('telefone_EDIT').value = '<%= row.telefone %>';
+                                  document.getElementById('email_EDIT').value = '<%= row.email %>';
+                                  document.getElementById('contato_EDIT').value = '<%= row.contato %>';
+                                  document.getElementById('observacao_EDIT').value = '<%= row.observacao %>';
+
+                                  //Setando o valor no combobox grupo
+                                                    $('#uf_EDIT').val('<%= row.uf %>');
+                                                    $('#uf_EDIT').trigger('change');
+                                  })()">&nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;
+                               </button>
+                               <% } else { %>
+                                 <% } %>
+                               <!-- Função anónima dentro da classe button que seta o cod do registro selecionado no campo oculto do modal -->
+                               
+                                 <% if (row.eliminar  == 1) {%>
+                               <button class="btn btn-xs btn-danger" data-toggle="modal"
+                                  data-target="#modalDEL" onclick="(function(){
+                                  document.getElementById('cod_DEL').textContent = '<%= row.cod %>';
+                                  })()">Eliminar
+                               </button>
+                               <% } else { %>
+                                 <% } %>
+                                 
+                         </tr>
+                         <% }) %>
+                      </tbody>
+                      <!-- Pesquisa -->
+                      <tfoot>
+                         <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Razão Social</th>
+                            <th scope="col">Nome Fantasia</th>
+                            <th scope="col">CNPJ</th>
+                            <th scope="col">Inscrição</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">bairro</th>
+                            <th scope="col">cidade</th>
+                            <th scope="col">UF</th>
+                            <th scope="col">cep</th>
+                            <th scope="col">telefone</th>
+                            <th scope="col">e-mail</th>
+                            <th scope="col">contato</th>
+                            <th scope="col">Observação</th>
+                            <th class="th-none" scope="col">Opcões</th>
+                         </tr>
+                      </tfoot>
+                   </table>
+                   <% } else { %>
+                   <!-- Não existe dados na tabela -->
+                   <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                      style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                      registro.
+                   </p>
+                   <% } %>
+                </div>
+                <!-- ######################################################################### Modal para ADICIONAR -->
+                <div class="modal fade" id="modalADD" data-backdrop="static">
+                   <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                         <!-- Header -->
+                         <div class="modal-header">
+                            <h4 class="modal-title">Adicionar</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                         </div>
+                         <!-- Conteúdo central do modal -->
+                         <form role="form" action="/addFornecedor" method="post" enctype="multipart/form-data">
+                            <!-- Campos do formulário -->
+                            <!-- Campos do formulário -->
+                            <div class="modal-body">
+                               <!-- Cod -->
+                               <div class="row" style="display: none;">
+                                  <div class="col-sm-12">
+                                     <div class="form-group">
+                                        <label for="cod_ADD" class="label">Cod</label>
+                                        <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                           name="cod_ADD" id="cod_ADD" placeholder="Cod" readonly=“true”>
+                                     </div>
+                                  </div>
+                               </div>
+                               <div class="col-sm-12">
+                                  <!-- Campos de cadastro -->
+                                  <div class="row">
+                                     <div class="col-sm-12">
+                                        <div class="row">
+                                           <!-- Razão Social --> 
+                                           <div class="col-sm-12">
+                                              <div class="form-group">
+                                                 <label for="razao_social_ADD" class="label">Razão Social</label>
+                                                 <input type="text" maxlength="150" autocomplete="off" class="form-control form-control-sm"
+                                                    name="razao_social_ADD" id="razao_social_ADD"
+                                                    placeholder="Razão Social" required>
+                                              </div>
+                                           </div>
+                                           <!-- Nome Fantazia -->
+                                           <div class="col-sm-12">
+                                              <div class="form-group">
+                                                 <label for="nome_fantazia_ADD" class="label">Nome Fantazia</label>
+                                                 <input type="text" maxlength="150" autocomplete="off" class="form-control form-control-sm"
+                                                    name="nome_fantazia_ADD" id="nome_fantazia_ADD"
+                                                    placeholder="Nome Fantasia" required>
+                                              </div>
+                                           </div>
+                                           <!-- CNPJ -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="cnpj_ADD" class="label">CNPJ/CPF</label>
+                                                 <input type="number" maxlength="14" autocomplete="off" class="form-control form-control-sm"
+                                                    name="cnpj_ADD" id="cnpj_ADD"
+                                                    placeholder="CNPJ/CPF" required>
+                                              </div>
+                                           </div>
+                                           <!-- inscrissao -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="inscrissao_ADD" class="label">Inscrição</label>
+                                                 <input type="number" maxlength="40" autocomplete="off" class="form-control form-control-sm"
+                                                    name="inscrissao_ADD" id="inscrissao_ADD"
+                                                    placeholder="Inscrição" required>
+                                              </div>
+                                           </div>
+                                           <!-- endereco -->
+                                           <div class="col-sm-12">
+                                              <div class="form-group">
+                                                 <label for="endereco_ADD" class="label">Endereço</label>
+                                                 <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                    name="endereco_ADD" id="endereco_ADD"
+                                                    placeholder="Endereço" required>
+                                              </div>
+                                           </div>
+                                           <!-- bairro -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="bairro_ADD" class="label">Bairro</label>
+                                                 <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                    name="bairro_ADD" id="bairro_ADD"
+                                                    placeholder="Bairro" required>
+                                              </div>
+                                           </div>
+                                           <!-- Cidade -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="cidade_ADD" class="label">Cidade</label>
+                                                 <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                    name="cidade_ADD" id="cidade_ADD"
+                                                    placeholder="Cidade" required>
+                                              </div>
+                                           </div>
+                                           <!-- uf -->
+                                     <!-- uf -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="uf_ADD" class="label">UF</label>
+                                           <select class="form-control form-control-sm select2" 
+                                           style="width: 100%;" name="uf_ADD" id="uf_ADD" required>
+                                           <% DTEstados.forEach((row, index) => { %>  
+                                           <option value="<%= row.sigla %>"><%= row.sigla %>
+                                           </option>
+                                           <% }) %>
+                                           </select>
+                                        </div>
+                                     </div>
+                                           <!-- cep -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="cep_ADD" class="label">CEP</label>
+                                                 <input type="number" maxlength="8" autocomplete="off"class="form-control form-control-sm"
+                                                    name="cep_ADD" id="cep_ADD"
+                                                    placeholder="CEP" required>
+                                              </div>
+                                           </div>
+                                           <!-- telefone -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="telefone_ADD" class="label">Telefone</label>
+                                                 <input type="number" maxlength="14" autocomplete="off" class="form-control form-control-sm"
+                                                    name="telefone_ADD" id="telefone_ADD"
+                                                    placeholder="Telefone" required>
+                                              </div>
+                                           </div>
+                                           <!-- email -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="email_ADD" class="label">E-mail</label>
+                                                 <input type="email" maxlength="50" autocomplete="off" class="form-control form-control-sm"
+                                                    name="email_ADD" id="email_ADD"
+                                                    placeholder="E-mail" required>
+                                              </div>
+                                           </div>
+                                           <!-- contato -->
+                                           <div class="col-sm-6">
+                                              <div class="form-group">
+                                                 <label for="contato_ADD" class="label">Contato</label>
+                                                 <input type="text"  maxlength="50" autocomplete="off" class="form-control form-control-sm"
+                                                    name="contato_ADD" id="contato_ADD"
+                                                    placeholder="Contato" required>
+                                              </div>
+                                           </div>
+                                           <!-- observacao -->
+                                           <div class="col-sm-6">
+                                            <div class="form-group">
+                                               <label for="observacao_ADD"  class="label">Observação</label>
+                                               <input type="text"  maxlength="255" autocomplete="off" class="form-control form-control-sm"
+                                                  name="observacao_ADD" id="observacao_ADD"
+                                                  placeholder="Observação" required>
+                                            </div>
+                                         </div>
+                                           <!-- Botões -->
+                                           <div class="modal-footer justify-content-between">
+                                              <button type="submit"
+                                                 class="btn btn-primary" id="btnSalvar_ADD">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                              <button type="button" class="btn btn-secondary"
+                                                 data-dismiss="modal">Cancelar</button>
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                      </div>
+                   </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+          <!-- ######################################################################### Modal para EDITAR -->
+          <div class="modal fade" id="modalEDIT" data-backdrop="static">
+             <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                   <!-- Header -->
+                   <div class="modal-header">
+                      <h4 class="modal-title">Editar</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                   </div>
+                   <!-- Conteúdo central do modal -->
+                   <form role="form"
+                      action="/editFornecedor/ <?= document.getElementById('cod_EDIT').value ?>"
+                      method="post" enctype="multipart/form-data">
+                      <!-- Formulário para Editar usuário -->
+                      <div class="modal-body">
+                         <!-- Cod -->
+                         <div class="row" style="display: none;">
+                            <div class="col-sm-12">
+                               <div class="form-group">
+                                  <label for="cod_EDIT" class="label">Cod</label>
+                                  <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                     name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+                               </div>
+                            </div>
+                         </div>
+                         <!-- Campos de cadastro -->
+                         <div class="row">
+                            <div class="col-sm-12" style="text-align: center;">
+                            </div>
+                         </div>
+                         <div class="col-sm-12">
+                            <div class="row">
+                               <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                                  <div class="row">
+                                     <!-- Razão Social -->
+                                     <div class="col-sm-12">
+                                        <div class="form-group">
+                                           <label for="razao_social_EDIT" class="label">Razão Social</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="razao_social_EDIT" id="razao_social_EDIT"
+                                              placeholder="Razão Social" required>
+                                        </div>
+                                     </div>
+                                     <!-- Nome Fantazia -->
+                                     <div class="col-sm-12">
+                                        <div class="form-group">
+                                           <label for="nome_fantazia_EDIT" class="label">Nome Fantasia</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="nome_fantazia_EDIT" id="nome_fantazia_EDIT"
+                                              placeholder="Nome Fantasia" required>
+                                        </div>
+                                     </div>
+                                     <!-- CNPJ -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="cnpj_EDIT" class="label">CNPJ</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="cnpj_EDIT" id="cnpj_EDIT"
+                                              placeholder="CNPJ" required>
+                                        </div>
+                                     </div>
+                                     <!-- inscrissao -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="inscrissao_EDIT" class="label">Inscrição</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="inscrissao_EDIT" id="inscrissao_EDIT"
+                                              placeholder="Inscrição" required>
+                                        </div>
+                                     </div>
+                                     <!-- endereco -->
+                                     <div class="col-sm-12">
+                                        <div class="form-group">
+                                           <label for="endereco_EDIT" class="label">Endereço</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="endereco_EDIT" id="endereco_EDIT"
+                                              placeholder="Endereço" required>
+                                        </div>
+                                     </div>
+                                     <!-- bairro -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="bairro_EDIT" class="label">Bairro</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="bairro_EDIT" id="bairro_EDIT"
+                                              placeholder="Bairro" required>
+                                        </div>
+                                     </div>
+                                     <!-- cidade -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="cidade_EDIT" class="label">Cidade</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="cidade_EDIT" id="cidade_EDIT"
+                                              placeholder="Bairro" required>
+                                        </div>
+                                     </div>
+                                     <!-- uf -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="uf_EDIT" class="label">UF</label>
+                                           <select class="form-control form-control-sm select2" 
+                                           style="width: 100%;" name="uf_EDIT" id="uf_EDIT" required>
+                                           <option id="uf_EDIT"></option>
+                                           <% DTEstados.forEach((row, index) => { %>  
+                                           <option value="<%= row.sigla %>"><%= row.sigla %>
+                                           </option>
+                                           <% }) %>
+                                           </select>
+                                        </div>
+                                     </div>
+                                     <!-- cep -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="cep_EDIT" class="label">CEP</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="cep_EDIT" id="cep_EDIT"
+                                              placeholder="CEP" required>
+                                        </div>
+                                     </div>
+                                     <!-- telefone -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="telefone_EDIT" class="label">Telefone</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="telefone_EDIT" id="telefone_EDIT"
+                                              placeholder="Telefone" required>
+                                        </div>
+                                     </div>
+                                     <!-- email -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="email_EDIT" class="label">E-mail</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="email_EDIT" id="email_EDIT"
+                                              placeholder="E-mail" required>
+                                        </div>
+                                     </div>
+                                     <!-- contato -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="contato_EDIT" class="label">Contato</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="contato_EDIT" id="contato_EDIT"
+                                              placeholder="Contato" required>
+                                        </div>
+                                     </div>
+                                     <!-- observacao -->
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                           <label for="observacao_EDIT" class="label">Observação</label>
+                                           <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                              name="observacao_EDIT" id="observacao_EDIT"
+                                              placeholder="Observação" required>
+                                        </div>
+                                     </div>
+
+                                 
+
+
+
+
+                                     <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                           class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                           data-dismiss="modal">Cancelar</button>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                </div>
+                <!-- Botões -->
+                </form>
+             </div>
+          </div>
+       </div>
+       <!-- ######################################################################### Modal para ELIMINAR -->
+       <div class="modal fade" id="modalDEL" id="modal-danger" data-backdrop="static">
+          <div class="modal-dialog">
+             <div class="modal-content bg-danger">
+                <div class="modal-header">
+                   <h4 class="modal-title">Atenção!</h4>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                   </button>
+                </div>
+                <div class="modal-body">
+                   <p>Tem certeza que deseja eliminar o registro selecionado?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                   <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                   Não, cancelar
+                   </button>
+                   <!-- Esse span é oculto pois apenas recebe o texto contendo o cod para eliminação na função abaixo -->
+                   <span style="display:none" id="cod_DEL"></span>
+                   <!-- Função anónima dentro da classe button que direciona para a route /delete/:id após o usuário clicar em sim no modal -->
+                   <button type="button" class="btn btn-outline-light" onclick="(function() {
+                      window.location = '/delFornecedor/' + document.getElementById('cod_DEL').textContent;
+                      })()" id="btnDeletar_DEL">Sim, eliminar
+                   </button>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    </div>
+    </div>
+    </div>
+ </section>
+ <!-- Grava o texto recebido da variável status_Crud do routes/usuario
+    lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+    e dispara uma função de alerta do toastr de acordo com o texto -->
+ <span style="display:none" id='status_Crud'><%= status_Crud %></span>

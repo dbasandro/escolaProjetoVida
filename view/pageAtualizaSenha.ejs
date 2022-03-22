@@ -1,0 +1,63 @@
+<form role="form"
+action="/editLogin/ <?= document.getElementById('cod_EDIT').value ?>"
+method="post" enctype="multipart/form-data">
+<!-- Formulário para Editar usuário -->
+<div class="modal-body">
+    <!-- Cod -->
+    <div class="row" style="display: none;">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="cod_EDIT" class="label">Cod</label>
+                <input type="text" autocomplete="off" class="form-control form-control-sm"
+                    name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campos de cadastro -->
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center;">
+            </div>
+        </div>
+    
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                    <div class="row">
+                        <!-- Nome -->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="usuario_EDIT" class="label">Usuário</label>
+                                <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                    name="usuario_EDIT" id="usuario_EDIT"
+                                    placeholder="Usuário" required>
+                            </div>
+                        </div>
+
+                                            <!-- Campo senha -->
+                    <div class="form-group">
+                        <small class="form-text login-text-muted mb-1">Senha</small>
+                        <div class="input-icon-group">
+                            <input autocomplete="off" type="password" class="login-form-control login-form-control-sm" id="senha"
+                                name="senha" placeholder="Senha" value="">
+                            <div class="input-icon" id="revelar_PASS" onclick="(function(){
+                                revelar(document.getElementById('revelar_PASS'), document.getElementById('senha'));
+                              })()">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                        
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit"
+                                class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>                                                
+        </div>
+    </div>
+</div>

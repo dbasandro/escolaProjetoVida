@@ -1,0 +1,808 @@
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+       <div class="row sm-2">
+          <!-- Título -->
+          <div class="col-sm-6">
+             <h1>Cadastro de Pedidos - Fundamental</h1>
+          </div>
+          <% Perfil.forEach((row, index) => { %>
+            <% if (row.id_perfil  == 1 || row.id_perfil  == 2) {%>
+       <select id="selectBox" onchange="changeFunc();">
+        <option value="0">-- Selecione a unidade --</option>
+        <option value="1">Projeto Vida Infantil</option>
+        <option value="2">Projeto Vida - Fundamental</option>
+        <option value="3">Novo Pátio</option>
+       </select>
+       <% } else { %>
+        <% } %>
+        <% }) %>
+       </div>
+    </div>
+ </section>
+ <!-- Page Content (conteúdo) -->
+ <section class="content">
+    <div class="container-fluid">
+       <div class="row">
+
+
+<script>
+$(document).ready(function() {
+   
+$("#TBtable").dataTable().fnDestroy();
+$.fn.dataTable.ext.errMode = 'none';
+    $('#TBtable').DataTable( {
+      "bDestroy": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+        }
+    } );
+} );
+
+</script>
+
+
+         <script type="text/javascript">
+
+            function changeFunc() {
+             var selectBox = document.getElementById("selectBox");
+             var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+             
+             if (selectBox.value === '1') {
+             window.location.href = "/requisicao_infantil";
+             }
+             if (selectBox.value === '2') {
+             window.location.href = "/requisicao_sandro";
+             }
+             if (selectBox.value === '3') {
+             window.location.href = "/requisicao_novopatio";
+             }
+            }
+         
+           </script>
+          </head>
+
+          <body>
+            
+
+
+                     
+                             
+                <script>
+
+
+                   
+
+// Definir variáveis universais
+var nomes =[];
+var unidades =[];
+var cods =[]; 
+var valorTotal = [];
+var valorProduto = [];
+var qtd = [];
+var matriz = []; 
+var users = []; 
+var estoques = [];
+var id_pedidos = [];
+
+
+//FUNÇÃO QUE ADICIONA e EXCLUi ÍTEM SELECIONADO NO ARRAY E NA DIV (nome produto, valor produto, checkbox)
+
+
+
+function agrupaarray() {
+   let resultado = cods.map((p, i) => {
+  return [p, valorTotal[i].toFixed(2), valorProduto[i], qtd[i] ,unidades[i], users[i], id_pedidos[i]] 
+})
+
+
+
+submitForm()
+
+
+function submitForm() { // submits form
+   let observacao = document.getElementById('observacao_ADD').value;
+   if (observacao.length > 0) {
+      
+    document.getElementById("ismForm").submit();
+    
+   }
+}
+
+if (document.getElementById("ismForm")) {
+    setTimeout("submitForm()", 5000); // set timout 
+}
+
+let observacao = document.getElementById('observacao_ADD').value;
+
+let cod = document.getElementById('cod_ADD');
+
+cod.value = JSON.stringify(resultado);
+
+let dados = (nomes.length);
+
+console.log(observacao.length)
+
+if (dados > 0) {
+   alert('Solitação feita com sucesso !');
+fetch("/addProduto_sandro", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(resultado),
+          })
+            //.then((response) => response.json())
+            .then((results) => {
+              //console.log("Success:", results);
+            })
+            .catch((error) => {
+              //console.error("Error:", error);
+            });
+
+         
+         
+         }
+      
+
+
+}
+
+
+function editado(editvalue, value) {
+   var indices = nomes.findIndex((item) => item == editvalue);
+
+
+console.log(editvalue)
+vl = document.getElementById(editvalue)
+qtd[indices] =+ vl.innerHTML
+
+var quantidade = document.getElementById(editvalue);
+var total = document.getElementById('total' + editvalue);
+
+valorTotal[indices] = valorProduto[indices] * qtd[indices];
+total.innerHTML = valorTotal[indices].toFixed(2);;
+
+valorCompra();
+
+if (qtd[indices] <= parseInt(estoques[indices].replace(/[^\d]+/g,''))){
+   var aviso = document.getElementById('aviso' + editvalue); 
+   aviso.style.display = 'none'
+   }
+
+   if (qtd[indices] >= parseInt(estoques[indices].replace(/[^\d]+/g,''))){
+   var aviso = document.getElementById('aviso' + editvalue);
+   aviso.style.display = 'block'
+   }
+
+}   
+
+
+
+function adicionaeexcluidiv(nome, valor, check, unidade, user, estoque) {
+
+
+
+   var ApagaBotao = document.getElementById("btnSalvar_ADD");
+
+   ApagaBotao.style.display = "none"
+
+//SELECINANDO AONDE SERÁ INSERIDO A DIV
+let dependentes_container = document.querySelector(".cart");
+
+if (unidade == 'Novo Pátio') {
+                unidade = 3;
+            } else if (unidade == 'Projeto Vida - Fundamental')
+            {
+                unidade = 2;
+            }
+            else if (unidade == 'Projeto Vida Infantil')
+            {
+                unidade = 1;
+            }
+            ;
+
+
+let testes = nome
+
+let id_pedido = 0
+
+//VERIFICANDO SE CHECKBOX ESTÁ ATIVO OU INATIVO
+   let checkbox = document.getElementById(check);
+if(checkbox.checked) {
+
+
+// ATIVO = VERIFICAR SE O NOME JA EXISTE NO ARRAY
+result = nomes.includes(nome);
+if  (result === false) {
+nomes.push(nome);
+valorTotal.push(0);
+valorProduto.push(valor);
+qtd.push(0);
+unidades.push(unidade);
+cods.push(check)
+users.push(user)
+id_pedidos.push(id_pedido)
+estoques.push(estoque);}
+else {}
+
+
+
+
+
+    let dependente_container = `<div class="cart--item" id="`+testes+valor+`">
+                       <div class="cart--item-nome">`+testes+`</div>
+                       <div class="cart--item--qtarea">
+                         <div class="cart--item-qtmenos" onclick="array2('`+testes+`','`+valor+`')">-</div>
+                         <div onkeypress="return (this.innerText.length <= 4)" class="cart--item--qt" id="`+testes+`" contenteditable="true" onkeyup="editado('`+testes+`','`+valor+`')" >0</div>
+                         <div class="cart--item-qtmais" onclick="array('`+testes+`','`+valor+`')">+</div>
+                       
+                       </div>
+                       <td>
+                        Total R$: <span id="total`+testes+`">00,00</span>
+</td>
+
+</div>
+<div style="color: #ff2401; display: none;" id="aviso`+testes+`">Aviso: Quantidade é superior do que o estoque atual</div>
+`;
+    dependentes_container.innerHTML += dependente_container;
+    console.log("O cliente marcou o checkbox");
+} else {
+
+   item = nomes.indexOf(testes);
+
+   var indice = nomes.findIndex((item) => item == testes);
+
+  
+   nomes.splice(indice, 1);
+   valorTotal.splice(indice, 1);
+   valorProduto.splice(indice, 1);
+   qtd.splice(indice, 1);
+   id_pedidos.splice(indice, 1);
+   estoques.splice(indice, 1);
+
+   valorCompra();
+
+excluir(nome+valor);
+    console.log("O cliente não marcou o checkbox");
+    
+};
+
+function excluir (nome) {   
+   document.getElementById(nome).remove();
+   document.getElementById("aviso"+testes).remove();
+};
+                  };
+
+
+
+function array(nome, valor) {
+item = nomes.indexOf(nome)
+console.log(item + 'posição')
+adicionarItem(item, nome)
+}
+
+function array2(nome, valor) {
+item = nomes.indexOf(nome)
+console.log(item + 'posição')
+removerItem(item, nome)
+}
+
+// Aumentar a quantidade de itens de um produto
+function adicionarItem(item, nome) {
+   
+   
+if (qtd[item] < parseInt(estoques[item].replace(/[^\d]+/g,''))){
+ 
+   console.log(qtd[item],estoques[item])
+	var quantidade = document.getElementById(nome);
+   //console.log(quantidade)
+
+	var total = document.getElementById('total' + nome);
+	qtd[item] += 1;
+	valorTotal[item] = valorProduto[item] * qtd[item];
+	quantidade.innerHTML = qtd[item];
+	total.innerHTML = valorTotal[item].toFixed(2);;
+	//console.log(quantidade);
+	valorCompra();
+ //  console.log(estoques[item])
+  // console.log(qtd[item])
+  var ApagaBotao = document.getElementById("btnSalvar_ADD");
+
+ApagaBotao.style.display = "block"
+
+if (qtd.includes(0) == true) {
+   var ApagaBotao = document.getElementById("btnSalvar_ADD");
+
+ApagaBotao.style.display = "none"
+   }
+}
+   else {
+      
+
+
+         //console.log(nome)
+	var quantidade = document.getElementById(nome);
+   //console.log(quantidade)
+
+	var total = document.getElementById('total' + nome);
+	qtd[item] += 1;
+	valorTotal[item] = valorProduto[item] * qtd[item];
+	quantidade.innerHTML = qtd[item];
+	total.innerHTML = valorTotal[item].toFixed(2);;
+	//console.log(quantidade);
+	valorCompra();
+
+   console.log(qtd[item],parseInt(estoques[item].replace(/[^\d]+/g,'')))
+      var aviso = document.getElementById('aviso' + nome);
+      
+      aviso.style.display = 'block'
+  // console.log(estoques[item])
+  // console.log(qtd[item])
+  var ApagaBotao = document.getElementById("btnSalvar_ADD");
+
+ApagaBotao.style.display = "block"
+
+if (qtd.includes(0) == true) {
+   var ApagaBotao = document.getElementById("btnSalvar_ADD");
+
+ApagaBotao.style.display = "none"
+   }
+   }
+}
+
+// Diminuir a quantidade de itens de um produto
+function removerItem(item, nome) {
+
+
+	if (qtd[item] > 0) {
+		qtd[item] -= 1;
+		var quantidade = document.getElementById(nome);
+		var total = document.getElementById('total' + nome);
+		quantidade.innerHTML = qtd[item];
+		valorTotal[item] = valorProduto[item] * qtd[item];
+		total.innerHTML = valorTotal[item].toFixed(2);
+		valorCompra();
+
+      console.log(qtd[item],estoques[item])
+   if (qtd[item] <= parseInt(estoques[item].replace(/[^\d]+/g,''))){
+   var aviso = document.getElementById('aviso' + nome);
+      
+      aviso.style.display = 'none'
+   }
+	}
+
+   if (qtd.includes(0) == true) {
+   var ApagaBotao = document.getElementById("btnSalvar_ADD");
+
+ApagaBotao.style.display = "none"
+   }
+}
+
+// Remover o produto
+function removerProduto(produto) {
+	var pai = document.getElementById('carrinho');
+	var filho = document.getElementById('produto' + produto);
+	if (confirm('Confirmar exclusão?')) {
+		valorTotal[produto] -= (valorProduto[produto] * qtd[produto]);
+		qtd[produto] = 0;
+		pai.removeChild(filho);
+		valorCompra();
+	}
+}
+
+// Calcular o valor total da compra
+function valorCompra() {
+	var valorTotalCompra = document.getElementById('valorTotalCompra');
+	var valor = 0;;
+	for (var i = 0; i < valorTotal.length; i++) {
+		valor += valorTotal[i];
+	}
+	valorTotalCompra.innerHTML = valor.toFixed(2);
+	//console.log(valorTotal.length);
+}
+
+// Finalizar a compra e zerar os valores
+function finalizarCompra() {
+	var nome = document.getElementById('nome').innerHTML;
+	alert('Obrigada pela compra, ' + nome + '!');
+	document.location.reload(true);
+}
+
+
+
+
+                    </script>
+                  
+                  
+                  
+                  <section class="content-header">
+                     <div class="container-fluid">
+                         <div class="row sm-2">
+                             <!-- Título -->
+                             
+                             <!-- Navegação histórica -->
+
+                         </div>
+                     </div>
+                 </section>
+                 
+                 <!-- Page Content (conteúdo) -->
+                 <section class="content">
+                     <div class="container-fluid">
+                         <div class="row">
+                             <div class="col-sm-6">
+                 
+                                 <!-- Para iniciar fechado, adicione collapsed-card na class-->
+                                 <div class="card card-primary card-outline" style="width: 31rem;">
+                 
+                                     <!-- ######################################################################### Cabeçalho -->
+                                     <div class="card-header">
+                 
+
+ 
+                 
+                                         <!-- Botão Ocultar ou exibir o card -->
+                                         <div class="card-tools">
+                                             <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                                 title="Collapse">
+                                                 <i class="fas fa-minus"></i>
+                                             </button>
+                                             <!-- Botão destruir card -->
+                                             <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                                                 title="Remove">
+                                                 <i class="fas fa-times"></i>
+                                             </button>
+                                         </div>
+                 
+                                     </div> 
+
+
+                <!-- ######################################################################### Tabela -->
+                <div class="card-body">
+
+
+
+                  <% if (DTMaterial.length > 0) {%>
+                      
+                  <table id="TBtable" class="table-bordered">
+
+                      <!-- Cabeçalho: Titulos da tabela -->
+                      <thead class="thead-light">
+                          <tr>
+                              <th scope="col">Cod</th>
+                              <th scope="col">Material</th>
+                              <th scope="col">Descricao</th>
+ 
+                              
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                          <!-- Detalhes: Dados da tabela -->
+                          <% DTMaterial.forEach((row, index) => { %>
+                           
+                          <tr>
+                           <td><%= row.codigo %> <input type="checkbox" id="<%= row.codigo %>" name="scales" onclick="adicionaeexcluidiv('<%= row.material %>','<%= row.valor_uni %>', '<%= row.codigo %>', '<%= row.unidade %>', '<%= row.user %>', '<%= row.estoque %>')"> <a class="data_lighter" style="cursor: zoom-in;" href="dist/img/materiais/<%= row.foto %>"><img src="dist/img/materiais/<%= row.foto %>" class="rounded-wide img-table-m" alt=""></a> </td>
+                           <td style="min-width: 150px; min-height:300px;"> <%= row.material %> </td>
+                            <td> <%= row.descricao %></td>
+
+                          </tr>
+                          <% }) %>
+                      </tbody>
+
+                      <!-- Pesquisa -->
+                      <tfoot>
+                          <tr>
+                              <th scope="col">Cod</th>
+                              <th scope="col">Material</th>
+                             <!-- <th scope="col">Descricao</th>
+                              <th scope="col">Categoria</th>
+                              <th scope="col">Estoque</th>
+                              <th scope="col">Valor Unitário</th>
+                              <th scope="col">Unidade</th>-->
+                              
+                          </tr>
+                      </tfoot>
+
+                  </table>
+                   <% } else { %>
+                   <!-- Não existe dados na tabela -->
+                   <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                      style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                      registro.
+                   </p>
+                   <% } %>
+                </div>             
+          </div>   
+    </div>
+
+
+    <div class="col-sm-6">
+      <!-- Para iniciar fechado, adicione collapsed-card na class-->
+      <div class="card card-primary card-outline" style="width: 30rem;">
+         <!-- ######################################################################### Cabeçalho -->
+         <div class="card-header">
+           <style>
+              * {
+                box-sizing: border-box;
+              }
+              body {
+                background-color: #ffffff;
+                background-attachment: fixed;
+                background-size: cover;
+              
+                font-family: "Hepta Slab", Helvetica, Arial;
+                font-size: 15px;
+                display: block;
+                margin: 0;
+                min-height: 100vh;
+              }
+              
+              
+              .menu-closer {
+                width: 32px;
+                height: 32px;
+                display: none;
+                font-size: 30px;
+                cursor: pointer;
+              }
+              
+              .cart--area {
+                padding: 20px;
+              }
+              
+              
+              .cart--item {
+                display: flex;
+                align-items: center;
+                margin: 10px 0;
+              }
+              
+              .cart--item-nome {
+                flex: 1;
+              }
+              .cart--item--qtarea {
+                display: inline-flex;
+                background-color: #eee;
+                border-radius: 10px;
+                height: 30px;
+              }
+              .cart--item--qtarea div {
+                border: 0;
+                background-color: transparent;
+                font-size: 17px;
+                outline: 0;
+                cursor: pointer;
+                padding: 0px 10px;
+                color: #333;
+              }
+              .cart--item--qt {
+                line-height: 30px;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 0px 5px;
+                color: #000;
+              }
+              .cart-value {
+                padding: 15px 0;
+                border-top: 1px solid #79b9dd;
+                color: #315970;
+                display: flex;
+                justify-content: space-between;
+                font-size: 15px;
+              }
+              .cart-value span:first-child {
+                font-weight: bold;
+              }
+              .cart-value.big {
+                font-size: 20px;
+                color: #000;
+                font-weight: bold;
+              }
+              .cart--finalizar {
+                padding: 20px 30px;
+                border-radius: 20px;
+                background-color: #48d05f;
+                color: #fff;
+                cursor: pointer;
+                text-align: center;
+                margin-top: 20px;
+                border: 2px solid #63f77c;
+                transition: all ease 0.2s;
+              }
+              .cart--finalizar:hover {
+                background-color: #35af4a;
+              }
+              
+              @media (max-width: 1000px) {
+                .pizza-area {
+                  grid-template-columns: repeat(2, 1fr);
+                }
+              }
+              
+              @media (max-width: 25px) {
+                body {
+                  flex-direction: column;
+                }
+              
+                header {
+                  display: flex;
+                }
+                main {
+                  padding-top: 60px;
+                }
+              
+                aside {
+                  width: auto;
+                  position: fixed;
+                  left: 100vw;
+                  right: 0;
+                  top: 0;
+                  bottom: 0;
+                  transition: all ease 0.2s;
+                }
+                aside.show {
+                  width: auto;
+                }
+                .cart--area {
+                  width: 100vw;
+                }
+
+                .turma{
+display: none;
+}
+
+#turma{
+display: none;
+}
+              }
+
+              </style>
+                  <!-- Conteúdo central do modal -->
+                  <form role="form"  action="/addRequisicao_sandro" method="post"  id="ismForm" >
+                    <!-- Campos do formulário -->
+                    <!-- Campos do formulário -->
+                    <div class="modal-body">
+                       <!-- Cod -->
+                       <div class="row" style="display: none;">
+                          <div class="col-sm-12">
+                             <div class="form-group">
+                                <label for="cod_ADD" class="label">Cod</label>
+                                <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                   name="cod_ADD" id="cod_ADD" placeholder="Cod" readonly=“true”>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="col-sm-12">
+                          <!-- Campos de cadastro -->
+                          <div class="row">
+                             <div class="col-sm-12">
+                                <div class="row">
+
+                                   <script>
+                                      function mostra(campo){
+
+
+                                         var box = document.getElementById('id_departamento_ADD');
+
+                                          conceptName = box.options[box.selectedIndex].value;
+
+                                          a = conceptName.charAt(conceptName.length-1)
+
+                                          console.log(a)
+
+                                          if (a == 1) {
+                                            document.getElementById("turma").style.display = "block";
+                                            document.getElementById("disciplina").style.display = "block";
+                                         } 
+                                         
+                                         if (a == 0) {
+                                            document.getElementById("turma").style.display = "none";
+                                            document.getElementById("disciplina").style.display = "none";
+                                         }
+                                      }
+                                   </script>
+                         
+                                   <!-- Setor -->
+                                   <div class="col-sm-4">
+                                      <div class="form-group">
+                                         <label for="id_departamento_ADD" class="label">Centro de Custo</label>
+                                         <select class="form-control form-control-sm select2" onchange="mostra(this)"
+                                            style="width: 100%;" name="id_departamento_ADD" id="id_departamento_ADD" required>
+                                            <option value="" >-- Selecione --</option>
+                                            <% DTDepartamentos.forEach((row, index) => { %>
+                                            
+                                            <option value="<%= row.id %>,<%= row.pedagogico %>" ><%= row.nome %></option>
+                                         <% }) %>
+                                         </select>
+                                      </div>
+                                   </div>
+                                   <!-- Turma -->
+                                   <div class="col-sm-4">
+                                      <div class="form-group" id="turma" style="display: none;">
+                                         <label for="id_turma_ADD" class="label">Turma</label>
+                                         <select class="form-control form-control-sm select2"
+                                            style="width: 100%; display: none;" name="id_turma_ADD" id="id_turma_ADD">
+                                            <% DTTurmas.forEach((row, index) => { %>
+                                            <option value="<%= row.cod %>"><%= row.turma %>
+                                            </option>
+                                            <% }) %>
+                                         </select>
+                                      </div>
+                                   </div>
+                                   <!-- Disciplina -->
+                                   <div class="col-sm-4">
+                                      <div class="form-group" id="disciplina" style="display: none;">
+                                         <label for="id_disciplina_ADD" class="label">Disciplina</label>
+                                         <select class="form-control form-control-sm select2"
+                                            style="width: 100%;" name="id_disciplina_ADD" id="id_disciplina_ADD">
+                                            <% DTDisciplinas.forEach((row, index) => { %>
+                                            <option value="<%= row.cod %>"><%= row.Nome %>
+                                            </option>
+                                            <% }) %>
+                                         </select>
+                                      </div>
+                                   </div>
+                                   <!-- Observação -->
+                                   <div class="col-sm-12">
+                                      <div class="form-group">
+                                         <label for="observacao_ADD" class="label">Observação</label>
+                                         <input type="text" autocomplete="off" class="form-control form-control-sm" 
+                                            name="observacao_ADD" id="observacao_ADD"
+                                            placeholder="Observação" required>
+                                      </div>
+                                   </div>
+                                      
+
+
+
+                                   <!-- Botões -->
+
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                          <!--compras-->
+                          <div class="col-sm-6"></div>
+                          <div class="cart--area" id="produto" >
+                             <div class="menu-closer"></div>
+                             <div class="cart" id="cart">
+                        </div>  
+                             <div class="cart--details">
+                               <div class="cart-value total big">
+                                 <span>Total geral</span>
+                                 <span class="cart-value-total" id="valorTotalCompra">00,00</span>
+                               </div>
+                             </div>
+                            
+                             
+                                
+                                
+                            
+                             <!--cart--details-->
+                           </div>  
+                          </div>  
+                    </div>
+                    <button type="submit" style="display: none;" 
+                    class="cart--finalizar"  id="btnSalvar_ADD" onclick="$('#fundo_modal').fadeIn()">&nbsp;&nbsp;Finalizar Pedido&nbsp;&nbsp;</button>
+               
+              </div>
+            </form>
+           </div>
+
+           
+          
+           
+                       
+
+
+    </div>
+    </div>
+    </div>
+ </section>
+ <!-- Grava o texto recebido da variável status_Crud do routes/usuario
+    lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+    e dispara uma função de alerta do toastr de acordo com o texto -->
+ <span style="display:none" id='status_Crud'><%= status_Crud %></span>

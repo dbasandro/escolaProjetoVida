@@ -1,0 +1,1377 @@
+<style>
+
+td.dt-control {
+  background: url("https://www.datatables.net/examples/resources/details_open.png") no-repeat center center;
+  cursor: pointer;
+}
+ 
+tr.dt-hasChild td.dt-control {
+  background: url("https://www.datatables.net/examples/resources/details_close.png") no-repeat center center;
+}
+ 
+table.dataTable th.dt-left,
+table.dataTable td.dt-left {
+  text-align: left;
+}
+table.dataTable th.dt-center,
+table.dataTable td.dt-center,
+table.dataTable td.dataTables_empty {
+  text-align: center;
+}
+table.dataTable th.dt-right,
+table.dataTable td.dt-right {
+  text-align: right;
+}
+table.dataTable th.dt-justify,
+table.dataTable td.dt-justify {
+  text-align: justify;
+}
+table.dataTable th.dt-nowrap,
+table.dataTable td.dt-nowrap {
+  white-space: nowrap;
+}
+table.dataTable thead th.dt-head-left,
+table.dataTable thead td.dt-head-left,
+table.dataTable tfoot th.dt-head-left,
+table.dataTable tfoot td.dt-head-left {
+  text-align: left;
+}
+table.dataTable thead th.dt-head-center,
+table.dataTable thead td.dt-head-center,
+table.dataTable tfoot th.dt-head-center,
+table.dataTable tfoot td.dt-head-center {
+  text-align: center;
+}
+table.dataTable thead th.dt-head-right,
+table.dataTable thead td.dt-head-right,
+table.dataTable tfoot th.dt-head-right,
+table.dataTable tfoot td.dt-head-right {
+  text-align: right;
+}
+table.dataTable thead th.dt-head-justify,
+table.dataTable thead td.dt-head-justify,
+table.dataTable tfoot th.dt-head-justify,
+table.dataTable tfoot td.dt-head-justify {
+  text-align: justify;
+}
+table.dataTable thead th.dt-head-nowrap,
+table.dataTable thead td.dt-head-nowrap,
+table.dataTable tfoot th.dt-head-nowrap,
+table.dataTable tfoot td.dt-head-nowrap {
+  white-space: nowrap;
+}
+table.dataTable tbody th.dt-body-left,
+table.dataTable tbody td.dt-body-left {
+  text-align: left;
+}
+table.dataTable tbody th.dt-body-center,
+table.dataTable tbody td.dt-body-center {
+  text-align: center;
+}
+table.dataTable tbody th.dt-body-right,
+table.dataTable tbody td.dt-body-right {
+  text-align: right;
+}
+table.dataTable tbody th.dt-body-justify,
+table.dataTable tbody td.dt-body-justify {
+  text-align: justify;
+}
+table.dataTable tbody th.dt-body-nowrap,
+table.dataTable tbody td.dt-body-nowrap {
+  white-space: nowrap;
+}
+ 
+/*
+ * Table styles
+ */
+table.dataTable {
+  width: 100%;
+  margin: 0 auto;
+  clear: both;
+  border-collapse: separate;
+  border-spacing: 0;
+  /*
+   * Header and footer styles
+   */
+  /*
+   * Body styles
+   */
+}
+table.dataTable thead th,
+table.dataTable tfoot th {
+  font-weight: bold;
+}
+table.dataTable thead th,
+table.dataTable thead td {
+  padding: 10px 18px;
+  border-bottom: 1px solid #111111;
+}
+table.dataTable thead th:active,
+table.dataTable thead td:active {
+  outline: none;
+}
+table.dataTable tfoot th,
+table.dataTable tfoot td {
+  padding: 10px 18px 6px 18px;
+  border-top: 1px solid #111111;
+}
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+  cursor: pointer;
+  *cursor: hand;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+table.dataTable thead .sorting {
+  background-image: url("../images/sort_both.png");
+}
+table.dataTable thead .sorting_asc {
+  background-image: url("../images/sort_asc.png") !important;
+}
+table.dataTable thead .sorting_desc {
+  background-image: url("../images/sort_desc.png") !important;
+}
+table.dataTable thead .sorting_asc_disabled {
+  background-image: url("../images/sort_asc_disabled.png");
+}
+table.dataTable thead .sorting_desc_disabled {
+  background-image: url("../images/sort_desc_disabled.png");
+}
+table.dataTable tbody tr {
+  background-color: #ffffff;
+}
+table.dataTable tbody tr.selected {
+  background-color: #b0bed9;
+}
+table.dataTable tbody th,
+table.dataTable tbody td {
+  padding: 8px 10px;
+}
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+  border-top: 1px solid #dddddd;
+}
+table.dataTable.row-border tbody tr:first-child th,
+table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th,
+table.dataTable.display tbody tr:first-child td {
+  border-top: none;
+}
+table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+}
+table.dataTable.cell-border tbody tr th:first-child,
+table.dataTable.cell-border tbody tr td:first-child {
+  border-left: 1px solid #dddddd;
+}
+table.dataTable.cell-border tbody tr:first-child th,
+table.dataTable.cell-border tbody tr:first-child td {
+  border-top: none;
+}
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+  background-color: #f9f9f9;
+}
+table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
+  background-color: #acbad4;
+}
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+  background-color: #f6f6f6;
+}
+table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
+  background-color: #aab7d1;
+}
+table.dataTable.order-column tbody tr > .sorting_1,
+table.dataTable.order-column tbody tr > .sorting_2,
+table.dataTable.order-column tbody tr > .sorting_3, table.dataTable.display tbody tr > .sorting_1,
+table.dataTable.display tbody tr > .sorting_2,
+table.dataTable.display tbody tr > .sorting_3 {
+  background-color: #fafafa;
+}
+table.dataTable.order-column tbody tr.selected > .sorting_1,
+table.dataTable.order-column tbody tr.selected > .sorting_2,
+table.dataTable.order-column tbody tr.selected > .sorting_3, table.dataTable.display tbody tr.selected > .sorting_1,
+table.dataTable.display tbody tr.selected > .sorting_2,
+table.dataTable.display tbody tr.selected > .sorting_3 {
+  background-color: #acbad5;
+}
+table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+  background-color: #f1f1f1;
+}
+table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
+  background-color: #f3f3f3;
+}
+table.dataTable.display tbody tr.odd > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd > .sorting_3 {
+  background-color: whitesmoke;
+}
+table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1 {
+  background-color: #a6b4cd;
+}
+table.dataTable.display tbody tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_2 {
+  background-color: #a8b5cf;
+}
+table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_3 {
+  background-color: #a9b7d1;
+}
+table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+  background-color: #fafafa;
+}
+table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
+  background-color: #fcfcfc;
+}
+table.dataTable.display tbody tr.even > .sorting_3, table.dataTable.order-column.stripe tbody tr.even > .sorting_3 {
+  background-color: #fefefe;
+}
+table.dataTable.display tbody tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1 {
+  background-color: #acbad5;
+}
+table.dataTable.display tbody tr.even.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_2 {
+  background-color: #aebcd6;
+}
+table.dataTable.display tbody tr.even.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_3 {
+  background-color: #afbdd8;
+}
+table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
+  background-color: #eaeaea;
+}
+table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
+  background-color: #ececec;
+}
+table.dataTable.display tbody tr:hover > .sorting_3, table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
+  background-color: #efefef;
+}
+table.dataTable.display tbody tr:hover.selected > .sorting_1, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_1 {
+  background-color: #a2aec7;
+}
+table.dataTable.display tbody tr:hover.selected > .sorting_2, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
+  background-color: #a3b0c9;
+}
+table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_3 {
+  background-color: #a5b2cb;
+}
+table.dataTable.no-footer {
+  border-bottom: 1px solid #111111;
+}
+table.dataTable.nowrap th, table.dataTable.nowrap td {
+  white-space: nowrap;
+}
+table.dataTable.compact thead th,
+table.dataTable.compact thead td {
+  padding: 4px 17px;
+}
+table.dataTable.compact tfoot th,
+table.dataTable.compact tfoot td {
+  padding: 4px;
+}
+table.dataTable.compact tbody th,
+table.dataTable.compact tbody td {
+  padding: 4px;
+}
+ 
+table.dataTable th,
+table.dataTable td {
+  box-sizing: content-box;
+}
+ 
+/*
+ * Control feature layout
+ */
+.dataTables_wrapper {
+  position: relative;
+  clear: both;
+}
+.dataTables_wrapper .dataTables_length {
+  float: left;
+}
+.dataTables_wrapper .dataTables_length select {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: transparent;
+  padding: 4px;
+}
+.dataTables_wrapper .dataTables_filter {
+  float: right;
+  text-align: right;
+}
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: transparent;
+  margin-left: 3px;
+}
+.dataTables_wrapper .dataTables_info {
+  clear: both;
+  float: left;
+  padding-top: 0.755em;
+}
+.dataTables_wrapper .dataTables_paginate {
+  float: right;
+  text-align: right;
+  padding-top: 0.25em;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0.5em 1em;
+  margin-left: 2px;
+  text-align: center;
+  text-decoration: none !important;
+  cursor: pointer;
+  *cursor: hand;
+  color: #333333 !important;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: #333333 !important;
+  border: 1px solid #979797;
+  background-color: white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dcdcdc));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, white 0%, #dcdcdc 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -moz-linear-gradient(top, white 0%, #dcdcdc 100%);
+  /* FF3.6+ */
+  background: -ms-linear-gradient(top, white 0%, #dcdcdc 100%);
+  /* IE10+ */
+  background: -o-linear-gradient(top, white 0%, #dcdcdc 100%);
+  /* Opera 11.10+ */
+  background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
+  /* W3C */
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+  cursor: default;
+  color: #666 !important;
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: white !important;
+  border: 1px solid #111111;
+  background-color: #585858;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #585858), color-stop(100%, #111111));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #585858 0%, #111111 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -moz-linear-gradient(top, #585858 0%, #111111 100%);
+  /* FF3.6+ */
+  background: -ms-linear-gradient(top, #585858 0%, #111111 100%);
+  /* IE10+ */
+  background: -o-linear-gradient(top, #585858 0%, #111111 100%);
+  /* Opera 11.10+ */
+  background: linear-gradient(to bottom, #585858 0%, #111111 100%);
+  /* W3C */
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+  outline: none;
+  background-color: #2b2b2b;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b2b2b), color-stop(100%, #0c0c0c));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -moz-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+  /* FF3.6+ */
+  background: -ms-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+  /* IE10+ */
+  background: -o-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+  /* Opera 11.10+ */
+  background: linear-gradient(to bottom, #2b2b2b 0%, #0c0c0c 100%);
+  /* W3C */
+  box-shadow: inset 0 0 3px #111;
+}
+.dataTables_wrapper .dataTables_paginate .ellipsis {
+  padding: 0 1em;
+}
+.dataTables_wrapper .dataTables_processing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 40px;
+  margin-left: -50%;
+  margin-top: -25px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  background-color: white;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(25%, rgba(255, 255, 255, 0.9)), color-stop(75%, rgba(255, 255, 255, 0.9)), color-stop(100%, rgba(255, 255, 255, 0)));
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+  background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+  background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+}
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
+  color: #333333;
+}
+.dataTables_wrapper .dataTables_scroll {
+  clear: both;
+}
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+  *margin-top: -1px;
+  -webkit-overflow-scrolling: touch;
+}
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > td, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td {
+  vertical-align: middle;
+}
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > th > div.dataTables_sizing,
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > td > div.dataTables_sizing, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > th > div.dataTables_sizing,
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td > div.dataTables_sizing {
+  height: 0;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #111111;
+}
+.dataTables_wrapper.no-footer div.dataTables_scrollHead table.dataTable,
+.dataTables_wrapper.no-footer div.dataTables_scrollBody > table {
+  border-bottom: none;
+}
+.dataTables_wrapper:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+ 
+@media screen and (max-width: 767px) {
+  .dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    float: none;
+    text-align: center;
+  }
+  .dataTables_wrapper .dataTables_paginate {
+    margin-top: 0.5em;
+  }
+}
+@media screen and (max-width: 640px) {
+  .dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    float: none;
+    text-align: center;
+  }
+  .dataTables_wrapper .dataTables_filter {
+    margin-top: 0.5em;
+  }
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.child,table.dataTable.dtr-inline.collapsed>tbody>tr>th.child,table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty{cursor:default !important}table.dataTable.dtr-inline.collapsed>tbody>tr>td.child:before,table.dataTable.dtr-inline.collapsed>tbody>tr>th.child:before,table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty:before{display:none !important}table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child,table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child{position:relative;padding-left:30px;cursor:pointer}table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{top:12px;left:4px;height:14px;width:14px;display:block;position:absolute;color:white;border:2px solid white;border-radius:14px;box-shadow:0 0 3px #444;box-sizing:content-box;text-align:center;text-indent:0 !important;font-family:'Courier New', Courier, monospace;line-height:14px;content:'+';background-color:#0275d8}table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{content:'-';background-color:#d33333}table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child,table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child{padding-left:27px}table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before,table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child:before{top:5px;left:4px;height:14px;width:14px;border-radius:14px;line-height:14px;text-indent:3px}table.dataTable.dtr-column>tbody>tr>td.control,table.dataTable.dtr-column>tbody>tr>th.control{position:relative;cursor:pointer}table.dataTable.dtr-column>tbody>tr>td.control:before,table.dataTable.dtr-column>tbody>tr>th.control:before{top:50%;left:50%;height:16px;width:16px;margin-top:-10px;margin-left:-10px;display:block;position:absolute;color:white;border:2px solid white;border-radius:14px;box-shadow:0 0 3px #444;box-sizing:content-box;text-align:center;text-indent:0 !important;font-family:'Courier New', Courier, monospace;line-height:14px;content:'+';background-color:#0275d8}table.dataTable.dtr-column>tbody>tr.parent td.control:before,table.dataTable.dtr-column>tbody>tr.parent th.control:before{content:'-';background-color:#d33333}table.dataTable>tbody>tr.child{padding:0.5em 1em}table.dataTable>tbody>tr.child:hover{background:transparent !important}table.dataTable>tbody>tr.child ul.dtr-details{display:inline-block;list-style-type:none;margin:0;padding:0}table.dataTable>tbody>tr.child ul.dtr-details>li{border-bottom:1px solid #efefef;padding:0.5em 0}table.dataTable>tbody>tr.child ul.dtr-details>li:first-child{padding-top:0}table.dataTable>tbody>tr.child ul.dtr-details>li:last-child{border-bottom:none}table.dataTable>tbody>tr.child span.dtr-title{display:inline-block;min-width:75px;font-weight:bold}div.dtr-modal{position:fixed;box-sizing:border-box;top:0;left:0;height:100%;width:100%;z-index:100;padding:10em 1em}div.dtr-modal div.dtr-modal-display{position:absolute;top:0;left:0;bottom:0;right:0;width:50%;height:50%;overflow:auto;margin:auto;z-index:102;overflow:auto;background-color:#f5f5f7;border:1px solid black;border-radius:0.5em;box-shadow:0 12px 30px rgba(0,0,0,0.6)}div.dtr-modal div.dtr-modal-content{position:relative;padding:1em}div.dtr-modal div.dtr-modal-close{position:absolute;top:6px;right:6px;width:22px;height:22px;border:1px solid #eaeaea;background-color:#f9f9f9;text-align:center;border-radius:3px;cursor:pointer;z-index:12}div.dtr-modal div.dtr-modal-close:hover{background-color:#eaeaea}div.dtr-modal div.dtr-modal-background{position:fixed;top:0;left:0;right:0;bottom:0;z-index:101;background:rgba(0,0,0,0.6)}@media screen and (max-width: 767px){div.dtr-modal div.dtr-modal-display{width:95%}}div.dtr-bs-modal table.table tr:first-child td{border-top:none}
+
+</style>
+
+
+<!-- Page Content (header) -->
+<section class="content-header">
+  <div class="container-fluid">
+     <div class="row sm-2">
+        <!-- Título -->
+        <div class="col-sm-6">
+           <h1>Entrega Pedidos - Em Aberto</h1>
+        </div>
+        <!-- Navegação histórica -->
+        <div class="col-sm-6">
+           <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="admin">Home</a></li>
+              <li class="breadcrumb-item active">Cadastros</li>
+              <li class="breadcrumb-item active">Requisição</li>
+           </ol>
+        </div>
+     </div>
+  </div>
+</section>
+<!-- Page Content (conteúdo) -->
+<section class="content">
+  <div class="container-fluid">
+     <div class="row">
+        
+               
+                </form>
+                            
+<!-- ######################################################################### Modal para EDITAR -->
+<div class="modal fade" id="modalEDIT" data-backdrop="static">
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
+ <!-- Header -->
+ <div class="modal-header">
+ <h4 class="modal-title">Editar</h4>
+ <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+ </button>
+ </div>
+ 
+
+
+ <script>
+   function check_form(){
+    var input1 = document.getElementById('qtd_solicitada_EDIT');
+    var input2 = document.getElementById('qtd_entregue_EDIT');
+    var consulta1 = input1.value
+    var consulta2 = input2.value
+
+    console.log(consulta1,consulta2)
+
+
+  if (consulta1 < consulta2){
+    alert('Solicitação deve ser maior ou igual ao que já foi entregue.');
+    return false;
+  } 
+  if(consulta1 == consulta2){ 
+    alert('Item finalizado.');
+    return true; 
+  }
+  if(consulta1 >= consulta2){ 
+    alert('Item alterado.');
+    return true; 
+  }
+}
+ </script>
+ <!-- Conteúdo central do modal -->
+ <form role="form"
+ action="/editEntrega/"
+ method="post" enctype="multipart/form-data" onsubmit="return check_form()">
+ <!-- Formulário para Editar usuário -->
+ <div class="modal-body">
+     <!-- Cod -->
+     <div class="row" style="display: none;">
+         <div class="col-sm-12">
+             <div class="form-group">
+                 <label for="cod_EDIT" class="label">Cod</label>
+                 <input type="text" autocomplete="off" class="form-control form-control-sm"
+                     name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+             </div>
+         </div>
+     </div>
+ 
+     <!-- Campos de cadastro -->
+     <div class="row">
+         <div class="col-sm-12" style="text-align: center;">
+             </div>
+         </div>
+     
+         <div class="col-sm-12">
+             <div class="row">
+                 <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                     <div class="row">
+                         <!-- Nome produto -->
+                         <div class="col-sm-12">
+                             <div class="form-group">
+                                 <label for="nome_EDIT" class="label">Produto</label>
+                                 <input type="text" autocomplete="off"  class="form-control form-control-sm"
+                                     name="nome_EDIT" id="nome_EDIT"
+                                     placeholder="Nome" required readonly="readonly"> 
+                             </div>
+                         </div>
+                          <!-- quantidade solicitada-->
+                           <div class="col-sm-6">
+                             <div class="form-group">
+                                 <label for="qtd_solicitada_EDIT" class="label">Quantidade solicitada</label>
+                                 <input type="text" autocomplete="off"  class="form-control form-control-sm"
+                                     name="qtd_solicitada_EDIT" id="qtd_solicitada_EDIT"
+                                     placeholder="Quantidade" required>
+                             </div>
+                         </div>
+                         <!-- quantidade -->
+                         <div class="col-sm-6">
+                             <div class="form-group">
+                                 <label for="qtd_entregue_EDIT" class="label">Quantidade entregue</label>
+                                 <input type="text" autocomplete="off"  class="form-control form-control-sm"
+                                     name="qtd_entregue_EDIT" id="qtd_entregue_EDIT"
+                                     placeholder="Quantidade" required readonly="readonly">
+                             </div>
+                         </div>
+                       
+
+                         <script>
+function calc(){
+                                                              
+var a =  parseInt(qtd_EDIT.value);
+var b =  parseInt(entregar_EDIT.value);
+var c =  parseInt(estoque_EDIT.value);                                             
+                                                             
+if (a < c) {
+ entregar_EDIT.value = a
+ pendente_EDIT.value = a - b
+}
+
+if (a > c) {
+ entregar_EDIT.value = c
+ 
+ pendente_EDIT.value = qtd_EDIT.value - entregar_EDIT.value
+}
+                                                              
+}
+
+function pendente(){
+var a =  parseInt(qtd_EDIT.value);
+var b =  parseInt(entregar_EDIT.value);
+var c =  parseInt(estoque_EDIT.value); 
+
+
+
+if (b > c) {
+ alert("Você não pode entregar mais do que tem em estoque.");
+ if (a < c) {
+ entregar_EDIT.value = a
+ pendente_EDIT.value = a - b
+}
+
+if (a > c) {
+ entregar_EDIT.value = c
+ 
+ pendente_EDIT.value = qtd_EDIT.value - entregar_EDIT.value
+}
+}
+
+
+if (b > a) {
+ alert("Você não pode entregar mais do foi solicitado.");
+ if (a < c) {
+ entregar_EDIT.value = a
+ pendente_EDIT.value = a - b
+}
+
+if (a > c) {
+ entregar_EDIT.value = c
+ 
+ pendente_EDIT.value = qtd_EDIT.value - entregar_EDIT.value
+}
+
+
+
+}
+
+pendente_EDIT.value = qtd_EDIT.value - entregar_EDIT.value
+
+              }                </script>
+                         
+                
+
+                         
+                         <div class="modal-footer justify-content-between">
+                             <button type="submit"
+                                 class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                             <button type="button" class="btn btn-secondary"
+                                 data-dismiss="modal">Cancelar</button>
+                         </div>
+ 
+                     </div>
+                 </div>
+             </div>                                                
+         </div>
+     </div>
+ </div>
+ 
+                                     <!-- Botões -->
+ 
+                                 </form>
+                             </div>
+                         </div>
+
+                         <div class="modal fade" id="modalDEL" id="modal-danger" data-backdrop="static">
+                          <div class="modal-dialog">
+                              <div class="modal-content bg-danger">
+                                  <div class="modal-header">
+                                      <h4 class="modal-title">Atenção!</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <p>Tem certeza que deseja eliminar o registro selecionado?</p>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                      <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                                          Não, cancelar
+                                      </button>
+  
+                                      <!-- Esse span é oculto pois apenas recebe o texto contendo o cod para eliminação na função abaixo -->
+                                      <span style="display:none" id="cod_DEL"></span>
+  
+                                      <!-- Função anónima dentro da classe button que direciona para a route /delete/:id após o usuário clicar em sim no modal -->
+                                      <button type="button" class="btn btn-outline-light" onclick="(function() {
+                                              window.location = '/delEntrega_sandro/' + document.getElementById('cod_DEL').textContent;
+                                              })()" id="btnDeletar_DEL">Sim, eliminar
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+                     </div>
+                   
+                           
+             
+                                         
+                   
+                    
+                   
+                   <script>
+
+                      
+
+                 
+
+// Definir variáveis universais
+
+var pedidos =[]; 
+
+function voltaPedidos() {
+cardCompra = document.getElementById('card-compra');
+
+cardCompra.style.display = "none"
+
+cardPedido = document.getElementById('card-pedido');
+
+cardPedido.style.display = "block"
+}
+
+
+
+
+
+
+
+
+function adicionaeexcluidiv(id_pedido, solicitante, obs, dpt, tm, disc, total_pedido) {
+                             
+ selecionaPedido(id_pedido)
+
+ function selecionaPedido(id_pedido) {
+  var table = $('#TBtable2').DataTable();
+
+   table
+       .columns( 0 )
+       .search( id_pedido )
+       .draw();
+
+      
+    }
+
+cardCompra = document.getElementById('card-compra');
+
+cardCompra.style.display = "block"
+
+cardPedido = document.getElementById('card-pedido');
+
+cardPedido.style.display = "none"
+
+total_geral = document.getElementById('valorTotalCompra');
+total_geral.innerHTML = total_pedido
+
+var input1 = document.getElementById('cod_ADD');
+
+input1.value = id_pedido;
+
+ 
+ let pedidoEntrega = document.getElementById('id_pedido_ADD');
+ let pedidoSolicitante = document.getElementById('id_solicitante_ADD');
+ let observacao = document.getElementById('observacao_ADD');
+ let departamento = document.getElementById('id_departamento_ADD');
+ let turma = document.getElementById('id_turma_ADD');
+ let disciplina = document.getElementById('id_disciplina_ADD');
+
+
+ observacao.innerHTML  = 'Observação: '+ obs;
+ departamento.innerHTML  = 'Centro de Custo: '+ dpt;
+ if(tm.length > 5){
+ turma.innerHTML  = 'Turma: '+ tm;} 
+ else {
+  turma.style.display = 'none';
+ }
+ if(disc.length > 1){
+ disciplina.innerHTML  = 'Disciplina: '+ disc;}
+ else {
+  disciplina.style.display = 'none';
+ }
+ pedidoEntrega.innerHTML  = 'Nº Pedido: '+ id_pedido;
+ pedidoSolicitante.innerHTML  = 'Solicitante: '+ solicitante;
+
+
+                };
+
+                  </script>
+                
+                
+                
+                <section class="content-header">
+                   <div class="container-fluid">
+                       <div class="row sm-2">
+                           <!-- Título -->
+                           
+                           <!-- Navegação histórica -->
+
+                       </div>
+                   </div>
+               </section>
+               
+               <!-- Page Content (conteúdo) -->
+               <section class="content">
+                   <div class="container-fluid">
+                       <div class="row">
+
+                        
+                         
+                          <div class="card card-primary card-outline" id = "card-compra" style="display: none;">
+                             <!-- ######################################################################### Cabeçalho -->
+                             <div class="card-header">
+                               <style>
+                                  * {
+                                    box-sizing: border-box;
+                                  }
+                                  body {
+                                    background-color: #ffffff;
+                                    background-attachment: fixed;
+                                    background-size: cover;
+                                  
+                                    font-family: "Hepta Slab", Helvetica, Arial;
+                                    font-size: 15px;
+                                    display: block;
+                                    margin: 0;
+                                    min-height: 100vh;
+                                  }
+                                  
+                                  
+                                  .menu-closer {
+                                    width: 32px;
+                                    height: 32px;
+                                    display: none;
+                                    font-size: 30px;
+                                    cursor: pointer;
+                                  }
+                                  
+                                  .cart--area {
+                                    padding: 20px;
+                                  }
+                                  
+                                  
+                                  .cart--item {
+                                    display: flex;
+                                    align-items: center;
+                                    margin: 10px 0;
+                                  }
+                                  
+                                  .cart--item-nome {
+                                    flex: 1;
+                                  }
+                                  .cart--item--qtarea {
+                                    display: inline-flex;
+                                    background-color: #eee;
+                                    border-radius: 10px;
+                                    height: 30px;
+                                  }
+                                  .cart--item--qtarea div {
+                                    border: 0;
+                                    background-color: transparent;
+                                    font-size: 17px;
+                                    outline: 0;
+                                    cursor: pointer;
+                                    padding: 0px 10px;
+                                    color: #333;
+                                  }
+                                  .cart--item--qt {
+                                    line-height: 30px;
+                                    font-size: 12px;
+                                    font-weight: bold;
+                                    padding: 0px 5px;
+                                    color: #000;
+                                  }
+                                  .cart-value {
+                                    padding: 15px 0;
+                                    border-top: 1px solid #79b9dd;
+                                    color: #315970;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    font-size: 15px;
+                                  }
+                                  .cart-value span:first-child {
+                                    font-weight: bold;
+                                  }
+                                  .cart-value.big {
+                                    font-size: 20px;
+                                    color: #000;
+                                    font-weight: bold;
+                                  }
+                                  .cart--finalizar {
+                                    padding: 20px 30px;
+                                    border-radius: 20px;
+                                    background-color: #48d05f;
+                                    color: #fff;
+                                    cursor: pointer;
+                                    text-align: center;
+                                    margin-top: 20px;
+                                    border: 2px solid #63f77c;
+                                    transition: all ease 0.2s;
+                                  }
+                                  .cart--voltar {
+                                    padding: 20px 30px;
+                                    border-radius: 20px;
+                                    background-color: #054f77;
+                                    color: #fff;
+                                    cursor: pointer;
+                                    text-align: center;
+                                    margin-top: 20px;
+                                    border: 2px solid #054f77;
+                                    transition: all ease 0.2s;
+                                  }
+                                  .cart--finalizar:hover {
+                                    background-color: #35af4a;
+                                  }
+               
+                                  .cart--voltar:hover {
+                                    background-color: #054f77;
+                                  }
+                                  
+                                  @media (max-width: 1000px) {
+                                    .pizza-area {
+                                      grid-template-columns: repeat(2, 1fr);
+                                    }
+                                  }
+                                  
+                                  @media (max-width: 25px) {
+                                    body {
+                                      flex-direction: column;
+                                    }
+                                  
+                                    header {
+                                      display: flex;
+                                    }
+                                    main {
+                                      padding-top: 60px;
+                                    }
+                                  
+                                    aside {
+                                      width: auto;
+                                      position: fixed;
+                                      left: 100vw;
+                                      right: 0;
+                                      top: 0;
+                                      bottom: 0;
+                                      transition: all ease 0.2s;
+                                    }
+                                    aside.show {
+                                      width: auto;
+                                    }
+                                    .cart--area {
+                                      width: 100vw;
+                                    }
+                                  }
+               
+                                  </style>
+                                      <!-- Conteúdo central do modal -->
+                                  
+                                        <div class="modal-body">
+                                           
+               
+                                         <div class="col-sm-4">
+                                           <div class="form-group">
+                                              <label for="id_pedido_ADD" id ="id_pedido_ADD" class="label" style="font-size:20px; color: black"></label>
+               
+                                           </div>
+                                        </div>
+               
+               
+                                                                    <div class="col-sm-4">
+                                           <div class="form-group">
+                                              <label for="id_solicitante_ADD" id ="id_solicitante_ADD" class="label" style="font-size:20px; color: black"></label>
+               
+                                           </div>
+                                        </div> 
+                                         
+               
+               
+              <script>   
+              var IDS = []
+               var ID_PEDIDOS = []
+               var ID_PRODUTOS = []
+               var QUANTIDADES = []
+                                             function array(id, qtd, estoque) {
+               
+               
+               if (parseInt(document.getElementById("'"+id+"'").value) > parseInt(estoque) ) {
+               
+               
+               if (parseInt(qtd) >= parseInt(estoque)) {
+               document.getElementById("'"+id+"'").value = parseInt(estoque)};
+               
+               if (parseInt(estoque)>= parseInt(qtd)) {
+               document.getElementById("'"+id+"'").value = parseInt(qtd)};
+               
+               }
+               
+               if (parseInt(document.getElementById("'"+id+"'").value) > parseInt(qtd) ) {
+               if (parseInt(qtd) >= parseInt(estoque)) {
+               document.getElementById("'"+id+"'").value = parseInt(estoque)};
+               
+               if (parseInt(estoque) >= parseInt(qtd)) {
+               document.getElementById("'"+id+"'").value = parseInt(qtd)};
+               
+               }
+               
+               
+               }
+               
+
+               
+               function adiciona(ID_PEDIDO,id_produto ,id, check ){
+               console.log(ID_PEDIDO,id_produto ,document.getElementById("'"+id+"'").value, check)
+               
+               quantidade = document.getElementById("'"+id+"'").value
+               
+               //VERIFICANDO SE CHECKBOX ESTÁ ATIVO OU INATIVO
+               let checkbox = document.getElementById(check);
+               if(checkbox.checked) {
+               console.log('selecionado');
+               // impedindo de editar o valor digitado a ser entregue 
+               document.getElementById("'"+id+"'").readOnly = true;
+               //CONSULTANDO SE O PRODUTO JÁ EXISTE 
+               result = IDS.includes(id);
+               if  (result === false) {
+               IDS.push(id);
+               ID_PEDIDOS.push(ID_PEDIDO);
+               ID_PRODUTOS.push(id_produto);
+               QUANTIDADES.push(quantidade);
+               }
+               }
+               else {
+               console.log('demarcado');
+               // permitir editar o valor digitado a ser entregue 
+               document.getElementById("'"+id+"'").readOnly = false;
+               item = IDS.indexOf(id);
+               
+               var indice = IDS.findIndex((item) => item == id);
+               
+               IDS.splice(indice, 1);
+               ID_PEDIDOS.splice(indice, 1);
+               ID_PRODUTOS.splice(indice, 1);
+               QUANTIDADES.splice(indice, 1);
+               
+               }
+               }
+               
+               // envio de informações para o backend
+               
+               function agrupaarray() {
+                let resultado = ID_PEDIDOS.map((p, i) => {
+               return [p, ID_PRODUTOS[i], QUANTIDADES[i]] 
+               })
+               
+               
+               console.log(resultado)
+               
+               
+               
+               
+               
+               let dados = (IDS.length);
+               
+               if (dados > 0) {
+                alert('Entrega realizada com sucesso !');
+               fetch("/addEntrega", {
+                         method: "POST",
+                         headers: {
+                            "Content-Type": "application/json",
+                         },
+                         body: JSON.stringify(resultado),
+                       })
+                         //.then((response) => response.json())
+                         .then((results) => {
+                           //console.log("Success:", results);
+                         })
+                         .catch((error) => {
+                           //console.error("Error:", error);
+                         });
+               
+                      
+                      
+                      
+                   }
+               
+                   restartPage(IDS.length)
+               }
+               
+               
+               function restartPage(dados) {
+               if (dados > 0) {
+               window.location.reload()
+               }
+               }
+                                                       </script>   
+               
+                                     
+               
+                                              
+                                              <!--compras-->
+                                              
+                                              <div class="cart--area" id="produto" >
+                                                 <div class="menu-closer"></div>
+                                                 
+                                                 <table id="TBtable2" class="table-bordered">
+               
+                                                   <!-- Cabeçalho: Titulos da tabela -->
+                                                   <thead class="thead-light">
+                                                       <tr>
+                                                         <th scope="col">Cod</th>
+                                                         <th scope="col">Produto</th>
+                                                         <th scope="col">Quantidade</th>
+                                                         <th scope="col">Pendente</th>
+                                                         <th scope="col">Entregar</th>
+                                                         <th scope="col">Estoque</th>
+                                                         <th scope="col">Valor unitário</th>
+                                                         <th scope="col">Subtotal</th>
+                                                         <th scope="col">Editar</th> 
+                                                         <th scope="col">Excluir</th>     
+                                                       </tr>
+                                                   </thead>
+                              
+                               
+                                                   <tbody>
+                                                       <!-- Detalhes: Dados da tabela -->  <!--CALL `sheets`.`atualiza_SAIDA_ESTOQUE`(339, 10, 5, 9, 3);-->   
+                                                      
+                                                       <% Dtcompra.forEach((row, index) => { %>
+                                                       <tr>
+                                                         <td><%= row.ID_PEDIDO %>  <input type="checkbox"  name="scales" id='<%= row.id %>check' onclick="adiciona('<%= row.ID_PEDIDO %>','<%= row.id_produto %>','<%= row.id %>','<%= row.id %>check')" ><br><a class="data_lighter" style="cursor: zoom-in;" href="dist/img/materiais/<%= row.foto %>"><img src="dist/img/materiais/<%= row.foto %>" class="rounded-wide img-table-m" alt=""></a> </td>
+                                                         <td><%= row.NOME %> </td>
+                                                         <td><%= row.QTD %></td>
+                                                         <td><%= row.Pendente %></td>
+                                                         <td><input style="width:44px;font-size: 13px" onkeyup="array('<%= row.id %>','<%= row.Pendente %>','<%= row.estoque %>')" type="text" id="'<%= row.id %>'" value="<%= row.entregar %>"></td>
+                                                         <td><%= row.estoque %></td>
+                                                         <td><%= row.VALOR_UNITARIO %></td>
+                                                         <td><%= row.SUBTOTAL %></td>
+                                                        
+                                                         <td>
+                                                           <button class="btn btn-xs btn-warning" data-toggle="modal"
+                                                           data-target="#modalEDIT" onclick="(function(){
+                                                               
+                                                                   //Setando o valor nos campos de texto 
+                                                                   document.getElementById('cod_EDIT').value = '<%= row.id %>';
+                                                                   document.getElementById('nome_EDIT').value = '<%= row.NOME %>';
+                                                                   document.getElementById('qtd_solicitada_EDIT').value = '<%= row.QTD %>';
+                                                                   document.getElementById('qtd_entregue_EDIT').value = '<%= row.entregue %>';
+                                          
+                                                                   })()">&nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;
+               
+                                                       </button>
+                                                         </td>
+                                                    <td>
+                                                       <button class="btn btn-xs btn-danger" data-toggle="modal"
+                                                       data-target="#modalDEL" onclick="(function(){
+                                                               document.getElementById('cod_DEL').textContent = '<%= row.cod %>';
+                                                               })()">Eliminar
+                                                   </button>
+                                                    </td>
+                                                       </tr>
+                                                       <% }) %>
+                                                   </tbody>
+                               
+                                         
+                               
+                                               </table>
+               
+               
+                                            
+                                                 <div class="cart--details">
+                                                   <div class="cart-value total big">
+                                                     <span>Total geral</span>
+                                                     <span class="cart-value-total" id="valorTotalCompra">00,00</span>
+                                                   </div>
+                                                 </div>
+               
+                                                 <!-- Cod -->
+                                           <div class="row" style="display: none;">
+                                             <div class="col-sm-12">
+                                                <div class="form-group">
+                                                   <label for="cod_ADD" class="label">Cod</label>
+                                                   <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                      name="cod_ADD" id="cod_ADD" placeholder="Cod" readonly=“true” value="">
+                                                </div>
+                                             </div>
+                                          </div>
+                                         
+               
+                                                   
+                                            
+                                                      <!-- Setor -->
+                                                      <div class="col-sm-4">
+                                                         <div class="form-group">
+                                                            <label for="id_departamento_ADD" id ="id_departamento_ADD" class="label"></label>
+               
+                                                         </div>
+                                                      </div>
+                                                      <!-- Turma -->
+                                                      <div class="col-sm-4">
+                                                         <div class="form-group">
+                                                            <label for="id_turma_ADD" id ="id_turma_ADD" class="label"></label>
+               
+                                                         </div>
+                                                      </div>
+                                                      <!-- Disciplina -->
+                                                      <div class="col-sm-4">
+                                                         <div class="form-group">
+                                                            <label for="id_disciplina_ADD" id ="id_disciplina_ADD" class="label"></label>
+               
+                                                         </div>
+                                                      </div>
+                                                      <!-- Observação -->
+                                                      <div class="col-sm-12">
+                                                         <div class="form-group">
+                                                            <label for="observacao_ADD" id ="observacao_ADD" class="label"></label>
+                                                         </div>
+                                                      </div>
+               
+                                                
+                                                 <!--cart--details-->
+                                               </div>  
+                                              </div>  
+                                        </div>
+                                        <button type="submit"
+                                        class="cart--finalizar"  id="btnSalvar_ADD" onclick="agrupaarray()">&nbsp;&nbsp;Finalizar Entrega&nbsp;&nbsp;</button>
+                                   
+                                        <button type="button" onclick= "voltaPedidos()"
+                                        class="cart--voltar"  id="btnSalvar_ADD" >&nbsp;&nbsp;Voltar&nbsp;&nbsp;</button>
+                                  </div>
+                                
+
+                           <div class="col-sm-12">
+               
+                               <!-- Para iniciar fechado, adicione collapsed-card na class-->
+                               <div class="card card-primary card-outline" id="card-pedido">
+               
+                                   <!-- ######################################################################### Cabeçalho -->
+                                   <div class="card-header">
+               
+
+
+               
+                                       <!-- Botão Ocultar ou exibir o card -->
+                                       <div class="card-tools">
+                                           <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                                           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                               title="Collapse">
+                                               <i class="fas fa-minus"></i>
+                                           </button>
+                                           <!-- Botão destruir card -->
+                                           <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                                               title="Remove">
+                                               <i class="fas fa-times"></i>
+                                           </button>
+                                       </div>
+               
+                                   </div>
+              <!-- ######################################################################### Tabela -->
+              <div class="card-body">
+
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+                <script type='text/javascript'>
+                            $(function g(){
+                                
+                                
+                            });
+
+                            
+                         
+                            $(document).ready(function() {
+  $('#TBtable').DataTable( {
+      "order": [[ 0, "desc" ]]
+  } );
+
+
+
+  $('#TBitens').dataTable({
+  "paging": false
+});
+  
+
+
+  $('#TBtable').dataTable.ext.errMode = 'none';
+
+
+
+} );
+
+
+
+                </script>
+
+
+      
+
+                
+
+                <% if (DTMaterial.length > 0) {%>
+                    
+                <table id="TBtable" class="table-bordered">
+
+                    <!-- Cabeçalho: Titulos da tabela -->
+                    <thead class="thead-light">
+                        <tr>
+                         <th scope="col">Cod</th>
+                         <th scope="col">Solicitante</th>
+                         <th scope="col">Turma</th>
+                         <th scope="col">Centro de Custo</th>
+                         <th scope="col">Status</th>
+                         <th scope="col">DateTime</th>
+                            
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        <!-- Detalhes: Dados da tabela -->
+                        <% DTMaterial.forEach((row, index) => { %>
+                         
+                        <tr>
+                            <td><%= row.id_pedido %> <input type="radio" id="<%= row.id_pedido %>" name="scales" class="<%= row.id_pedido %>" onclick="adicionaeexcluidiv('<%= row.id_pedido %>','<%= row.solicitante %>','<%= row.observacao %>','<%= row.departamento %>','<%= row.turma %>','<%= row.disciplina %>','<%= row.total_pedido %>')"></td>
+                            <td><%= row.solicitante %> </td>
+                            <td><%= row.turma %></td>
+                            <td><%= row.departamento %></td>
+                            <td><%= row.status_pedido %></td>
+                            <td><%= row.data %></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+
+                    <!-- Pesquisa -->
+                    <tfoot>
+                        <tr>
+                         <th scope="col">Cod</th>
+                         <th scope="col">Solicitante</th>
+                         <th scope="col">Turma</th>
+                         <th scope="col">Centro de custo</th>
+                         <th scope="col">Status</th>
+                         <th scope="col">DateTime</th>
+                            
+                        </tr>
+                    </tfoot>
+
+                </table>
+                 <% } else { %>
+                 <!-- Não existe dados na tabela -->
+                 <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                    style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                    registro.
+                 </p>
+                 <% } %>
+              </div>             
+        </div>   
+  </div>
+  </div>
+  </div>
+  </div>
+</section>
+<!-- Grava o texto recebido da variável status_Crud do routes/usuario
+  lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+  e dispara uma função de alerta do toastr de acordo com o texto -->
+<span style="display:none" id='status_Crud'><%= status_Crud %></span>

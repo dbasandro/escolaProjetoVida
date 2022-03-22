@@ -1,0 +1,1004 @@
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row sm-2">
+            <!-- Título -->
+            <div class="col-sm-6">
+                <h1>Relatórios</h1>
+            </div>
+            <!-- Navegação histórica -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="admin">Home</a></li>
+                    <li class="breadcrumb-item active">Cadastros</li>
+                    <li class="breadcrumb-item active">Relatório</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Page Content (conteúdo) -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Para iniciar fechado, adicione collapsed-card na class-->
+                <div class="card card-primary card-outline">
+
+<!-- ######################################################################### Cabeçalho Abaixo_Minimo-->
+                    <div class="card-header">
+
+                        <!-- Botões -->
+                        <div class="btn-group">
+                            <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                                data-target="#modal_Abaixo_Minimo">&nbsp;Produtos Abaixo do Mínimo&nbsp;
+                            </button>
+                        </div>
+
+<!-- ################################################################# Modal para Abaixo_Minimo -->
+                    <div class="modal fade" id="modal_Abaixo_Minimo" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Header -->
+
+         
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Produtos Abaixo do Mínimo</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form" action="/Abaixo_Minimo" method="post" enctype="multipart/form-data">
+                        
+                          <!-- unidade -->
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="unidade_ADD" class="label">Unidade</label>
+                                 <select class="form-control form-control-sm select2"
+                                   style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                                    <% DTPerfis.forEach((row, index) => { %>
+                                    <option value="<%= row.cod %>"><%= row.perfil %>
+                                    </option>
+                                    <% }) %>
+                                 </select>
+                              </div>
+                            </div>
+        
+
+
+                        <!-- Botões -->
+                        <div class="modal-footer justify-content-between">
+                          <button type="submit"
+                            class="btn btn-primary" id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+                          <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Cancelar</button>
+                        </div>                     
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+<!-- ######################################################################### Cabeçalho Baixa de Produtos-->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_baixa_produto">&nbsp;Baixa de Produtos&nbsp;
+        </button>  
+    </div>
+
+<!-- ################################################################# Modal para baixa_produto -->
+<div class="modal fade" id="modal_baixa_produto" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Baixa de Produtos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/baixa_produto" method="post" enctype="multipart/form-data">
+
+
+<script>function validadata()
+{
+    var inicio = data_i.value;
+    var fim = data_f.value;
+
+    if (fim < inicio) {
+        alert('A data final deve ser maior que a inicial')
+        window.location.reload()
+    }
+}
+</script>
+
+                          <!-- unidade -->
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="unidade_ADD" class="label">Unidade</label>
+                                 <select class="form-control form-control-sm select2"
+                                   style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                                    <% DTPerfis.forEach((row, index) => { %>
+                                    <option value="<%= row.cod %>"><%= row.perfil %>
+                                    </option>
+                                    <% }) %>
+                                 </select>
+                              </div>
+                            </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i" id="data_i"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f" id="data_f" min="#data_i" onblur="validadata();"
+                            required >
+                    </div>
+                </div>
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<!-- ################################################################# Modal para entrada_produto -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_entrada_produto">&nbsp;Entrada de Produtos&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_entrada_produto" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Entrada de Produtos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/entrada_produto" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_entrada()
+                    {
+                        var inicio = data_i_entrada.value;
+                        var fim = data_f_entrada.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+                    <!-- unidade -->
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="unidade_ADD" class="label">Unidade</label>
+                             <select class="form-control form-control-sm select2"
+                               style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                                <% DTPerfis.forEach((row, index) => { %>
+                                <option value="<%= row.cod %>"><%= row.perfil %>
+                                </option>
+                                <% }) %>
+                             </select>
+                          </div>
+                        </div>
+
+                        <!-- unidade -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="entrada_ADD" class="label">Tipo entrada</label>
+                                 <select class="form-control form-control-sm select2"
+                                   style="width: 100%;" name="entrada_ADD" id="entrada_ADD">
+                                    
+                                    <option value="0">Todos</option>
+                                    <option value="1">Doação</option>
+                                    <option value="2">Devolução</option>
+                                    <option value="3">Compra</option>
+                                    
+                                 </select>
+                              </div>
+                            </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_entrada" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_entrada" id="data_i_entrada"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_entrada" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_entrada" id="data_f_entrada" min="#data_i_entrada" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_entrada()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_categoria">&nbsp;Consumo por Categoria&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_categoria" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Consumo por Categoria</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/consumo_categorias" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_categoria()
+                    {
+                        var inicio = data_i_categoria.value;
+                        var fim = data_f_categoria.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+                     <!-- unidade -->
+                     <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="unidade_ADD" class="label">Unidade</label>
+                             <select class="form-control form-control-sm select2"
+                               style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                                <% DTPerfis.forEach((row, index) => { %>
+                                <option value="<%= row.cod %>"><%= row.perfil %>
+                                </option>
+                                <% }) %>
+                             </select>
+                          </div>
+                        </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_categoria" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_categoria" id="data_i_categoria"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_categoria" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_categoria" id="data_f_categoria" min="#data_i_categoria" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+    
+             
+
+
+
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_categoria()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<!-- ################################################################# Modal para centro de custo -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_centrodecusto">&nbsp;Consumo Centro de Custo por Ítem&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_centrodecusto" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Consumo Centro de Custo por Ítem</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/consumo_centrodecusto" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_centrodecusto()
+                    {
+                        var inicio = data_i_centrocusto.value;
+                        var fim = data_f_centrocusto.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_centrocusto" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_centrocusto" id="data_i_centrocusto"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_centrocusto" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_centrocusto" id="data_f_centrocusto" min="#data_i_centrocusto" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+
+                 <!-- unidade -->
+                 <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="unidade_ADD" class="label">Unidade</label>
+                         <select class="form-control form-control-sm select2"
+                           style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                            <% DTPerfis.forEach((row, index) => { %>
+                            <option value="<%= row.cod %>"><%= row.perfil %>
+                            </option>
+                            <% }) %>
+                         </select>
+                      </div>
+                    </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="centrodecusto_ADD" class="label">Centro de Custo</label>
+                         <select class="form-control form-control-sm select2"
+                           style="width: 100%;" name="centrodecusto_ADD" id="centrodecusto_ADD">
+                           <option value="0">Todos</option>
+                            <% DTCentroCusto.forEach((row, index) => { %>
+                            <option value="<%= row.id %>"><%= row.nome %>
+                            </option>
+                            <% }) %>
+                         </select>
+                      </div>
+                    </div>
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_centrodecusto()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+<!-- ################################################################# Modal para diario -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_consumo_diario">&nbsp;Consumo Diário&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_consumo_diario" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Consumo Diário</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/consumo_diario" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_consumo_diario()
+                    {
+                        var inicio = data_i_diario.value;
+                        var fim = data_f_diario.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+                    <!-- unidade -->
+                 <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="unidade_ADD" class="label">Unidade</label>
+                         <select class="form-control form-control-sm select2"
+                           style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                            <% DTPerfis.forEach((row, index) => { %>
+                            <option value="<%= row.cod %>"><%= row.perfil %>
+                            </option>
+                            <% }) %>
+                         </select>
+                      </div>
+                    </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_diario" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_diario" id="data_i_diario"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_diario" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_diario" id="data_f_diario" min="#data_i_diario" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_consumo_diario()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+<!-- ################################################################# Modal para Serie -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_serie">&nbsp;Consumo por Série&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_serie" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Consumo por Série</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/serie" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_serie()
+                    {
+                        var inicio = data_i_serie.value;
+                        var fim = data_f_serie.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+                                       <!-- unidade -->
+                 <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="unidade_ADD" class="label">Unidade</label>
+                         <select class="form-control form-control-sm select2"
+                           style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                            <% DTPerfis.forEach((row, index) => { %>
+                            <option value="<%= row.cod %>"><%= row.perfil %>
+                            </option>
+                            <% }) %>
+                         </select>
+                      </div>
+                    </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_serie" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_serie" id="data_i_serie"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_serie" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_serie" id="data_f_serie" min="#data_i_serie" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_serie()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+<!-- ################################################################# Modal para Solicitante -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_solicitante">&nbsp;Consumo por Solicitante&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_solicitante" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Consumo por Solicitante</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/consumo_solicitante" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_solicitante()
+                    {
+                        var inicio = data_i_solicitante.value;
+                        var fim = data_f_solicitante.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+
+                          <!-- unidade -->
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="unidade_ADD" class="label">Unidade</label>
+                                 <select class="form-control form-control-sm select2"
+                                   style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                                    <% DTPerfis.forEach((row, index) => { %>
+                                    <option value="<%= row.cod %>"><%= row.perfil %>
+                                    </option>
+                                    <% }) %>
+                                 </select>
+                              </div>
+                            </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_solicitante" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_solicitante" id="data_i_solicitante"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_solicitante" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_solicitante" id="data_f_solicitante" min="#data_i_solicitante" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+
+                
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_solicitante()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<!-- ################################################################# Modal para Produto -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_produto">&nbsp;Consumo por Produto&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_produto" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Consumo por Produto</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/consumo_produto" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_produto()
+                    {
+                        var inicio = data_i_produto.value;
+                        var fim = data_f_produto.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+                       <!-- unidade -->
+                       <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="unidade_ADD" class="label">Unidade</label>
+                             <select class="form-control form-control-sm select2"
+                               style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+                                <% DTPerfis.forEach((row, index) => { %>
+                                <option value="<%= row.cod %>"><%= row.perfil %>
+                                </option>
+                                <% }) %>
+                             </select>
+                          </div>
+                        </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_produto" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_produto" id="data_i_produto"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_produto" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_produto" id="data_f_produto" min="#data_i_produto" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+
+                
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_produto()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+<!-- ################################################################# Modal para Requisição -->
+<div class="card-header">
+
+    <!-- Botões -->
+    <div class="btn-group">
+        <!-- Abre o modal para Produtos Abaixo do Mínimo -->
+        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+            data-target="#modal_requisicoes">&nbsp;Requisições&nbsp;
+        </button>
+    </div>
+
+
+<div class="modal fade" id="modal_requisicoes" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Requisições</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo central do modal -->
+            <form role="form" action="/requisicoes" method="post" enctype="multipart/form-data">
+
+
+                <script>function validadata_requisicoes()
+                    {
+                        var inicio = data_i_requisicoes.value;
+                        var fim = data_f_requisicoes.value;
+                    
+                        if (fim < inicio) {
+                            alert('A data final deve ser maior que a inicial')
+                            window.location.reload()
+                        }
+                    }
+                    </script>
+
+
+ <!-- unidade -->
+ <div class="col-sm-4">
+    <div class="form-group">
+        <label for="unidade_ADD" class="label">Unidade</label>
+         <select class="form-control form-control-sm select2"
+           style="width: 100%;" name="unidade_ADD" id="unidade_ADD">
+            <% DTPerfis.forEach((row, index) => { %>
+            <option value="<%= row.cod %>"><%= row.perfil %>
+            </option>
+            <% }) %>
+         </select>
+      </div>
+    </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_i_requisicoes" class="col-2 col-form-label">Início</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_i_requisicoes" id="data_i_requisicoes"
+                            required>
+                    </div>
+                </div>
+
+
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="data_f_requisicoes" class="col-2 col-form-label">Fim</label>
+                        <input type="date" autocomplete="off"  class="form-control form-control-sm"
+                            name="data_f_requisicoes" id="data_f_requisicoes" min="#data_i_requisicoes" onblur="validadata_entrada();"
+                            required >
+                    </div>
+                </div>
+    
+    <!-- Botões -->
+    <div class="modal-footer justify-content-between">
+      <button type="submit"
+        class="btn btn-primary" onclick = 'validadata_requisicoes()' id="btnSalvar_ADD">&nbsp;&nbsp;DOWNLOAD&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+    </div>                     
+</div>
+</div>
+</div>
+</div>
+</form>
+<!-- ######################################################################### Modal para EDITAR -->
+<div class="modal fade" id="modalEDIT" data-backdrop="static">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<!-- Header -->
+<div class="modal-header">
+<h4 class="modal-title">Editar</h4>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<!-- Conteúdo central do modal -->
+<form role="form"
+action="/editDisciplina/ <?= document.getElementById('cod_EDIT').value ?>"
+method="post" enctype="multipart/form-data">
+<!-- Formulário para Editar usuário -->
+<div class="modal-body">
+    <!-- Cod -->
+    <div class="row" style="display: none;">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="cod_EDIT" class="label">Cod</label>
+                <input type="text" autocomplete="off" class="form-control form-control-sm"
+                    name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campos de cadastro -->
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center;">
+            </div>
+        </div>
+    
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                    <div class="row">
+                        <!-- Nome -->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="nome_EDIT" class="label">Nome</label>
+                                <input type="text" autocomplete="off"  class="form-control form-control-sm"
+                                    name="nome_EDIT" id="nome_EDIT"
+                                    placeholder="Nome" required>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit"
+                                class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>                                                
+        </div>
+    </div>
+</div>
+
+                                    <!-- Botões -->
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ######################################################################### Modal para ELIMINAR -->
+                    <div class="modal fade" id="modalDEL" id="modal-danger" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-danger">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Atenção!</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Tem certeza que deseja eliminar o registro selecionado?</p>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                                        Não, cancelar
+                                    </button>
+
+                                    <!-- Esse span é oculto pois apenas recebe o texto contendo o cod para eliminação na função abaixo -->
+                                    <span style="display:none" id="cod_DEL"></span>
+
+                                    <!-- Função anónima dentro da classe button que direciona para a route /delete/:id após o usuário clicar em sim no modal -->
+                                    <button type="button" class="btn btn-outline-light" onclick="(function() {
+                                            window.location = '/delDisciplina/' + document.getElementById('cod_DEL').textContent;
+                                            })()" id="btnDeletar_DEL">Sim, eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Grava o texto recebido da variável status_Crud do routes/usuario
+           lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+           e dispara uma função de alerta do toastr de acordo com o texto -->
+<span style="display:none" id='status_Crud'><%= status_Crud %></span>

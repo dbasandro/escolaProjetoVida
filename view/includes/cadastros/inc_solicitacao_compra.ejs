@@ -1,0 +1,531 @@
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+       <div class="row sm-2">
+          <!-- Título -->
+          <div class="col-sm-6">
+             <h1>Solicitação de Produtos</h1>
+          </div>
+          <!-- Navegação histórica -->
+          <div class="col-sm-6">
+             <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="admin">Home</a></li>
+                <li class="breadcrumb-item active">Cadastros</li>
+                <li class="breadcrumb-item active">Requisição</li>
+             </ol>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- Page Content (conteúdo) -->
+ <section class="content">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-sm-12">
+             <!-- Para iniciar fechado, adicione collapsed-card na class-->
+             <div class="card card-primary card-outline">
+                <!-- ######################################################################### Cabeçalho -->
+                <div class="card-header">
+                  <style>
+                     * {
+                       box-sizing: border-box;
+                     }
+                     body {
+                       background-color: #ffffff;
+                       background-attachment: fixed;
+                       background-size: cover;
+                     
+                       font-family: "Hepta Slab", Helvetica, Arial;
+                       font-size: 15px;
+                       display: block;
+                       margin: 0;
+                       min-height: 100vh;
+                     }
+                     
+                     
+                     .menu-closer {
+                       width: 32px;
+                       height: 32px;
+                       display: none;
+                       font-size: 30px;
+                       cursor: pointer;
+                     }
+                     
+                     .cart--area {
+                       padding: 20px;
+                     }
+                     
+                     
+                     .cart--item {
+                       display: flex;
+                       align-items: center;
+                       margin: 10px 0;
+                     }
+                     
+                     .cart--item-nome {
+                       flex: 1;
+                     }
+                     .cart--item--qtarea {
+                       display: inline-flex;
+                       background-color: #eee;
+                       border-radius: 10px;
+                       height: 30px;
+                     }
+                     .cart--item--qtarea div {
+                       border: 0;
+                       background-color: transparent;
+                       font-size: 17px;
+                       outline: 0;
+                       cursor: pointer;
+                       padding: 0px 10px;
+                       color: #333;
+                     }
+                     .cart--item--qt {
+                       line-height: 30px;
+                       font-size: 12px;
+                       font-weight: bold;
+                       padding: 0px 5px;
+                       color: #000;
+                     }
+                     .cart-value {
+                       padding: 15px 0;
+                       border-top: 1px solid #79b9dd;
+                       color: #315970;
+                       display: flex;
+                       justify-content: space-between;
+                       font-size: 15px;
+                     }
+                     .cart-value span:first-child {
+                       font-weight: bold;
+                     }
+                     .cart-value.big {
+                       font-size: 20px;
+                       color: #000;
+                       font-weight: bold;
+                     }
+                     .cart--finalizar {
+                       padding: 20px 30px;
+                       border-radius: 20px;
+                       background-color: #48d05f;
+                       color: #fff;
+                       cursor: pointer;
+                       text-align: center;
+                       margin-top: 20px;
+                       border: 2px solid #63f77c;
+                       transition: all ease 0.2s;
+                     }
+                     .cart--finalizar:hover {
+                       background-color: #35af4a;
+                     }
+                     
+                     @media (max-width: 1000px) {
+                       .pizza-area {
+                         grid-template-columns: repeat(2, 1fr);
+                       }
+                     }
+                     
+                     @media (max-width: 25px) {
+                       body {
+                         flex-direction: column;
+                       }
+                     
+                       header {
+                         display: flex;
+                       }
+                       main {
+                         padding-top: 60px;
+                       }
+                     
+                       aside {
+                         width: auto;
+                         position: fixed;
+                         left: 100vw;
+                         right: 0;
+                         top: 0;
+                         bottom: 0;
+                         transition: all ease 0.2s;
+                       }
+                       aside.show {
+                         width: auto;
+                       }
+                       .cart--area {
+                         width: 100vw;
+                       }
+                     }
+
+                     </style>
+
+
+
+<% students.forEach((row, index) =>{ %>
+   <tr>
+     <td><%= students.name%></td>
+     <td><%= students.age%></td>
+   </tr>
+ <% })%>
+                     
+
+                         <!-- Conteúdo central do modal -->
+                         <form role="form" action="/addSolicitacaoProduto" method="post" enctype="multipart/form-data">
+                           <!-- Campos do formulário -->
+                           <!-- Campos do formulário -->
+                           <div class="modal-body">
+                              <!-- Cod -->
+                              <div class="row" style="display: none;">
+                                 <div class="col-sm-12">
+                                    <div class="form-group">
+                                       <label for="cod_ADD" class="label">Cod</label>
+                                       <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                          name="cod_ADD" id="cod_ADD" placeholder="Cod" readonly=“true”>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-12">
+                                 <!-- Campos de cadastro -->
+
+                                 <div class="row">
+                                    <div class="col-sm-12">
+                                       <div class="row">
+
+                                          
+                                           <!-- descricao material -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group" id='valor_uni_EDITADD' style = "display: block"> 
+                                                                    <label for="valor_uni_EDITADD" class="label" id='valor_uni_EDITADD'>Descrição Produto </label> 
+                                                                    <input type="text"  autocomplete="off" id="valor_uni_EDITADD" 
+                                                                        class="form-control form-control-sm"
+                                                                        name="valor_uni_EDITADD" id="valor_uni_EDITADD" placeholder="Descrição Produto">                                                                        
+                                                                </div>
+                                                            </div>
+                                
+                                        
+                                         
+
+                                          
+                                          <!-- Quantidade -->
+                                          <div class="col-sm-4">
+                                             <div class="form-group">
+                                                <label for="quantidade_ADD" class="label">Quantidade</label>
+                                                <input type="number" autocomplete="off" class="form-control form-control-sm" 
+                                                   name="quantidade_ADD" id="quantidade_ADD"
+                                                   placeholder="Quantidade" required>
+                                             </div>
+                                          </div>
+
+
+
+                                          <!-- Observação -->
+                                          <div class="col-sm-12">
+                                             <div class="form-group">
+                                                <label for="observacao_ADD" class="label">Motivo</label>
+                                                <input type="text" autocomplete="off" class="form-control form-control-sm" 
+                                                   name="observacao_ADD" id="observacao_ADD"
+                                                   placeholder="Observação" required>
+                                             </div>
+                                          </div>
+
+
+                                         
+
+                                             
+
+
+
+                                          <!-- Botões -->
+
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                                 <!--compras-->
+                                 <div class="col-sm-12"></div>
+                                 <div class="cart--area" id="produto" >
+                                    <div class="menu-closer"></div>
+                                    <div class="cart" id="cart">
+                               </div>  
+
+                                   
+                                    
+                                       
+                                       
+                                   
+                                    <!--cart--details-->
+                                  </div>  
+                                 </div>  
+                                 
+                           </div>
+                           <button type="submit"
+                           class="cart--finalizar"  id="btnSalvar_ADD">&nbsp;&nbsp;Finalizar solicitação&nbsp;&nbsp;</button>
+                      
+                     </div>
+              
+                  </div>
+                 
+                  </form>
+                              
+
+                     
+                             
+               
+                                           
+                     
+                      
+                     
+                     <script>
+
+                   
+
+// Definir variáveis universais
+var nomes =[];
+var unidades =[];
+var cods =[]; 
+var valorTotal = [];
+var valorProduto = [];
+var qtd = [];
+var matriz = []; 
+var users = [];
+var estoques = [];
+
+
+function myFunction() {
+ // Get the checkbox
+ var checkBox = document.getElementById("doacao_EDITADD");
+ // Get the output text
+ var text = document.getElementById("valor_uni_EDITADD");
+
+ var text2 = document.getElementById("id_departamento_ADD");
+
+
+ // If the checkbox is checked, display the output text
+ if (checkBox.checked == false){
+ text.style.display = "none";
+ text2.style.display = "block";
+ } else {
+ text.style.display = "block";
+ text2.style.display = "none";
+ }
+ }
+
+
+//FUNÇÃO QUE ADICIONA e EXCLUi ÍTEM SELECIONADO NO ARRAY E NA DIV (nome produto, valor produto, checkbox)
+function agrupaarray() {
+   let resultado = cods.map((p, i) => {
+  return [p, valorTotal[i].toFixed(2), valorProduto[i], qtd[i] ,unidades[i], users[i]]
+})
+
+
+
+let observacao = document.getElementById('observacao_ADD').value;
+
+let dados = (nomes.length);
+
+console.log(observacao)
+
+if (observacao != "") {
+if (dados > 0) {
+   alert('Solitação feita com sucesso !')
+fetch("/addProduto", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(resultado),
+          })
+            //.then((response) => response.json())
+            .then((results) => {
+              //console.log("Success:", results);
+            })
+            .catch((error) => {
+              //console.error("Error:", error);
+            });
+
+         }
+      }
+}
+
+
+function adicionaeexcluidiv(nome, valor, check, unidade, user, estoque) {
+
+//SELECINANDO AONDE SERÁ INSERIDO A DIV
+let dependentes_container = document.querySelector(".cart");
+
+if (unidade == 'Novo Pátio') {
+                unidade = 3;
+            } else if (unidade == 'Projeto Vida - Fundamental')
+            {
+                unidade = 2;
+            }
+            else if (unidade == 'Projeto Vida Infantil')
+            {
+                unidade = 1;
+            }
+            ;
+
+
+let testes = nome
+
+//VERIFICANDO SE CHECKBOX ESTÁ ATIVO OU INATIVO
+   let checkbox = document.getElementById(check);
+if(checkbox.checked) {
+
+
+// ATIVO = VERIFICAR SE O NOME JA EXISTE NO ARRAY
+result = nomes.includes(nome);
+if  (result === false) {
+nomes.push(nome);
+valorTotal.push(0);
+valorProduto.push(valor);
+qtd.push(0);
+unidades.push(unidade);
+cods.push(check)
+users.push(user)
+estoques.push(estoque);}
+else {}
+
+
+
+    let dependente_container = `<div class="cart--item" id="`+testes+valor+`">
+                       <div class="cart--item-nome">`+testes+`</div>
+                       <div class="cart--item--qtarea">
+                         <div class="cart--item-qtmenos" onclick="array2('`+testes+`','`+valor+`')">-</div>
+                         <div class="cart--item--qt" id="`+testes+`">0</div>
+                         <div class="cart--item-qtmais" onclick="array('`+testes+`','`+valor+`')">+</div>
+                       </div>
+                       <td>
+                        Total R$: <span id="total`+testes+`">00,00</span>
+</td>
+                     </div>`;
+    dependentes_container.innerHTML += dependente_container;
+    console.log("O cliente marcou o checkbox");
+} else {
+
+   item = nomes.indexOf(testes);
+
+   var indice = nomes.findIndex((item) => item == testes);
+  
+   nomes.splice(indice, 1);
+   valorTotal.splice(indice, 1);
+   valorProduto.splice(indice, 1);
+   qtd.splice(indice, 1);
+   estoques.splice(indice, 1);
+
+   valorCompra();
+
+excluir(nome+valor);
+    console.log("O cliente não marcou o checkbox");
+    
+};
+
+function excluir (nome) {   
+   document.getElementById(nome).remove();
+};
+                  };
+
+
+
+function array(nome, valor) {
+item = nomes.indexOf(nome)
+console.log(item + 'posição')
+adicionarItem(item, nome)
+}
+
+function array2(nome, valor) {
+item = nomes.indexOf(nome)
+console.log(item + 'posição')
+removerItem(item, nome)
+}
+
+// Aumentar a quantidade de itens de um produto
+function adicionarItem(item, nome) {
+   
+   
+if (qtd[item] < estoques[item]){
+  
+   //console.log(nome)
+	var quantidade = document.getElementById(nome);
+   //console.log(quantidade)
+
+	var total = document.getElementById('total' + nome);
+	qtd[item] += 1;
+	valorTotal[item] = valorProduto[item] * qtd[item];
+	quantidade.innerHTML = qtd[item];
+	total.innerHTML = valorTotal[item].toFixed(2);;
+	//console.log(quantidade);
+	valorCompra();
+   console.log(estoques[item])
+   console.log(qtd[item])}
+}
+
+// Diminuir a quantidade de itens de um produto
+function removerItem(item, nome) {
+	if (qtd[item] > 0) {
+		qtd[item] -= 1;
+		var quantidade = document.getElementById(nome);
+		var total = document.getElementById('total' + nome);
+		quantidade.innerHTML = qtd[item];
+		valorTotal[item] = valorProduto[item] * qtd[item];
+		total.innerHTML = valorTotal[item].toFixed(2);
+		valorCompra();
+	}
+}
+
+// Remover o produto
+function removerProduto(produto) {
+	var pai = document.getElementById('carrinho');
+	var filho = document.getElementById('produto' + produto);
+	if (confirm('Confirmar exclusão?')) {
+		valorTotal[produto] -= (valorProduto[produto] * qtd[produto]);
+		qtd[produto] = 0;
+		pai.removeChild(filho);
+		valorCompra();
+	}
+}
+
+// Calcular o valor total da compra
+function valorCompra() {
+	var valorTotalCompra = document.getElementById('valorTotalCompra');
+	var valor = 0;;
+	for (var i = 0; i < valorTotal.length; i++) {
+		valor += valorTotal[i];
+	}
+	valorTotalCompra.innerHTML = valor.toFixed(2);
+	//console.log(valorTotal.length);
+}
+
+// Finalizar a compra e zerar os valores
+function finalizarCompra() {
+	var nome = document.getElementById('nome').innerHTML;
+	alert('Obrigada pela compra, ' + nome + '!');
+	document.location.reload(true);
+}
+
+                    </script>
+                  
+                  
+                  
+                   <!-- Botão Ocultar ou exibir o card -->
+                   <div class="card-tools">
+                      <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                         title="Collapse">
+                      <i class="fas fa-minus"></i>
+                      </button>
+                      <!-- Botão destruir card -->
+                      <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                         title="Remove">
+                      <i class="fas fa-times"></i>
+                      </button>
+                   </div>
+                </div>   
+                <!-- ######################################################################### Tabela -->
+          
+          </div>   
+    </div>
+    </div>
+    </div>
+    </div>
+ </section>
+ <!-- Grava o texto recebido da variável status_Crud do routes/usuario
+    lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+    e dispara uma função de alerta do toastr de acordo com o texto -->
+ <span style="display:none" id='status_Crud'><%= status_Crud %></span>

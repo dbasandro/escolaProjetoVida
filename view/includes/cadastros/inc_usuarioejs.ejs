@@ -1,0 +1,1074 @@
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row sm-2">
+            <!-- Título -->
+            <div class="col-sm-6">
+                <h1>Cadastro de usuário</h1>
+            </div>
+            <!-- Navegação histórica -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="admin">Home</a></li>
+                    <li class="breadcrumb-item active">Cadastros</li>
+                    <li class="breadcrumb-item active">Usuário</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Page Content (conteúdo) -->
+<section class="content"  >
+    <div class="container-fluid" id="session" style="visibility:hidden">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Para iniciar fechado, adicione collapsed-card na class-->
+                <div class="card card-primary card-outline">
+
+                    <!-- ######################################################################### Cabeçalho -->
+                    <div class="card-header">
+                        <!-- Botões -->
+                        <div class="btn-group">
+                            <!-- Abre o modal para INSERT -->
+                            <% if (Adicionarusuario.length > 0) {%>
+                                <% Adicionarusuario.forEach((row, index) => { %>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" 
+                                data-target="#modalADD">
+                                &nbsp;<%= row.adicionar %>&nbsp;
+                            </button>
+                            <% }) %>
+                    <% } else { %>
+                    <% } %>  
+                        </div>
+
+                        
+
+                        <div class="btn-group">
+                            <!-- Botão para exportar dados da tabela (tableExport) -->
+                            <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle"
+                                data-toggle="dropdown">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                                <span class="caret"></span>
+                            </button>
+
+                            <!-- Exportar -->
+                            <div class="dropdown-menu" role="menu">
+                                <!-- Exportar para Excel -->
+                                <a class="dropdown-item" style="cursor: pointer;" onclick="(function(){
+                                $('#TBtable').tableExport({type:'excel', fileName: 'Usuarios', exportHiddenCells: true, ignoreColumn:'[1],[5],[8]'});
+                                })()"><i class="fas fa-file-excel" style="color: #118311;"></i>&nbsp;&nbsp;Ms-Excel</a>
+                                <!-- Exportar para PDF -->
+                                <a class="dropdown-item" style="cursor: pointer;" onclick="(function(){
+                                $('#TBtable').tableExport({type:'pdf', fileName: 'Usuarios', exportHiddenCells: true, ignoreColumn:'[5],[8]'});
+                                })()"><i class="fas fa-file-pdf" style="color: #d17021;"></i>&nbsp;&nbsp;PDF</a>
+                            </div>
+                        </div>
+
+                        <!-- Botão Ocultar ou exibir o card -->
+                        <div class="card-tools">
+                            <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <!-- Botão destruir card -->
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                                title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ######################################################################### Tabela -->
+                    <div class="card-body" >
+
+                        <% if (DTUsuario.length > 0) {%>
+                            
+                        <table id="TBtable" class="table-bordered">
+
+                            <thead class="thead-light">
+                                <tr>
+                                    <!-- Cabeçalho: Titulos da tabela -->
+                                    <th scope="col">Cod</th>
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">usuario</th>
+                                    <th class="th-none" scope="col">Senha</th>
+                                    <!-- Coluna oculta -->
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Opcoes</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% DTUsuario.forEach((row, index) => { %>
+                                   
+                                <tr>
+                                    <!-- Detalhes: Dados da tabela -->
+                                    <td><%= row.cod %></td>
+                                    <td>
+                                        <a class='data_lighter' style="cursor: zoom-in;"
+                                            href="dist/img/usuarios/<%= row.foto %>">
+                                            <img src="dist/img/usuarios/<%= row.foto %>"
+                                                class="rounded-circle img-table-p" alt="">
+                                        </a>
+                                    </td>
+                                    <td><%= row.nome %></td>
+                                    <td><%= row.email %></td>
+                                    <td><%= row.usuario %></td>
+                                    <td class="td-none"><%= row.senha %></td>
+                                    <!-- Coluna oculta -->
+         
+                                    <td><%= row.status %></td>
+
+                                    
+                                    <!-- Coluna: Opções -->
+                                    
+                                       
+
+                                    <script>
+                                    function removeDummy() {
+                                        if (document.getElementById('botaopermissao').value ==0){
+                                        var elem = document.getElementById('botaopermissao');
+                                        elem.parentNode.removeChild(elem)};
+
+                                        if (document.getElementById('botaoeditar').value ==0){
+                                        var a = document.getElementById('botaoeditar');
+                                        a.parentNode.removeChild(a)};
+
+                                        if (document.getElementById('botaoeliminar').value ==0){
+                                        var b = document.getElementById('botaoeliminar');
+                                        b.parentNode.removeChild(b)};
+
+
+                                        document.getElementById('session').style.visibility="visible"
+
+                                       }
+                                       window.onload = removeDummy;
+
+                                       </script>
+                                    
+                                    
+                                    <td style="min-width: 130px;">
+
+                                        
+                                        <button class="btn btn-xs btn-primary" data-toggle="modal" id="botaopermissao" value="<%= row.permissao %>"
+                                        data-target="#modalpermissaoEDIT" onclick="(function(){                      
+                                        //Setando o valor nos campos de texto 
+                                        document.getElementById('cod_PERMISSAOEDIT').value = '<%= row.cod %>';
+                                        if('<%= row.comunicacao %>' == '1'){                        
+                                            document.getElementById('comunicacao_PERMISSAOEDIT').checked = true;                        
+                                        }else{
+                                            document.getElementById('comunicacao_PERMISSAOEDIT').checked = false;                        
+                                        }; 
+                                        if('<%= row.chat %>' == '1'){                        
+                                            document.getElementById('chat_PERMISSAOEDIT').checked = true;                        
+                                        }else{
+                                            document.getElementById('chat_PERMISSAOEDIT').checked = false;                        
+                                        }; 
+                                        if('<%= row.cadastro %>' == '1'){document.getElementById('cadastro_PERMISSAOEDIT').checked = true;} else{document.getElementById('cadastro_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.categoria %>' == '1'){document.getElementById('categoria_PERMISSAOEDIT').checked = true;} else{document.getElementById('categoria_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionarcategoria %>' == '1'){document.getElementById('adicionarcategoria_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionarcategoria_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminarcategoria %>' == '1'){document.getElementById('eliminarcategoria_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminarcategoria_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.centrodecusto %>' == '1'){document.getElementById('centrodecusto_PERMISSAOEDIT').checked = true;} else{document.getElementById('centrodecusto_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionarcentro %>' == '1'){document.getElementById('adicionarcentro_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionarcentro_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminarcentro %>' == '1'){document.getElementById('eliminarcentro_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminarcentro_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.disciplina %>' == '1'){document.getElementById('disciplina_PERMISSAOEDIT').checked = true;} else{document.getElementById('disciplina_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionardisciplina %>' == '1'){document.getElementById('adicionardisciplina_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionardisciplina_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.editardisciplina %>' == '1'){document.getElementById('editardisciplina_PERMISSAOEDIT').checked = true;} else{document.getElementById('editardisciplina_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminardisciplina %>' == '1'){document.getElementById('eliminardisciplina_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminardisciplina_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.fornecedor %>' == '1'){document.getElementById('fornecedor_PERMISSAOEDIT').checked = true;} else{document.getElementById('fornecedor_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionarfornecedor %>' == '1'){document.getElementById('adicionarfornecedor_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionarfornecedor_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.editarfornecedor %>' == '1'){document.getElementById('editarfornecedor_PERMISSAOEDIT').checked = true;} else{document.getElementById('editarfornecedor_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminarfornecedor %>' == '1'){document.getElementById('eliminarfornecedor_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminarfornecedor_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.material %>' == '1'){document.getElementById('material_PERMISSAOEDIT').checked = true;} else{document.getElementById('material_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionarmaterial %>' == '1'){document.getElementById('adicionarmaterial_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionarmaterial_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.editarmaterial %>' == '1'){document.getElementById('editarmaterial_PERMISSAOEDIT').checked = true;} else{document.getElementById('editarmaterial_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminarmaterial %>' == '1'){document.getElementById('eliminarmaterial_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminarmaterial_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.baixa_produto %>' == '1'){document.getElementById('baixa_produto_PERMISSAOEDIT').checked = true;} else{document.getElementById('baixa_produto_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.entrada_produto %>' == '1'){document.getElementById('entrada_produto_PERMISSAOEDIT').checked = true;} else{document.getElementById('entrada_produto_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.turma %>' == '1'){document.getElementById('turma_PERMISSAOEDIT').checked = true;} else{document.getElementById('turma_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionarturma %>' == '1'){document.getElementById('adicionarturma_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionarturma_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminarrturma %>' == '1'){document.getElementById('eliminarrturma_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminarrturma_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.usuariomenu %>' == '1'){document.getElementById('usuariomenu_PERMISSAOEDIT').checked = true;} else{document.getElementById('usuariomenu_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.adicionarusuario %>' == '1'){document.getElementById('adicionarusuario_PERMISSAOEDIT').checked = true;} else{document.getElementById('adicionarusuario_PERMISSAOEDIT').checked = false;};
+                                       if('<%= row.permissao %>' == '1'){document.getElementById('permissao_PERMISSAOEDIT').checked = true;} else{document.getElementById('permissao_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.editarusuario %>' == '1'){document.getElementById('editarusuario_PERMISSAOEDIT').checked = true;} else{document.getElementById('editarusuario_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.eliminausuario %>' == '1'){document.getElementById('eliminausuario_PERMISSAOEDIT').checked = true;} else{document.getElementById('eliminausuario_PERMISSAOEDIT').checked = false;};
+                                        if('<%= row.pedido %>' == '1'){document.getElementById('pedidos_PERMISSAOEDIT').checked = true;}else{document.getElementById('pedidos_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.novo %>' == '1'){document.getElementById('novo_PERMISSAOEDIT').checked = true;} else{document.getElementById('novo_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.solicitacao %>' == '1'){document.getElementById('solicitacao_PERMISSAOEDIT').checked = true;}else{document.getElementById('solicitacao_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.entregas %>' == '1'){document.getElementById('entregas_PERMISSAOEDIT').checked = true;} else{document.getElementById('entregas_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.aberto %>' == '1'){document.getElementById('aberto_PERMISSAOEDIT').checked = true;}else{document.getElementById('aberto_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.finalizadas %>' == '1'){document.getElementById('finalizadas_PERMISSAOEDIT').checked = true;} else{document.getElementById('finalizadas_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.relatorio %>' == '1'){document.getElementById('relatorio_PERMISSAOEDIT').checked = true;}else{document.getElementById('relatorio_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.consulta %>' == '1'){document.getElementById('consulta_PERMISSAOEDIT').checked = true;} else{document.getElementById('consulta_PERMISSAOEDIT').checked = false;}; 
+                                        if('<%= row.auditoria %>' == '1'){document.getElementById('auditoria_PERMISSAOEDIT').checked = true;} else{document.getElementById('auditoria_PERMISSAOEDIT').checked = false;}; 
+
+
+})()">&nbsp;&nbsp;&nbsp;Permissão&nbsp;&nbsp;
+
+                                    </button>
+
+
+                                    
+                                        <button class="btn btn-xs btn-warning" data-toggle="modal" id="botaoeditar" value="<%= row.editarusuario %>"
+                                            data-target="#modalEDIT" onclick="(function(){                      
+                                            //Setando o valor nos campos de texto 
+                                            document.getElementById('cod_EDIT').value = '<%= row.cod %>';
+                                            document.getElementById('foto_EDIT').src = 'dist/img/usuarios/<%= row.foto %>';
+                                            document.getElementById('nome_EDIT').value = '<%= row.nome %>';
+                                            document.getElementById('email_EDIT').value = '<%= row.email %>';
+                                            document.getElementById('usuario_EDIT').value = '<%= row.usuario %>';
+                                            document.getElementById('senha_EDIT').value = '<%= row.senha %>'; 
+                                            //Setando o valor no checkbox ativo
+                                            if('<%= row.status %>' == 'Ativo'){                        
+                                                document.getElementById('status_EDIT').checked = true;                        
+                                            }else{
+                                                document.getElementById('status_EDIT').checked = false;                        
+                                            }; 
+                                            if('<%= row.comunicacao %>' == '1'){                        
+                                                document.getElementById('comunicacao_EDIT').checked = true;                        
+                                            }else{
+                                                document.getElementById('comunicacao_EDIT').checked = false;                        
+                                            }; 
+                                            if('<%= row.cadastro %>' == '1'){document.getElementById('cadastro_EDIT').checked = true;} else{document.getElementById('cadastro_EDIT').checked = false;}; 
+                                            if('<%= row.categoria %>' == '1'){document.getElementById('categoria_EDIT').checked = true;} else{document.getElementById('categoria_EDIT').checked = false;}; 
+                                            if('<%= row.centrodecusto %>' == '1'){document.getElementById('centrodecusto_EDIT').checked = true;} else{document.getElementById('centrodecusto_EDIT').checked = false;}; 
+                                            if('<%= row.disciplina %>' == '1'){document.getElementById('disciplina_EDIT').checked = true;} else{document.getElementById('disciplina_EDIT').checked = false;}; 
+                                            if('<%= row.fornecedor %>' == '1'){document.getElementById('fornecedor_EDIT').checked = true;} else{document.getElementById('fornecedor_EDIT').checked = false;}; 
+                                            if('<%= row.material %>' == '1'){document.getElementById('material_EDIT').checked = true;} else{document.getElementById('material_EDIT').checked = false;}; 
+                                            if('<%= row.solicitante %>' == '1'){document.getElementById('solicitante_EDIT').checked = true;} else{document.getElementById('solicitante_EDIT').checked = false;}; 
+                                            if('<%= row.requisicao %>' == '1'){document.getElementById('requisicao_EDIT').checked = true;} else{document.getElementById('requisicao_EDIT').checked = false;}; 
+                                            if('<%= row.turma %>' == '1'){document.getElementById('turma_EDIT').checked = true;} else{document.getElementById('turma_EDIT').checked = false;}; 
+                                            if('<%= row.usuariomenu %>' == '1'){document.getElementById('usuariomenu_EDIT').checked = true;} else{document.getElementById('usuariomenu_EDIT').checked = false;}; 
+                                            
+                                            
+                         
+
+
+                                            if('<%= row.relatorio %>' == '1'){                        
+                                                document.getElementById('relatorio_EDIT').checked = true;                        
+                                            }else{
+                                                document.getElementById('relatorio_EDIT').checked = false;                        
+                                            }; 
+
+                                            if('<%= row.consulta %>' == '1'){document.getElementById('consulta_EDIT').checked = true;} else{document.getElementById('consulta_EDIT').checked = false;}; 
+
+                                            
+                                          
+                                        
+
+
+                                            })()">&nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;
+
+                                        </button>
+                                 
+
+                                        <!-- Função anónima dentro da classe button
+                                             que seta o cod do registro selecionado no campo oculto do modal -->
+                                        <button class="btn btn-xs btn-danger" data-toggle="modal" id="botaoeliminar" value="<%= row.eliminausuario %>"
+                                            data-target="#modalDEL" onclick="(function(){
+                                            document.getElementById('cod_DEL').textContent = '<%= row.cod %>';
+                                            })()">Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+
+                            <!-- Pesquisa -->
+                            <tfoot>
+                                <tr>
+                                    <th scope="col">Cod</th>
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Usuario</th>
+                                    <th class="th-none" scope="col">Senha</th>
+                                    <!-- Coluna oculta -->
+                                    <th scope="col">unidade</th>
+                                    <th scope="col">Status</th>
+                                    <th class="th-none" scope="col">Opcoes</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                        <% } else { %>
+                        <!-- Não existe dados na tabela -->
+                        <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                                style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                            registro.</p>
+                        <% } %>
+                    </div>
+
+
+
+                    <!-- ######################################################################### Modal para EDITAR -->
+                    <div class="modal fade" id="modalEDIT" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form"
+                                    action="/editUsuario/ <?= document.getElementById('cod_EDIT').value ?>"
+                                    method="post" enctype="multipart/form-data">
+                                    <!-- Formulário para Editar usuário -->                                
+                                    <div class="modal-body">
+
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_EDIT" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">                                            
+                                            <div class="col-sm-5" style="text-align: center;">
+                                                <!-- Imagem -->
+                                                <div class="form-group"
+                                                    style="align-items: center;display: inline-grid;">
+
+                                                    <!-- Imagem e opção para zoom -->
+                                                    <img class="img-thumbnail-usuario mx-auto d-block" name="foto_EDIT" id="foto_EDIT">
+                                                    
+                                                    <!-- Botão Upload que simula im clique no elemento input file oculto -->
+                                                    <button type="button"
+                                                        class="btn btn-default btn-xs"
+                                                        style="margin-top:5px;;place-self: center;"
+                                                        onclick="document.getElementById('image_EDIT').click()"><i
+                                                        class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload</button>
+
+                                                    <!-- Elemento input file oculto -->
+                                                    <div class="custom-file" style="display: none;">
+                                                        <input type="file" autocomplete="off" class="custom-file-input form-control-sm"
+                                                            name="image_EDIT" id="image_EDIT" onclick="(function(){
+                                                                document.getElementById('image_EDIT').onchange = function (evt) {
+                                                                    var tgt = evt.target || window.event.srcElement,
+                                                                    files = tgt.files;                                 
+                                                                    if (FileReader && files && files.length) {
+                                                                        var fr = new FileReader();
+                                                                        fr.onload = function () {                                                                        
+                                                                        document.getElementById('foto_EDIT').src = fr.result;                                                                
+                                                                        }                                  
+                                                                    fr.readAsDataURL(files[0]);
+                                                                    }
+                                                                }
+                                                            })()">
+                                                        <label class="custom-file-label" for="image_EDIT"></label>
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+
+                                            <div class="col-sm-7">
+                                                <div class="row">
+                                                    <!-- Nome, Email -->
+                                                    <div class="col-sm-12">
+                                                        <!-- Nome -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="nome_EDIT" class="label">Nome</label>
+                                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                                        name="nome_EDIT" id="nome_EDIT"
+                                                                        placeholder="Nome completo" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Email -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="email_EDIT" class="label">E-mail</label>
+                                                                    <input type="email" autocomplete="off" class="form-control form-control-sm"
+                                                                        name="email_EDIT" id="email_EDIT" placeholder="E-mail">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="usuario_EDIT" class="label">Usuário</label>
+                                                        <input autocomplete="off" type="text" class="form-control form-control-sm"
+                                                            name="usuario_EDIT" id="usuario_EDIT" placeholder="Usuario">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Senha -->
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="senha_EDIT" class="label">Senha</label>
+                                                        <div class="input-group">
+                                                            <input type="password" autocomplete="off" class="form-control form-control-sm"
+                                                                name="senha_EDIT" id="senha_EDIT" placeholder="Senha"
+                                                                required>
+                                                            <div class="input-group-append" id="revelar_EDIT"
+                                                                style="cursor: pointer;" onclick="(function(){
+                                                                revelar(document.getElementById('revelar_EDIT'), document.getElementById('senha_EDIT'));
+                                                                })()">
+                                                                <div class="input-group-text">
+                                                                    <span class="fas fa-eye"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Perfil, status -->
+                                                <div class="row">
+                                                    <!-- Perfil -->
+
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <label for="status_EDIT" class="label">Status</label>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="status_EDIT" id="status_EDIT">
+                                                                <label for="status_EDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Ativo</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                            </div>
+
+
+
+                                            
+
+                                         
+
+                                                                           
+
+                                        
+                                            
+
+                                                <!-- Usuario, senha -->
+                                                <div class="row">
+                                                    <!-- Usuario -->
+
+                                           <!-- Botões -->
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                            class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ######################################################################### Modal para EDITAR PERMISSAO -->
+                    <div class="modal fade" id="modalpermissaoEDIT" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Permissões</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form"
+                                    action="/editUsuariopermissao/ <?= document.getElementById('cod_PERMISSAOEDIT').value ?>"
+                                    method="post" enctype="multipart/form-data">
+                                    <!-- Formulário para Editar usuário -->  
+                                    
+  
+ <input type="radio" id="solicitante" name="nivel_acesso" onclick="desmarcatodos('solicitante')">
+  <label for="">Solicitante</label><br>
+  <input type="radio" id="assistente" name="nivel_acesso" onclick="desmarcatodos('assistente')">
+  <label for="">Assistente</label><br>
+  <input type="radio" id="supervisor" name="nivel_acesso" onclick="desmarcatodos('supervisor')">
+  <label for="">Supervisor</label>  
+  <input type="radio" id="administrador" name="nivel_acesso" onclick="desmarcatodos('administrador')">
+  <label for="">Administrador</label>  
+
+
+<script>
+
+function desmarcatodos(item){
+document.getElementById('comunicacao_PERMISSAOEDIT').checked = false;
+document.getElementById('chat_PERMISSAOEDIT').checked = false;
+document.getElementById('cadastro_PERMISSAOEDIT').checked = false;
+document.getElementById('categoria_PERMISSAOEDIT').checked = false;
+document.getElementById('adicionarcategoria_PERMISSAOEDIT').checked = false;
+document.getElementById('eliminarcategoria_PERMISSAOEDIT').checked = false;
+document.getElementById('centrodecusto_PERMISSAOEDIT').checked = false;
+document.getElementById('adicionarcentro_PERMISSAOEDIT').checked = false;
+document.getElementById('eliminarcentro_PERMISSAOEDIT').checked = false;
+document.getElementById('disciplina_PERMISSAOEDIT').checked = false;
+document.getElementById('adicionardisciplina_PERMISSAOEDIT').checked = false;
+document.getElementById('editardisciplina_PERMISSAOEDIT').checked = false;
+document.getElementById('eliminardisciplina_PERMISSAOEDIT').checked = false;
+  document.getElementById('fornecedor_PERMISSAOEDIT').checked = false;
+  document.getElementById('adicionarfornecedor_PERMISSAOEDIT').checked = false;
+  document.getElementById('editarfornecedor_PERMISSAOEDIT').checked = false;
+  document.getElementById('eliminarfornecedor_PERMISSAOEDIT').checked = false;
+  document.getElementById('material_PERMISSAOEDIT').checked = false;
+  document.getElementById('adicionarmaterial_PERMISSAOEDIT').checked = false;
+  document.getElementById('editarmaterial_PERMISSAOEDIT').checked = false;
+  document.getElementById('eliminarmaterial_PERMISSAOEDIT').checked = false;
+  document.getElementById('baixa_produto_PERMISSAOEDIT').checked = false;
+  document.getElementById('entrada_produto_PERMISSAOEDIT').checked = false;
+  document.getElementById('turma_PERMISSAOEDIT').checked = false;
+  document.getElementById('adicionarturma_PERMISSAOEDIT').checked = false;
+  document.getElementById('eliminarrturma_PERMISSAOEDIT').checked = false;
+  document.getElementById('usuariomenu_PERMISSAOEDIT').checked = false;
+  document.getElementById('adicionarusuario_PERMISSAOEDIT').checked = false;
+  document.getElementById('permissao_PERMISSAOEDIT').checked = false;
+  document.getElementById('editarusuario_PERMISSAOEDIT').checked = false;
+  document.getElementById('eliminausuario_PERMISSAOEDIT').checked = false;
+  document.getElementById('pedidos_PERMISSAOEDIT').checked = false;
+  document.getElementById('novo_PERMISSAOEDIT').checked = false;
+  document.getElementById('solicitacao_PERMISSAOEDIT').checked = false;
+  document.getElementById('entregas_PERMISSAOEDIT').checked = false;
+  document.getElementById('aberto_PERMISSAOEDIT').checked = false;
+  document.getElementById('finalizadas_PERMISSAOEDIT').checked = false;
+  document.getElementById('relatorio_PERMISSAOEDIT').checked = false;
+  document.getElementById('consulta_PERMISSAOEDIT').checked = false;
+  document.getElementById('auditoria_PERMISSAOEDIT').checked = false;
+  
+  if (item === "solicitante") {
+    document.getElementById('pedidos_PERMISSAOEDIT').checked = true;
+  document.getElementById('novo_PERMISSAOEDIT').checked = true;
+  document.getElementById('solicitacao_PERMISSAOEDIT').checked = true; 
+  }
+
+  if (item === "assistente") {
+
+document.getElementById('comunicacao_PERMISSAOEDIT').checked = true;
+document.getElementById('chat_PERMISSAOEDIT').checked = true;
+document.getElementById('cadastro_PERMISSAOEDIT').checked = true;
+document.getElementById('categoria_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionarcategoria_PERMISSAOEDIT').checked = true;
+document.getElementById('centrodecusto_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionarcentro_PERMISSAOEDIT').checked = true;
+document.getElementById('disciplina_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionardisciplina_PERMISSAOEDIT').checked = true;
+  document.getElementById('fornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarfornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('material_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarmaterial_PERMISSAOEDIT').checked = true;
+  document.getElementById('baixa_produto_PERMISSAOEDIT').checked = true;
+  document.getElementById('entrada_produto_PERMISSAOEDIT').checked = true;
+  document.getElementById('turma_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarturma_PERMISSAOEDIT').checked = true;
+  document.getElementById('usuariomenu_PERMISSAOEDIT').checked = true;
+  document.getElementById('pedidos_PERMISSAOEDIT').checked = true;
+  document.getElementById('novo_PERMISSAOEDIT').checked = true;
+  document.getElementById('solicitacao_PERMISSAOEDIT').checked = true;
+  document.getElementById('entregas_PERMISSAOEDIT').checked = true;
+  document.getElementById('aberto_PERMISSAOEDIT').checked = true;
+  document.getElementById('finalizadas_PERMISSAOEDIT').checked = true;
+  document.getElementById('relatorio_PERMISSAOEDIT').checked = true;
+  document.getElementById('consulta_PERMISSAOEDIT').checked = true;
+  }
+
+  if (item === "supervisor") {
+  document.getElementById('comunicacao_PERMISSAOEDIT').checked = true;
+document.getElementById('chat_PERMISSAOEDIT').checked = true;
+document.getElementById('cadastro_PERMISSAOEDIT').checked = true;
+document.getElementById('categoria_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionarcategoria_PERMISSAOEDIT').checked = true;
+document.getElementById('centrodecusto_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionarcentro_PERMISSAOEDIT').checked = true;
+document.getElementById('disciplina_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionardisciplina_PERMISSAOEDIT').checked = true;
+document.getElementById('editardisciplina_PERMISSAOEDIT').checked = true;
+  document.getElementById('fornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarfornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('editarfornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('material_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarmaterial_PERMISSAOEDIT').checked = true;
+  document.getElementById('editarmaterial_PERMISSAOEDIT').checked = true;
+  document.getElementById('baixa_produto_PERMISSAOEDIT').checked = true;
+  document.getElementById('entrada_produto_PERMISSAOEDIT').checked = true;
+  document.getElementById('turma_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarturma_PERMISSAOEDIT').checked = true;
+  document.getElementById('usuariomenu_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarusuario_PERMISSAOEDIT').checked = true;
+  document.getElementById('editarusuario_PERMISSAOEDIT').checked = true;
+  document.getElementById('pedidos_PERMISSAOEDIT').checked = true;
+  document.getElementById('novo_PERMISSAOEDIT').checked = true;
+  document.getElementById('solicitacao_PERMISSAOEDIT').checked = true;
+  document.getElementById('entregas_PERMISSAOEDIT').checked = true;
+  document.getElementById('aberto_PERMISSAOEDIT').checked = true;
+  document.getElementById('finalizadas_PERMISSAOEDIT').checked = true;
+  document.getElementById('relatorio_PERMISSAOEDIT').checked = true;
+  document.getElementById('consulta_PERMISSAOEDIT').checked = true;}
+
+  if (item === "administrador") {
+    document.getElementById('comunicacao_PERMISSAOEDIT').checked = true;
+document.getElementById('chat_PERMISSAOEDIT').checked = true;
+document.getElementById('cadastro_PERMISSAOEDIT').checked = true;
+document.getElementById('categoria_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionarcategoria_PERMISSAOEDIT').checked = true;
+document.getElementById('eliminarcategoria_PERMISSAOEDIT').checked = true;
+document.getElementById('centrodecusto_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionarcentro_PERMISSAOEDIT').checked = true;
+document.getElementById('eliminarcentro_PERMISSAOEDIT').checked = true;
+document.getElementById('disciplina_PERMISSAOEDIT').checked = true;
+document.getElementById('adicionardisciplina_PERMISSAOEDIT').checked = true;
+document.getElementById('editardisciplina_PERMISSAOEDIT').checked = true;
+document.getElementById('eliminardisciplina_PERMISSAOEDIT').checked = true;
+  document.getElementById('fornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarfornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('editarfornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('eliminarfornecedor_PERMISSAOEDIT').checked = true;
+  document.getElementById('material_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarmaterial_PERMISSAOEDIT').checked = true;
+  document.getElementById('editarmaterial_PERMISSAOEDIT').checked = true;
+  document.getElementById('eliminarmaterial_PERMISSAOEDIT').checked = true;
+  document.getElementById('baixa_produto_PERMISSAOEDIT').checked = true;
+  document.getElementById('entrada_produto_PERMISSAOEDIT').checked = true;
+  document.getElementById('turma_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarturma_PERMISSAOEDIT').checked = true;
+  document.getElementById('eliminarrturma_PERMISSAOEDIT').checked = true;
+  document.getElementById('usuariomenu_PERMISSAOEDIT').checked = true;
+  document.getElementById('adicionarusuario_PERMISSAOEDIT').checked = true;
+  document.getElementById('permissao_PERMISSAOEDIT').checked = true;
+  document.getElementById('editarusuario_PERMISSAOEDIT').checked = true;
+  document.getElementById('eliminausuario_PERMISSAOEDIT').checked = true;
+  document.getElementById('pedidos_PERMISSAOEDIT').checked = true;
+  document.getElementById('novo_PERMISSAOEDIT').checked = true;
+  document.getElementById('solicitacao_PERMISSAOEDIT').checked = true;
+  document.getElementById('entregas_PERMISSAOEDIT').checked = true;
+  document.getElementById('aberto_PERMISSAOEDIT').checked = true;
+  document.getElementById('finalizadas_PERMISSAOEDIT').checked = true;
+  document.getElementById('relatorio_PERMISSAOEDIT').checked = true;
+  document.getElementById('consulta_PERMISSAOEDIT').checked = true;
+  document.getElementById('auditoria_PERMISSAOEDIT').checked = true;
+  }
+  
+  }
+</script>
+
+
+                                    <div class="modal-body">
+
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_PERMISSAOEDIT" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_PERMISSAOEDIT" id="cod_PERMISSAOEDIT" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+
+
+                                       
+                                        
+                                        
+
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <!-- Comunicação -->
+                                                    
+                                                    <label for="comunicacao_PERMISSAOEDIT" class="label"></label>
+                                                    <div class="custom-control custom-checkbox" style="width:429px; height:80px; border:solid 1px;">
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="comunicacao_PERMISSAOEDIT" id="comunicacao_PERMISSAOEDIT">
+                                                        <label for="comunicacao_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Menu Comunicação</label> <br>
+                                                           
+                                                    
+<br>
+                                                    <!-- chat -->
+                                                    <div class="form-check-inline" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="chat_PERMISSAOEDIT" id="chat_PERMISSAOEDIT">
+                                                        <label for="chat_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Chat</label>
+                                                    </div>
+
+                     
+
+                                            </div>
+
+
+
+                                                    <div style="width:429px; height:25px; border:solid 1px;">
+                                                     
+                                                        <div class="custom-control custom-checkbox" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="cadastro_PERMISSAOEDIT" id="cadastro_PERMISSAOEDIT">
+                                                            <label for="cadastro_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Menu Cadastro</label>
+
+                                                                
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div style="width:429px; height:25px; border:solid 1px;">
+                                                     
+                                                        <div class="custom-control custom-checkbox" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="categoria_PERMISSAOEDIT" id="categoria_PERMISSAOEDIT">
+                                                            <label for="categoria_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Categoria</label>
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                 <div class="form-check-inline" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="adicionarcategoria_PERMISSAOEDIT" id="adicionarcategoria_PERMISSAOEDIT">
+                                                                <label for="adicionarcategoria_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Adicionar</label>
+                                                                </div>
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <div class="form-check-inline" >
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        style="cursor: pointer" name="eliminarcategoria_PERMISSAOEDIT" id="eliminarcategoria_PERMISSAOEDIT">
+                                                                    <label for="eliminarcategoria_PERMISSAOEDIT" class="custom-control-label"
+                                                                        style="cursor: pointer">Eliminar</label>
+                                                            </div>
+                                                                
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div style="width:429px; height:25px; border:solid 1px;">
+                                                     
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="centrodecusto_PERMISSAOEDIT" id="centrodecusto_PERMISSAOEDIT">
+                                                        <label for="centrodecusto_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Centro de Custo</label>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                             <div class="form-check-inline" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="adicionarcentro_PERMISSAOEDIT" id="adicionarcentro_PERMISSAOEDIT">
+                                                            <label for="adicionarcentro_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Adicionar</label>
+                                                            </div>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="eliminarcentro_PERMISSAOEDIT" id="eliminarcentro_PERMISSAOEDIT">
+                                                                <label for="eliminarcentro_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Eliminar</label>
+                                                        </div>
+                                                            
+                                                    </div>
+                                                </div>
+                                                <div style="width:429px; height:25px; border:solid 1px;">
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="disciplina_PERMISSAOEDIT" id="disciplina_PERMISSAOEDIT">
+                                                        <label for="disciplina_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Disciplina</label>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                             <div class="form-check-inline" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="adicionardisciplina_PERMISSAOEDIT" id="adicionardisciplina_PERMISSAOEDIT">
+                                                            <label for="adicionardisciplina_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Adicionar</label>
+                                                            </div>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                             <div class="form-check-inline" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="editardisciplina_PERMISSAOEDIT" id="editardisciplina_PERMISSAOEDIT">
+                                                            <label for="editardisciplina_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Editar</label>
+                                                            </div>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="eliminardisciplina_PERMISSAOEDIT" id="eliminardisciplina_PERMISSAOEDIT">
+                                                                <label for="eliminardisciplina_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Eliminar</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="width:429px; height:25px; border:solid 1px;">
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="fornecedor_PERMISSAOEDIT" id="fornecedor_PERMISSAOEDIT">
+                                                        <label for="fornecedor_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Fornecedor</label>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="adicionarfornecedor_PERMISSAOEDIT" id="adicionarfornecedor_PERMISSAOEDIT">
+                                                           <label for="adicionarfornecedor_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Adicionar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="editarfornecedor_PERMISSAOEDIT" id="editarfornecedor_PERMISSAOEDIT">
+                                                           <label for="editarfornecedor_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Editar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <div class="form-check-inline" >
+                                                               <input class="custom-control-input" type="checkbox"
+                                                                   style="cursor: pointer" name="eliminarfornecedor_PERMISSAOEDIT" id="eliminarfornecedor_PERMISSAOEDIT">
+                                                               <label for="eliminarfornecedor_PERMISSAOEDIT" class="custom-control-label"
+                                                                   style="cursor: pointer">Eliminar</label>
+                                                       </div>
+                                                    </div>
+                                                </div>
+                                                <div style="width:429px; height:50px; border:solid 1px;">
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="material_PERMISSAOEDIT" id="material_PERMISSAOEDIT">
+                                                        <label for="material_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Material</label>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="adicionarmaterial_PERMISSAOEDIT" id="adicionarmaterial_PERMISSAOEDIT">
+                                                           <label for="adicionarmaterial_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Adicionar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="editarmaterial_PERMISSAOEDIT" id="editarmaterial_PERMISSAOEDIT">
+                                                           <label for="editarmaterial_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Editar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <div class="form-check-inline" >
+                                                               <input class="custom-control-input" type="checkbox"
+                                                                   style="cursor: pointer" name="eliminarmaterial_PERMISSAOEDIT" id="eliminarmaterial_PERMISSAOEDIT">
+                                                               <label for="eliminarmaterial_PERMISSAOEDIT" class="custom-control-label"
+                                                                   style="cursor: pointer">Eliminar</label>
+                                                       </div>
+                                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                       <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="baixa_produto_PERMISSAOEDIT" id="baixa_produto_PERMISSAOEDIT">
+                                                           <label for="baixa_produto_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Baixa de Produtos</label>
+                                                   </div>
+                                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                   <div class="form-check-inline" >
+                                                       <input class="custom-control-input" type="checkbox"
+                                                           style="cursor: pointer" name="entrada_produto_PERMISSAOEDIT" id="entrada_produto_PERMISSAOEDIT">
+                                                       <label for="entrada_produto_PERMISSAOEDIT" class="custom-control-label"
+                                                           style="cursor: pointer">Entrada de Produtos</label>
+                                               </div>
+                                                    </div>
+                                                </div>
+                                                <div style="width:429px; height:25px; border:solid 1px;">
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="turma_PERMISSAOEDIT" id="turma_PERMISSAOEDIT">
+                                                        <label for="turma_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Turma</label>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="adicionarturma_PERMISSAOEDIT" id="adicionarturma_PERMISSAOEDIT">
+                                                           <label for="adicionarturma_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Adicionar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <div class="form-check-inline" >
+                                                               <input class="custom-control-input" type="checkbox"
+                                                                   style="cursor: pointer" name="eliminarrturma_PERMISSAOEDIT" id="eliminarrturma_PERMISSAOEDIT">
+                                                               <label for="eliminarrturma_PERMISSAOEDIT" class="custom-control-label"
+                                                                   style="cursor: pointer">Eliminar</label>
+                                                       </div>
+                                                           
+                                                   </div>
+                                                    </div>
+                                                
+                                                <div style="width:429px; height:25px; border:solid 1px;">
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="usuariomenu_PERMISSAOEDIT" id="usuariomenu_PERMISSAOEDIT">
+                                                        <label for="usuariomenu_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Usuário</label>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="adicionarusuario_PERMISSAOEDIT" id="adicionarusuario_PERMISSAOEDIT">
+                                                           <label for="adicionarusuario_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Adicionar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <div class="form-check-inline" >
+                                                          <input class="custom-control-input" type="checkbox"
+                                                              style="cursor: pointer" name="permissao_PERMISSAOEDIT" id="permissao_PERMISSAOEDIT">
+                                                          <label for="permissao_PERMISSAOEDIT" class="custom-control-label"
+                                                              style="cursor: pointer">Permissão</label>
+                                                          </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <div class="form-check-inline" >
+                                                           <input class="custom-control-input" type="checkbox"
+                                                               style="cursor: pointer" name="editarusuario_PERMISSAOEDIT" id="editarusuario_PERMISSAOEDIT">
+                                                           <label for="editarusuario_PERMISSAOEDIT" class="custom-control-label"
+                                                               style="cursor: pointer">Editar</label>
+                                                           </div>
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <div class="form-check-inline" >
+                                                               <input class="custom-control-input" type="checkbox"
+                                                                   style="cursor: pointer" name="eliminausuario_PERMISSAOEDIT" id="eliminausuario_PERMISSAOEDIT">
+                                                               <label for="eliminausuario_PERMISSAOEDIT" class="custom-control-label"
+                                                                   style="cursor: pointer">Eliminar</label>
+                                                       </div>
+                                                    </div>
+                                                </div>
+
+                                                </div>
+
+                                                <!-- Pedidos -->
+                                                    <div class="custom-control custom-checkbox" style="width:429px; height:70px; border:solid 1px;">
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="pedidos_PERMISSAOEDIT" id="pedidos_PERMISSAOEDIT">
+                                                        <label for="pedidos_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Menu Pedidos</label>
+
+                                                            <div class="custom-control custom-checkbox" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="novo_PERMISSAOEDIT" id="novo_PERMISSAOEDIT">
+                                                                <label for="novo_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Novo</label>
+                                                            </div>   
+
+                                                            <div class="custom-control custom-checkbox" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="solicitacao_PERMISSAOEDIT" id="solicitacao_PERMISSAOEDIT">
+                                                                <label for="solicitacao_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Solicitação</label>
+                                                            </div>   
+                                                    </div>
+                                                  
+
+                                                <!-- Entregas -->
+                                                <div class="custom-control custom-checkbox" style="width:429px; height:70px; border:solid 1px;">
+                                                    <input class="custom-control-input" type="checkbox"
+                                                        style="cursor: pointer" name="entregas_PERMISSAOEDIT" id="entregas_PERMISSAOEDIT">
+                                                    <label for="entregas_PERMISSAOEDIT" class="custom-control-label"
+                                                        style="cursor: pointer">Menu Entregas</label>
+
+                                                        <div class="custom-control custom-checkbox" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="aberto_PERMISSAOEDIT" id="aberto_PERMISSAOEDIT">
+                                                            <label for="aberto_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Em Aberto</label>
+                                                        </div>   
+
+                                                        <div class="custom-control custom-checkbox" >
+                                                            <input class="custom-control-input" type="checkbox"
+                                                                style="cursor: pointer" name="finalizadas_PERMISSAOEDIT" id="finalizadas_PERMISSAOEDIT">
+                                                            <label for="finalizadas_PERMISSAOEDIT" class="custom-control-label"
+                                                                style="cursor: pointer">Finalizadas</label>
+                                                        </div>   
+                                                </div>
+
+                                                  <!-- Relatório -->
+                                                    <div class="custom-control custom-checkbox" style="width:429px; height:70px; border:solid 1px;">
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            style="cursor: pointer" name="relatorio_PERMISSAOEDIT" id="relatorio_PERMISSAOEDIT">
+                                                        <label for="relatorio_PERMISSAOEDIT" class="custom-control-label"
+                                                            style="cursor: pointer">Menu Relatório</label>
+
+                                                            <div class="custom-control custom-checkbox" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="consulta_PERMISSAOEDIT" id="consulta_PERMISSAOEDIT">
+                                                                <label for="consulta_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Consulta</label>
+                                                            </div>   
+
+                                                            <div class="custom-control custom-checkbox" >
+                                                                <input class="custom-control-input" type="checkbox"
+                                                                    style="cursor: pointer" name="auditoria_PERMISSAOEDIT" id="auditoria_PERMISSAOEDIT">
+                                                                <label for="auditoria_PERMISSAOEDIT" class="custom-control-label"
+                                                                    style="cursor: pointer">Auditoria</label>
+                                                            </div> 
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                                <div class="row">
+                                    <!-- Botões -->
+                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ######################################################################### Modal para ELIMINAR -->
+                    <div class="modal fade" id="modalDEL" id="modal-danger" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-danger">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Atenção!</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Tem certeza que deseja eliminar o registro selecionado?</p>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                                        Não, cancelar
+                                    </button>
+
+                                    <!-- Esse span é oculto pois apenas recebe o texto contendo 
+                                         o cod para eliminação na função abaixo -->
+                                    <span style="display:none" id="cod_DEL"></span>
+
+                                    <!-- Função anónima dentro da classe button
+                                         que direciona para a route /delete/:id após o usuário clicar em sim no modal -->
+                                    <button type="button" class="btn btn-outline-light" onclick="(function() {
+                                            window.location = '/delUsuario/' + document.getElementById('cod_DEL').textContent;
+                                            })()" id="btnDeletar_DEL">Sim, eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Grava o texto recebido da variável status_Crud do routes/usuario
+		 lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+		 e dispara uma função de alerta do toastr de acordo com o texto -->
+<span style="display:none" id='status_Crud'><%= status_Crud %></span>

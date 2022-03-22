@@ -1,0 +1,881 @@
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #E53516;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .2s;
+      transition: .2s;
+    }
+    
+    input:checked + .slider {
+      background-color: #16E516;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #16E516;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    </style>
+
+
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+       <div class="row sm-2">
+          <!-- Título -->
+          <div class="col-sm-6">
+             <h1>Usuários</h1>
+          </div>
+          <!-- Navegação histórica -->
+          <div class="col-sm-6">
+             <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="admin">Home</a></li>
+                <li class="breadcrumb-item active">Cadastros</li>
+                <li class="breadcrumb-item active">Requisição</li>
+             </ol>
+          </div>
+       </div>
+    </div>
+  </section>
+  <!-- Page Content (conteúdo) -->
+  <section class="content">
+    <div class="container-fluid">
+       <div class="row">
+
+                     <!-- ######################################################################### Modal para ADICIONAR -->
+                     <div class="modal fade" id="modalADD" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Header -->
+                            
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Adicionar</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                         
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form" action="/addUsuario" method="post" enctype="multipart/form-data">
+                                    <!-- Campos do formulário -->
+                                    <div class="modal-body">
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_ADD" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_ADD" id="cod_ADD" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-5" style="text-align: center;">
+                                                <!-- Imagem -->
+                                                <div class="form-group"
+                                                        style="align-items: center;display: inline-grid;">
+
+                                                    <!-- Imagem e opção para zoom -->
+                                                    <img class="img-thumbnail-usuario mx-auto d-block" name="foto_ADD" id="foto_ADD" src="dist/img/generic/usuario-no-image.png">
+                                                        
+                                                    <!-- Botão Upload que simula im clique no elemento input file oculto -->
+                                                    <button type="button"
+                                                        class="btn btn-default btn-xs"
+                                                        style="margin-top:5px;place-self: center;"
+                                                        onclick="document.getElementById('image_ADD').click()"><i
+                                                        class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload</button>
+
+                                                    <!-- Elemento input file oculto -->
+                                                    <div class="custom-file" style="display: none;">
+                                                        <input type="file" class="custom-file-input form-control-sm"
+                                                            name="image_ADD" id="image_ADD" onclick="(function(){
+                                                                document.getElementById('image_ADD').onchange = function (evt) {
+                                                                    var tgt = evt.target || window.event.srcElement,
+                                                                    files = tgt.files;                                 
+                                                                    if (FileReader && files && files.length) {
+                                                                        var fr = new FileReader();
+                                                                        fr.onload = function () {                                                                        
+                                                                        document.getElementById('foto_ADD').src = fr.result;                                                                
+                                                                        }                                  
+                                                                    fr.readAsDataURL(files[0]);
+                                                                    }
+                                                                }
+                                                            })()">
+                                                        <label class="custom-file-label" for="image_ADD"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="col-sm-7">                                                
+                                                <div class="row">
+                                                    <!-- Nome -->
+                                                    <div class="col-sm-12">
+                                                        <!-- Nome -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="nome_ADD" class="label">Nome completo</label>
+                                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                                        name="nome_ADD" id="nome_ADD"
+                                                                        placeholder="Nome completo" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- Perfil, status -->
+                                                <div class="row">
+                                                    <!-- Perfil -->
+
+
+
+                                                </div>
+
+                                                <!-- Usuario, senha -->
+                                                 <!-- unidade -->
+ <div class="col-sm-12">
+    <div class="form-group">
+        <label for="perfil_ADD" class="label">Perfil</label>
+         <select class="form-control form-control-sm select2"
+           style="width: 100%;" name="perfil_ADD" id="perfil_ADD">
+            <% Dtperfil.forEach((row, index) => { %>
+            <option value="<%= row.id %>"><%= row.perfil %>
+            </option>
+            <% }) %>
+         </select>
+      </div>
+    </div>
+
+                                                <div class="row">
+                                                    <!-- Usuario -->
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="usuario_ADD" class="label">Usuário</label>
+                                                            <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                                name="usuario_ADD" id="usuario_ADD" placeholder="Usuario">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Senha -->
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="senha_ADD" class="label">Senha</label>
+                                                            <div class="input-group">
+                                                                <input type="password" autocomplete="off" class="form-control form-control-sm"
+                                                                    name="senha_ADD" id="senha_ADD" placeholder="Senha"
+                                                                    required>
+                                                                <div class="input-group-append" id="revelar_ADD"
+                                                                    style="cursor: pointer;" onclick="(function(){
+                                                                    revelar(document.getElementById('revelar_ADD'), document.getElementById('senha_ADD'));
+                                                                    })()">
+                                                                    <div class="input-group-text">
+                                                                        <span class="fas fa-eye"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botões -->
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                            class="btn btn-primary" id="btnSalvar_ADD">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>       
+          
+                              
+  <!-- ######################################################################### Modal para EDITAR -->
+  <div class="modal fade" id="modalEDIT" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Editar</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+
+
+
+            <!-- Conteúdo central do modal -->
+            <form role="form"
+                action="/editUsuario/ <?= document.getElementById('cod_EDIT').value ?>"
+                method="post" enctype="multipart/form-data">
+                <!-- Formulário para Editar usuário -->                                
+                <div class="modal-body">
+
+                    <!-- Cod -->
+                    <div class="row" style="display: none;">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="cod_EDIT" class="label">Cod</label>
+                                <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                    name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">                                            
+                        <div class="col-sm-5" style="text-align: center;">
+                            <!-- Imagem -->
+                            <div class="form-group"
+                                style="align-items: center;display: inline-grid;">
+
+                                <!-- Imagem e opção para zoom -->
+                                <img class="img-thumbnail-usuario mx-auto d-block" name="foto_EDIT" id="foto_EDIT">
+                                
+                                <!-- Botão Upload que simula im clique no elemento input file oculto -->
+                                <button type="button"
+                                    class="btn btn-default btn-xs"
+                                    style="margin-top:5px;;place-self: center;"
+                                    onclick="document.getElementById('image_EDIT').click()"><i
+                                    class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload</button>
+
+                                <!-- Elemento input file oculto -->
+                                <div class="custom-file" style="display: none;">
+                                    <input type="file" autocomplete="off" class="custom-file-input form-control-sm"
+                                        name="image_EDIT" id="image_EDIT" onclick="(function(){
+                                            document.getElementById('image_EDIT').onchange = function (evt) {
+                                                var tgt = evt.target || window.event.srcElement,
+                                                files = tgt.files;                                 
+                                                if (FileReader && files && files.length) {
+                                                    var fr = new FileReader();
+                                                    fr.onload = function () {                                                                        
+                                                    document.getElementById('foto_EDIT').src = fr.result;                                                                
+                                                    }                                  
+                                                fr.readAsDataURL(files[0]);
+                                                }
+                                            }
+                                        })()">
+                                    <label class="custom-file-label" for="image_EDIT"></label>
+                                </div>
+                            </div>
+                        </div>                                        
+
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <!-- Nome -->
+                                <div class="col-sm-12">
+
+                                    <!-- Nome -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="nome_EDIT" class="label">Nome</label>
+                                                <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                    name="nome_EDIT" id="nome_EDIT"
+                                                    placeholder="Nome completo" required readonly=“false”>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                       
+                                     
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="usuario_EDIT" class="label">Usuário</label>
+                                    <input autocomplete="off" type="text" class="form-control form-control-sm"
+                                        name="usuario_EDIT" id="usuario_EDIT" placeholder="Usuario">
+                                </div>
+                            </div>
+
+                            <!-- Senha -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="senha_EDIT" class="label">Senha</label>
+                                    <div class="input-group">
+                                        <input type="password" autocomplete="off" class="form-control form-control-sm"
+                                            name="senha_EDIT" id="senha_EDIT" placeholder="Senha"
+                                            >
+                                        <div class="input-group-append" id="revelar_EDIT"
+                                            style="cursor: pointer;" onclick="(function(){
+                                            revelar(document.getElementById('revelar_EDIT'), document.getElementById('senha_EDIT'));
+                                            })()">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-eye"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+  
+
+                               
+
+                      
+
+                        
+                        
+
+                            <!-- Usuario, senha -->
+                            
+                                <!-- Usuario -->
+
+                       <!-- Botões -->
+                <div class="modal-footer justify-content-between">
+                    <button type="submit"
+                        class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cancelar</button>
+                </div>
+
+                        </div>
+                    </div>
+                </div>
+
+               
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ######################################################################### Modal para EDITAR PERMISSAO -->
+
+</div>
+                             
+               
+                                           
+                     
+                      
+                     
+                     <script>
+  
+                        
+  
+                   
+  
+  // Definir variáveis universais
+  
+  var pedidos =[]; 
+  
+  function voltaPedidos() {
+  cardCompra = document.getElementById('card-compra');
+  
+  cardCompra.style.display = "none"
+  
+  cardPedido = document.getElementById('card-pedido');
+  
+  cardPedido.style.display = "block"
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  function adicionaeexcluidiv(id_pedido, solicitante, obs, dpt, tm, disc, total_pedido) {
+                               
+   selecionaPedido(id_pedido)
+  
+   function selecionaPedido(id_pedido) {
+    var table = $('#TBtable2').DataTable();
+  
+     table
+         .columns( 0 )
+         .search( id_pedido )
+         .draw();
+  
+        
+      }
+  
+  cardCompra = document.getElementById('card-compra');
+  
+  cardCompra.style.display = "block"
+  
+  cardPedido = document.getElementById('card-pedido');
+  
+  cardPedido.style.display = "none"
+  
+  total_geral = document.getElementById('valorTotalCompra');
+  total_geral.innerHTML = total_pedido
+  
+  var input1 = document.getElementById('cod_ADD');
+  
+  input1.value = id_pedido;
+  
+   
+   let pedidoEntrega = document.getElementById('id_pedido_ADD');
+   let pedidoSolicitante = document.getElementById('id_solicitante_ADD');
+   let observacao = document.getElementById('observacao_ADD');
+   let departamento = document.getElementById('id_departamento_ADD');
+   let turma = document.getElementById('id_turma_ADD');
+   let disciplina = document.getElementById('id_disciplina_ADD');
+  
+  
+   observacao.innerHTML  = 'Observação: '+ obs;
+   departamento.innerHTML  = 'Centro de Custo: '+ dpt;
+   if(tm.length > 5){
+   turma.innerHTML  = 'Turma: '+ tm;} 
+   else {
+    turma.style.display = 'none';
+   }
+   if(disc.length > 1){
+   disciplina.innerHTML  = 'Disciplina: '+ disc;}
+   else {
+    disciplina.style.display = 'none';
+   }
+   pedidoEntrega.innerHTML  = 'Nº Pedido: '+ id_pedido;
+   pedidoSolicitante.innerHTML  = 'Solicitante: '+ solicitante;
+  
+  
+                  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+                    </script>
+                  
+                  
+                  
+                  <section class="content-header">
+                     <div class="container-fluid">
+                         <div class="row sm-2">
+                             <!-- Título -->
+                             
+                             <!-- Navegação histórica -->
+  
+                         </div>
+                     </div>
+                 </section>
+                 
+                 <!-- Page Content (conteúdo) -->
+                 <section class="content">
+                     <div class="container-fluid">
+                         <div class="row">
+                             <div class="col-sm-12">
+                 
+                                 <!-- Para iniciar fechado, adicione collapsed-card na class-->
+                                 <div class="card card-primary card-outline" id="tabelaprincipal">
+                 
+                                     <!-- ######################################################################### Cabeçalho -->
+                                     <div class="card-header" >
+                 
+                                        <div class="btn-group">
+                                            <!-- Abre o modal para INSERT -->
+                                            <% Dtpermissao.forEach((row, index) => { %>
+                                                <% if (row.adicionar  == 1) {%>
+                                            <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" 
+                                                data-target="#modalADD">
+                                                &nbsp;Adicionar&nbsp;
+                                            </button>
+                                            <% } else { %>
+                                                <% } %>
+                                                <% }) %>
+                                         
+                                        </div>
+  
+                 
+                                         <!-- Botão Ocultar ou exibir o card -->
+                                         <div class="card-tools">
+                                             <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                                 title="Collapse">
+                                                 <i class="fas fa-minus"></i>
+                                             </button>
+                                             <!-- Botão destruir card -->
+                                             <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                                                 title="Remove">
+                                                 <i class="fas fa-times"></i>
+                                             </button>
+                                         </div>
+                 
+                                     </div>
+                <!-- ######################################################################### Tabela -->
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+
+                <script type='text/javascript'>
+
+$(document).ready(function() {
+  $('#TBtable').DataTable( {
+      "order": [[ 2, "asc" ]],
+      
+  } );
+
+
+
+  $('#TBitens').dataTable({
+  "paging": false
+});
+
+
+
+  $('#TBtable').dataTable.ext.errMode = 'none';
+
+
+
+} );
+</script>            
+                <div class="card-body" >
+  
+                  <% if (DTMaterial.length > 0) {%>
+                      
+                  <table id="TBtable" class="table-bordered">
+  
+                      <!-- Cabeçalho: Titulos da tabela -->
+                      <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Cod</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Usuário</th>
+                            <th scope="col">Unidade</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Opções</th>
+                              
+                          </tr>
+                      </thead>
+  
+  
+                      <tbody>
+                          <!-- Detalhes: Dados da tabela -->
+                        
+                          <% DTMaterial.forEach((row, index) => { %>
+                            
+                            <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+                            <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+                          <tr>
+                            <td><%= row.cod %>  </td>
+                            <td>
+                                <a class='data_lighter' style="cursor: zoom-in;"
+                                    href="dist/img/usuarios/<%= row.foto %>">
+                                    <img src="dist/img/usuarios/<%= row.foto %>"
+                                        class="rounded-circle img-table-p" alt="">
+                                </a>
+                            </td>
+                            <td><%= row.nome %></td>
+                            <td><%= row.usuario %></td>
+                            <td><%= row.unidade %></td>
+                            <td> <label class="switch">
+                                <input type="checkbox" id='<%= row.cod %>' <%= row.status %>>
+                                <% if (row.eliminar  == 1) {%>  <span class="slider round" onclick="getUpdateuser('<%= row.cod %>')"></span> <% } else { %> <% } %>
+                              </label></td>  
+                            <td style="min-width: 130px;">
+
+                                <script>
+function getUpdateuser(id)  {      
+    
+    let checkbox = document.getElementById(id);
+
+
+if(checkbox.checked) {
+ //console.log("O cliente não marcou o checkbox");
+    status = 0
+    alert('Usuário inativado')
+    ExecUp("/atualizaStatusUser/" + id + "/" + status + "");
+} else {
+     //console.log("O cliente marcou o checkbox");
+    status = 1
+    alert('Usuário ativado')
+    ExecUp("/atualizaStatusUser/" + id + "/" + status + "");
+}
+    
+
+
+function ExecUp(url) {
+    
+var xhttp = new XMLHttpRequest();
+
+
+xhttp.open("GET", url, true);
+
+xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
+    if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo
+        //console.log(xhttp.responseText);
+    }
+}
+
+xhttp.send();//A execução do script CONTINUARÁ mesmo que a requisição não tenha retornado do servidor
+}
+
+}   
+
+function ListaPermissao (id,unidade) {
+
+    
+
+if (unidade == 'Projeto Vida Infantil'){
+    id_unidade = 1
+}
+
+if (unidade == 'Projeto Vida - Fundamental') {
+    id_unidade = 2
+}
+
+if (unidade == 'Novo Pátio') {
+id_unidade = 3
+} 
+
+var url = "/ConsultaPermissaoUser/" + id + "/" + id_unidade + ""
+var a
+var xmlhttp = new XMLHttpRequest(); 
+xmlhttp.open("GET", url,true);
+
+ // subscribe to this event before you send your request.
+ xmlhttp.onreadystatechange=function() {
+  if (xmlhttp.readyState==4) {
+ 
+   // And to view in firebug
+
+   a = JSON.parse(xmlhttp.responseText)
+
+   Criatabela(a)
+  }
+ }
+ xmlhttp.send(null)
+
+ 
+
+ 
+
+};
+
+function atualizaPermissao(va_cod,var_unidade){
+ 
+url = "/atualizaPermissaoUser/" + va_cod + "/" + var_unidade + ""
+
+request = new XMLHttpRequest();
+request.open('GET', url, true);  // `false` makes the request synchronous
+request.send(200);
+
+if (request.status === 200) {
+  console.log(request);
+}
+console.log(url)
+
+
+};
+
+
+
+</script>
+
+
+                                
+
+                                
+<% if (row.permissao  == 1) {%>   
+                                <button class="btn btn-xs btn-primary"  id="botaopermissao" 
+                                onclick="ListaPermissao('<%= row.cod %>','<%= row.unidade %>')" value="<%= row.permissao %>"
+                   
+
+})()">&nbsp;&nbsp;&nbsp;Permissão&nbsp;&nbsp;
+
+                                    </button>
+                                    <% } else { %>
+                                        <% } %>
+                                 
+
+                            
+                                    <% if (row.editar  == 1) {%>           
+                            <button class="btn btn-xs btn-warning" data-toggle="modal"
+                            data-target="#modalEDIT" onclick="(function(){                      
+                            //Setando o valor nos campos de texto 
+                            document.getElementById('cod_EDIT').value = '<%= row.cod %>';
+                            document.getElementById('foto_EDIT').src = 'dist/img/usuarios/<%= row.foto %>';
+                            document.getElementById('nome_EDIT').value = '<%= row.nome %>';
+                            document.getElementById('usuario_EDIT').value = '<%= row.usuario %>';
+                            document.getElementById('senha_EDIT').value = '<%= row.senha %>'; 
+                            //Setando o valor no checkbox ativo
+                            if('<%= row.status %>' == 'Ativo'){                        
+                                document.getElementById('status_EDIT').checked = true;                        
+                            }else{
+                                document.getElementById('status_EDIT').checked = false;                        
+                            }; 
+                            
+                            
+
+
+                            })()">&nbsp;&nbsp;&nbsp;Editar&nbsp;&nbsp;
+
+                        </button>   
+                        <% } else { %>
+                            <% } %>
+                          
+
+                          </tr>
+                          <% }) %> 
+                      </tbody>
+  
+                      <!-- Pesquisa -->
+                      <tfoot>
+                          <tr>
+                            <th scope="col">Cod</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Usuário</th>
+                            <th scope="col">Unidade</th>
+                            <th scope="col">Status</th>
+                              
+                          </tr>
+                      </tfoot>
+
+
+
+
+
+                  </table>
+                   <% } else { %>
+                   <!-- Não existe dados na tabela -->
+                   <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                      style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                      registro.
+                   </p>
+                   <% } %>
+                </div>  
+                
+                
+
+
+
+
+                <div class="card-body">
+
+                    <% if (DTMaterial.length > 0) {%>
+                        <script>
+                            function Criatabela(conteudo){
+                        $(document).ready(function() {    		
+                            var fs = function(){
+                              var dataObject = conteudo;
+
+
+                              var dataSet = [];
+                              $.each(dataObject, function(index,data){
+                                dataSet.push(
+                                    [data.nome,
+                                    data.descricao,
+                                    data.status,
+                                    data.UNIDADE,                           
+                                ]);
+                              });
+                              $('#example').DataTable({
+                                data: dataSet,
+                                columns: [
+                                  { title: 'Nome' },
+                                  { title: 'Descrição' },
+                                  { title: 'Status' },
+                                  { title: 'Unidade' }
+                                ]
+                              });	
+                            };
+                            fs();  		
+                          });
+
+                          var elem = document.getElementById('tabelaprincipal');
+
+elem.style.display = 'none';
+
+var elem2 = document.getElementById('botaoVoltar');
+
+elem2.style.display = 'block';
+                          
+                          
+                        }
+                        </script>
+
+
+                        
+                    
+                       
+
+                    </table>
+                    <% } else { %>
+                    <!-- Não existe dados na tabela -->
+                    <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                            style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                        registro.</p>
+                    <% } %>
+                </div>
+          </div>   
+    </div>
+    </div>
+    </div>
+    </div>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.js"></script>	
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>    
+
+    <table id="example" class="display" width="100%"><button id="botaoVoltar" style="display: none;" onClick="window.location.reload()">Voltar</button></table>
+
+    
+  </section>
+
+  <!-- Grava o texto recebido da variável status_Crud do routes/usuario
+    lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+    e dispara uma função de alerta do toastr de acordo com o texto -->
+  <span style="display:none" id='status_Crud'><%= status_Crud %></span>

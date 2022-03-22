@@ -1,0 +1,16 @@
+2021-04-28 10:09:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\IASD\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Projeto\app.js --scriptoptions= --log "Gestão de estoque wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2021-04-28 10:09:47 - Started 20736
+2021-04-28 10:44:48 - Stopping gestodeestoque.exe
+2021-04-28 10:44:48 - ProcessKill 20736
+2021-04-28 10:44:49 - Found child process: 6608 Name: conhost.exe
+2021-04-28 10:44:49 - Found child process: 24604 Name: node.exe
+2021-04-28 10:44:49 - Stopping process 6608
+2021-04-28 10:44:49 - Send SIGINT 6608
+2021-04-28 10:44:49 - SIGINT to 6608 failed - Killing as fallback
+2021-04-28 10:44:49 - Stopping process 24604
+2021-04-28 10:44:49 - Send SIGINT 24604
+2021-04-28 10:44:49 - SIGINT to 24604 failed - Killing as fallback
+2021-04-28 10:44:49 - Stopping process 20736
+2021-04-28 10:44:49 - Send SIGINT 20736
+2021-04-28 10:44:49 - SIGINT to 20736 failed - Killing as fallback
+2021-04-28 10:44:49 - Finished gestodeestoque.exe

@@ -1,0 +1,1867 @@
+<style>
+    td.dt-control {
+      background: url("https://www.datatables.net/examples/resources/details_open.png") no-repeat center center;
+      cursor: pointer;
+    }
+     
+    tr.dt-hasChild td.dt-control {
+      background: url("https://www.datatables.net/examples/resources/details_close.png") no-repeat center center;
+    }
+     
+    table.dataTable th.dt-left,
+    table.dataTable td.dt-left {
+      text-align: left;
+    }
+    table.dataTable th.dt-center,
+    table.dataTable td.dt-center,
+    table.dataTable td.dataTables_empty {
+      text-align: center;
+    }
+    table.dataTable th.dt-right,
+    table.dataTable td.dt-right {
+      text-align: right;
+    }
+    table.dataTable th.dt-justify,
+    table.dataTable td.dt-justify {
+      text-align: justify;
+    }
+    table.dataTable th.dt-nowrap,
+    table.dataTable td.dt-nowrap {
+      white-space: nowrap;
+    }
+    table.dataTable thead th.dt-head-left,
+    table.dataTable thead td.dt-head-left,
+    table.dataTable tfoot th.dt-head-left,
+    table.dataTable tfoot td.dt-head-left {
+      text-align: left;
+    }
+    table.dataTable thead th.dt-head-center,
+    table.dataTable thead td.dt-head-center,
+    table.dataTable tfoot th.dt-head-center,
+    table.dataTable tfoot td.dt-head-center {
+      text-align: center;
+    }
+    table.dataTable thead th.dt-head-right,
+    table.dataTable thead td.dt-head-right,
+    table.dataTable tfoot th.dt-head-right,
+    table.dataTable tfoot td.dt-head-right {
+      text-align: right;
+    }
+    table.dataTable thead th.dt-head-justify,
+    table.dataTable thead td.dt-head-justify,
+    table.dataTable tfoot th.dt-head-justify,
+    table.dataTable tfoot td.dt-head-justify {
+      text-align: justify;
+    }
+    table.dataTable thead th.dt-head-nowrap,
+    table.dataTable thead td.dt-head-nowrap,
+    table.dataTable tfoot th.dt-head-nowrap,
+    table.dataTable tfoot td.dt-head-nowrap {
+      white-space: nowrap;
+    }
+    table.dataTable tbody th.dt-body-left,
+    table.dataTable tbody td.dt-body-left {
+      text-align: left;
+    }
+    table.dataTable tbody th.dt-body-center,
+    table.dataTable tbody td.dt-body-center {
+      text-align: center;
+    }
+    table.dataTable tbody th.dt-body-right,
+    table.dataTable tbody td.dt-body-right {
+      text-align: right;
+    }
+    table.dataTable tbody th.dt-body-justify,
+    table.dataTable tbody td.dt-body-justify {
+      text-align: justify;
+    }
+    table.dataTable tbody th.dt-body-nowrap,
+    table.dataTable tbody td.dt-body-nowrap {
+      white-space: nowrap;
+    }
+     
+    /*
+     * Table styles
+     */
+    table.dataTable {
+      width: 100%;
+      margin: 0 auto;
+      clear: both;
+      border-collapse: separate;
+      border-spacing: 0;
+      /*
+       * Header and footer styles
+       */
+      /*
+       * Body styles
+       */
+    }
+    table.dataTable thead th,
+    table.dataTable tfoot th {
+      font-weight: bold;
+    }
+    table.dataTable thead th,
+    table.dataTable thead td {
+      padding: 10px 18px;
+      border-bottom: 1px solid #111111;
+    }
+    table.dataTable thead th:active,
+    table.dataTable thead td:active {
+      outline: none;
+    }
+    table.dataTable tfoot th,
+    table.dataTable tfoot td {
+      padding: 10px 18px 6px 18px;
+      border-top: 1px solid #111111;
+    }
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc,
+    table.dataTable thead .sorting_asc_disabled,
+    table.dataTable thead .sorting_desc_disabled {
+      cursor: pointer;
+      *cursor: hand;
+      background-repeat: no-repeat;
+      background-position: center right;
+    }
+    table.dataTable thead .sorting {
+      background-image: url("../images/sort_both.png");
+    }
+    table.dataTable thead .sorting_asc {
+      background-image: url("../images/sort_asc.png") !important;
+    }
+    table.dataTable thead .sorting_desc {
+      background-image: url("../images/sort_desc.png") !important;
+    }
+    table.dataTable thead .sorting_asc_disabled {
+      background-image: url("../images/sort_asc_disabled.png");
+    }
+    table.dataTable thead .sorting_desc_disabled {
+      background-image: url("../images/sort_desc_disabled.png");
+    }
+    table.dataTable tbody tr {
+      background-color: #ffffff;
+    }
+    table.dataTable tbody tr.selected {
+      background-color: #b0bed9;
+    }
+    table.dataTable tbody th,
+    table.dataTable tbody td {
+      padding: 8px 10px;
+    }
+    table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+      border-top: 1px solid #dddddd;
+    }
+    table.dataTable.row-border tbody tr:first-child th,
+    table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th,
+    table.dataTable.display tbody tr:first-child td {
+      border-top: none;
+    }
+    table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
+      border-top: 1px solid #dddddd;
+      border-right: 1px solid #dddddd;
+    }
+    table.dataTable.cell-border tbody tr th:first-child,
+    table.dataTable.cell-border tbody tr td:first-child {
+      border-left: 1px solid #dddddd;
+    }
+    table.dataTable.cell-border tbody tr:first-child th,
+    table.dataTable.cell-border tbody tr:first-child td {
+      border-top: none;
+    }
+    table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+      background-color: #f9f9f9;
+    }
+    table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
+      background-color: #acbad4;
+    }
+    table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+      background-color: #f6f6f6;
+    }
+    table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
+      background-color: #aab7d1;
+    }
+    table.dataTable.order-column tbody tr > .sorting_1,
+    table.dataTable.order-column tbody tr > .sorting_2,
+    table.dataTable.order-column tbody tr > .sorting_3, table.dataTable.display tbody tr > .sorting_1,
+    table.dataTable.display tbody tr > .sorting_2,
+    table.dataTable.display tbody tr > .sorting_3 {
+      background-color: #fafafa;
+    }
+    table.dataTable.order-column tbody tr.selected > .sorting_1,
+    table.dataTable.order-column tbody tr.selected > .sorting_2,
+    table.dataTable.order-column tbody tr.selected > .sorting_3, table.dataTable.display tbody tr.selected > .sorting_1,
+    table.dataTable.display tbody tr.selected > .sorting_2,
+    table.dataTable.display tbody tr.selected > .sorting_3 {
+      background-color: #acbad5;
+    }
+    table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+      background-color: #f1f1f1;
+    }
+    table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
+      background-color: #f3f3f3;
+    }
+    table.dataTable.display tbody tr.odd > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd > .sorting_3 {
+      background-color: whitesmoke;
+    }
+    table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1 {
+      background-color: #a6b4cd;
+    }
+    table.dataTable.display tbody tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_2 {
+      background-color: #a8b5cf;
+    }
+    table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_3 {
+      background-color: #a9b7d1;
+    }
+    table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+      background-color: #fafafa;
+    }
+    table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
+      background-color: #fcfcfc;
+    }
+    table.dataTable.display tbody tr.even > .sorting_3, table.dataTable.order-column.stripe tbody tr.even > .sorting_3 {
+      background-color: #fefefe;
+    }
+    table.dataTable.display tbody tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1 {
+      background-color: #acbad5;
+    }
+    table.dataTable.display tbody tr.even.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_2 {
+      background-color: #aebcd6;
+    }
+    table.dataTable.display tbody tr.even.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_3 {
+      background-color: #afbdd8;
+    }
+    table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
+      background-color: #eaeaea;
+    }
+    table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
+      background-color: #ececec;
+    }
+    table.dataTable.display tbody tr:hover > .sorting_3, table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
+      background-color: #efefef;
+    }
+    table.dataTable.display tbody tr:hover.selected > .sorting_1, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_1 {
+      background-color: #a2aec7;
+    }
+    table.dataTable.display tbody tr:hover.selected > .sorting_2, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
+      background-color: #a3b0c9;
+    }
+    table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_3 {
+      background-color: #a5b2cb;
+    }
+    table.dataTable.no-footer {
+      border-bottom: 1px solid #111111;
+    }
+    table.dataTable.nowrap th, table.dataTable.nowrap td {
+      white-space: nowrap;
+    }
+    table.dataTable.compact thead th,
+    table.dataTable.compact thead td {
+      padding: 4px 17px;
+    }
+    table.dataTable.compact tfoot th,
+    table.dataTable.compact tfoot td {
+      padding: 4px;
+    }
+    table.dataTable.compact tbody th,
+    table.dataTable.compact tbody td {
+      padding: 4px;
+    }
+     
+    table.dataTable th,
+    table.dataTable td {
+      box-sizing: content-box;
+    }
+     
+    /*
+     * Control feature layout
+     */
+    .dataTables_wrapper {
+      position: relative;
+      clear: both;
+    }
+    .dataTables_wrapper .dataTables_length {
+      float: left;
+    }
+    .dataTables_wrapper .dataTables_length select {
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      padding: 5px;
+      background-color: transparent;
+      padding: 4px;
+    }
+    .dataTables_wrapper .dataTables_filter {
+      float: right;
+      text-align: right;
+    }
+    .dataTables_wrapper .dataTables_filter input {
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      padding: 5px;
+      background-color: transparent;
+      margin-left: 3px;
+    }
+    .dataTables_wrapper .dataTables_info {
+      clear: both;
+      float: left;
+      padding-top: 0.755em;
+    }
+    .dataTables_wrapper .dataTables_paginate {
+      float: right;
+      text-align: right;
+      padding-top: 0.25em;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+      box-sizing: border-box;
+      display: inline-block;
+      min-width: 1.5em;
+      padding: 0.5em 1em;
+      margin-left: 2px;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      *cursor: hand;
+      color: #333333 !important;
+      border: 1px solid transparent;
+      border-radius: 2px;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+      color: #333333 !important;
+      border: 1px solid #979797;
+      background-color: white;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dcdcdc));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, white 0%, #dcdcdc 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -moz-linear-gradient(top, white 0%, #dcdcdc 100%);
+      /* FF3.6+ */
+      background: -ms-linear-gradient(top, white 0%, #dcdcdc 100%);
+      /* IE10+ */
+      background: -o-linear-gradient(top, white 0%, #dcdcdc 100%);
+      /* Opera 11.10+ */
+      background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
+      /* W3C */
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+      cursor: default;
+      color: #666 !important;
+      border: 1px solid transparent;
+      background: transparent;
+      box-shadow: none;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      color: white !important;
+      border: 1px solid #111111;
+      background-color: #585858;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #585858), color-stop(100%, #111111));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #585858 0%, #111111 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -moz-linear-gradient(top, #585858 0%, #111111 100%);
+      /* FF3.6+ */
+      background: -ms-linear-gradient(top, #585858 0%, #111111 100%);
+      /* IE10+ */
+      background: -o-linear-gradient(top, #585858 0%, #111111 100%);
+      /* Opera 11.10+ */
+      background: linear-gradient(to bottom, #585858 0%, #111111 100%);
+      /* W3C */
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+      outline: none;
+      background-color: #2b2b2b;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b2b2b), color-stop(100%, #0c0c0c));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -moz-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+      /* FF3.6+ */
+      background: -ms-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+      /* IE10+ */
+      background: -o-linear-gradient(top, #2b2b2b 0%, #0c0c0c 100%);
+      /* Opera 11.10+ */
+      background: linear-gradient(to bottom, #2b2b2b 0%, #0c0c0c 100%);
+      /* W3C */
+      box-shadow: inset 0 0 3px #111;
+    }
+    .dataTables_wrapper .dataTables_paginate .ellipsis {
+      padding: 0 1em;
+    }
+    .dataTables_wrapper .dataTables_processing {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 40px;
+      margin-left: -50%;
+      margin-top: -25px;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 1.2em;
+      background-color: white;
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(25%, rgba(255, 255, 255, 0.9)), color-stop(75%, rgba(255, 255, 255, 0.9)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+      background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+      background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+      background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+    }
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_processing,
+    .dataTables_wrapper .dataTables_paginate {
+      color: #333333;
+    }
+    .dataTables_wrapper .dataTables_scroll {
+      clear: both;
+    }
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+      *margin-top: -1px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > td, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td {
+      vertical-align: middle;
+    }
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > th > div.dataTables_sizing,
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > td > div.dataTables_sizing, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > th > div.dataTables_sizing,
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td > div.dataTables_sizing {
+      height: 0;
+      overflow: hidden;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .dataTables_wrapper.no-footer .dataTables_scrollBody {
+      border-bottom: 1px solid #111111;
+    }
+    .dataTables_wrapper.no-footer div.dataTables_scrollHead table.dataTable,
+    .dataTables_wrapper.no-footer div.dataTables_scrollBody > table {
+      border-bottom: none;
+    }
+    .dataTables_wrapper:after {
+      visibility: hidden;
+      display: block;
+      content: "";
+      clear: both;
+      height: 0;
+    }
+     
+    @media screen and (max-width: 767px) {
+      .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        float: none;
+        text-align: center;
+      }
+      .dataTables_wrapper .dataTables_paginate {
+        margin-top: 0.5em;
+      }
+    }
+    @media screen and (max-width: 640px) {
+      .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: center;
+      }
+      .dataTables_wrapper .dataTables_filter {
+        margin-top: 0.5em;
+      }
+    }
+    
+    table.dataTable.dtr-inline.collapsed>tbody>tr>td.child,table.dataTable.dtr-inline.collapsed>tbody>tr>th.child,table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty{cursor:default !important}table.dataTable.dtr-inline.collapsed>tbody>tr>td.child:before,table.dataTable.dtr-inline.collapsed>tbody>tr>th.child:before,table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty:before{display:none !important}table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child,table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child{position:relative;padding-left:30px;cursor:pointer}table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{top:12px;left:4px;height:14px;width:14px;display:block;position:absolute;color:white;border:2px solid white;border-radius:14px;box-shadow:0 0 3px #444;box-sizing:content-box;text-align:center;text-indent:0 !important;font-family:'Courier New', Courier, monospace;line-height:14px;content:'+';background-color:#0275d8}table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{content:'-';background-color:#d33333}table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child,table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child{padding-left:27px}table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before,table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child:before{top:5px;left:4px;height:14px;width:14px;border-radius:14px;line-height:14px;text-indent:3px}table.dataTable.dtr-column>tbody>tr>td.control,table.dataTable.dtr-column>tbody>tr>th.control{position:relative;cursor:pointer}table.dataTable.dtr-column>tbody>tr>td.control:before,table.dataTable.dtr-column>tbody>tr>th.control:before{top:50%;left:50%;height:16px;width:16px;margin-top:-10px;margin-left:-10px;display:block;position:absolute;color:white;border:2px solid white;border-radius:14px;box-shadow:0 0 3px #444;box-sizing:content-box;text-align:center;text-indent:0 !important;font-family:'Courier New', Courier, monospace;line-height:14px;content:'+';background-color:#0275d8}table.dataTable.dtr-column>tbody>tr.parent td.control:before,table.dataTable.dtr-column>tbody>tr.parent th.control:before{content:'-';background-color:#d33333}table.dataTable>tbody>tr.child{padding:0.5em 1em}table.dataTable>tbody>tr.child:hover{background:transparent !important}table.dataTable>tbody>tr.child ul.dtr-details{display:inline-block;list-style-type:none;margin:0;padding:0}table.dataTable>tbody>tr.child ul.dtr-details>li{border-bottom:1px solid #efefef;padding:0.5em 0}table.dataTable>tbody>tr.child ul.dtr-details>li:first-child{padding-top:0}table.dataTable>tbody>tr.child ul.dtr-details>li:last-child{border-bottom:none}table.dataTable>tbody>tr.child span.dtr-title{display:inline-block;min-width:75px;font-weight:bold}div.dtr-modal{position:fixed;box-sizing:border-box;top:0;left:0;height:100%;width:100%;z-index:100;padding:10em 1em}div.dtr-modal div.dtr-modal-display{position:absolute;top:0;left:0;bottom:0;right:0;width:50%;height:50%;overflow:auto;margin:auto;z-index:102;overflow:auto;background-color:#f5f5f7;border:1px solid black;border-radius:0.5em;box-shadow:0 12px 30px rgba(0,0,0,0.6)}div.dtr-modal div.dtr-modal-content{position:relative;padding:1em}div.dtr-modal div.dtr-modal-close{position:absolute;top:6px;right:6px;width:22px;height:22px;border:1px solid #eaeaea;background-color:#f9f9f9;text-align:center;border-radius:3px;cursor:pointer;z-index:12}div.dtr-modal div.dtr-modal-close:hover{background-color:#eaeaea}div.dtr-modal div.dtr-modal-background{position:fixed;top:0;left:0;right:0;bottom:0;z-index:101;background:rgba(0,0,0,0.6)}@media screen and (max-width: 767px){div.dtr-modal div.dtr-modal-display{width:95%}}div.dtr-bs-modal table.table tr:first-child td{border-top:none}
+    
+    </style>
+<style>
+    #loading {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: fixed;
+      display: block;
+      opacity: 0.7;
+      background-color: #fff;
+      z-index: 99;
+      text-align: center;
+      position:absolute;;
+    
+    }
+    
+    #loading-image {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      z-index: 100;
+      position:absolute;;
+    }
+    </style>
+    
+    <div id="loading">
+        <img id="loading-image" src="dist/img/ajax-loader.gif" alt="Loading..." />
+      </div>
+    
+      <script>
+        $(window).load(function() {
+          $('#loading').hide();
+        });
+      </script>
+<!-- Page Content (header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row sm-2">
+            <!-- Título -->
+            <div class="col-sm-6">
+                <h1>Estoque Infantil</h1>
+            </div>
+            <!-- Navegação histórica -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="admin">Home</a></li>
+                    <li class="breadcrumb-item active">Cadastros</li>
+                    <li class="breadcrumb-item active">Material</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Page Content (conteúdo) -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Para iniciar fechado, adicione collapsed-card na class-->
+                <div class="card card-primary card-outline">
+
+                    <!-- ######################################################################### Cabeçalho -->
+                    <div class="card-header">
+
+                        <!-- Botões -->
+                        <div class="btn-group">
+                            <!-- Abre o modal para INSERT -->
+                            <% DTPermissoes.forEach((row, index) => { %>
+                                <% if (row.adicionar  == 1) {%>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                                data-target="#modalADD">&nbsp;Adicionar&nbsp;
+                            </button>
+                            <% } else { %>
+                                <% } %>
+                                <% }) %>
+                        </div>
+
+                        <div class="btn-group">
+                            <!-- Botão para exportar dados da tabela (tableExport) -->
+                            <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle"
+                                data-toggle="dropdown">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                                <span class="caret"></span>
+                            </button>
+
+                            <!-- Exportar -->
+                            <div class="dropdown-menu" role="menu">
+                                <!-- Exportar para Excel -->
+                                <a class="dropdown-item" style="cursor: pointer;" onclick="(function(){
+                                $('#TBtable').tableExport({type:'excel', fileName: 'Materiais', exportHiddenCells: true});                
+                                })()"><i class="fas fa-file-excel" style="color: #118311;"></i>&nbsp;&nbsp;Ms-Excel</a>
+                                <!-- Exportar para PDF -->
+                                <a class="dropdown-item" style="cursor: pointer;" onclick="(function(){
+                                $('#TBtable').tableExport({type:'pdf', fileName: 'Materiais', exportHiddenCells: true});               
+                                })()"><i class="fas fa-file-pdf" style="color: #d17021;"></i>&nbsp;&nbsp;PDF</a>
+                            </div>
+                        </div>
+
+
+                        
+                        <!-- Botão Ocultar ou exibir o card -->
+                        <div class="card-tools">
+                            <!-- Botão Abrir/fechar card (Icone: fa-minus ou fa-plus) -->
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <!-- Botão destruir card -->
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                                title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                        <script type="text/javascript">
+
+                            function changeFunc() {
+                             var selectBox = document.getElementById("selectBox2");
+                             var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                             
+                             if (selectBox.value === '1') {
+                             window.location.href = "/material_infantil";
+                             }
+                             if (selectBox.value === '2') {
+                             window.location.href = "/material_fundamental";
+                             }
+                             if (selectBox.value === '3') {
+                             window.location.href = "/material_novopatio";
+                             }
+                            }
+                         
+                           </script>
+                          </head>
+                          <body>
+                            <% Perfil.forEach((row, index) => { %>
+                                <% if (row.id_perfil  == 1 || row.id_perfil  == 2) {%>
+                           <select id="selectBox2" onchange="changeFunc();">
+                            <option value="0">-- Selecione a unidade --</option>
+                            <option value="1">Projeto Vida Infantil</option>
+                            <option value="2">Projeto Vida - Fundamental</option>
+                            <option value="3">Novo Pátio</option>
+                           </select>
+                           <% } else { %>
+                            <% } %>
+                            <% }) %>
+
+                    </div>
+
+                    <!-- ########9################################################################# Tabela -->
+                    <div class="card-body">
+
+ 
+
+                         <!--BUSCA ITEM PESQUISADO-->
+                         <div class="col-sm-4">
+                            <div class="form-group">
+                               <label for="" class="label">Produtos</label>
+                               <select class="form-control form-control-sm select2" onchange="changeFunc2()";
+                                  style="width: 100%;" name="" id="selectBox" required>
+                                  <option value="0">Todos</option>
+                                  <% DTProdutos.forEach((row, index) => { %>
+                                  <option value="<%= row.cod %>"><%= row.nome %></option>
+                               <% }) %>
+                               </select>
+                            </div>
+                         </div>
+
+
+
+
+                            
+                              
+
+
+
+
+                            
+
+
+
+                            <table id="example" class="display" width="100%"></table>
+
+                            <script>
+                                var el = document.getElementById('example');
+                                el.addEventListener('click', function(e) {
+                                   // alert(e.target.id);
+                                   console.log('#'+e.target.id)
+                                     img = document.querySelector('#'+e.target.id);
+                                    console.log(img.className)
+                                    if (img.className === "1"){
+                                
+                                        img.className = "0"
+                                        img.setAttribute('src', 'dist/img/generic/olho_bloqueado.png'); 
+                                        url = "/atualizaVisualizaUser/" + 0 + "/" + 1 + "/" + e.target.id.replace('img', '') + ""
+                                request = new XMLHttpRequest();
+                                console.log(url)
+                                request.open('GET', url, true);  // `false` makes the request synchronous
+                                request.send(200);            
+                                    }
+                                    else{
+                                       
+                                        img.className = "1"
+                                        img.setAttribute('src', 'dist/img/generic/olho_desbloqueado.png');
+                                        
+                                        url = "/atualizaVisualizaUser/" + 1 + "/" + 1 + "/" + e.target.id.replace('img', '') + ""
+                                request = new XMLHttpRequest();
+                                console.log(url)
+                                request.open('GET', url, true);  // `false` makes the request synchronous
+                                request.send(200); 
+                                    }
+                                
+                                });
+                                
+                                
+                            </script>                            
+
+                            <script type="text/javascript" src="jquery.js"></script>
+
+                            <script type="text/javascript">
+                            
+                            $(window).on("load", function(){
+
+                            })
+                            
+                            </script> 
+
+                        <script>
+
+
+
+function ColorEstoqueMinimo() {
+
+
+     tr = document.getElementById("example");
+     tds = tr.getElementsByTagName("td");
+  
+     var x = document.getElementsByClassName('example');
+for (var i = 0; i < x.length; i++) {
+    x[i].style.color = "red";
+}
+};   
+
+
+
+
+
+window.onload = function() {
+    Page('somar');
+
+    if ('<%= id_perfil %>' === '1') {
+    $('input[name="material_EDIT"]').removeAttr('readonly');
+    }
+};
+
+function changeFunc2() {
+ var selectBox = document.getElementById("selectBox");
+ var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+ console.log(selectedValue);
+
+
+ 
+ if (selectedValue == 0){
+tabela(1, 'busca');
+ }
+ else {
+ tabela(selectedValue, 'filtro');
+ }
+}
+
+var p = 0;
+var idAnterior
+var geral
+
+function tabela(paginaSelecionada, tipo){
+    var url = "/consultaEstoque/1/"+paginaSelecionada+"/"+tipo+""
+var a
+var xmlhttp = new XMLHttpRequest(); 
+xmlhttp.open("GET", url,true);
+
+ // subscribe to this event before you send your request.
+ xmlhttp.onreadystatechange=function() {
+  if (xmlhttp.readyState==4) {
+ 
+   // And to view in firebug
+
+   a = JSON.parse(xmlhttp.responseText)
+
+   console.log(a)
+
+
+   Criatabela(a)
+  }
+ }
+ xmlhttp.send(null)
+}
+
+
+
+         
+
+function Criatabela(conteudo){
+
+    if ( $( "#agoravai" ).length ) { 
+        $('#example').DataTable().clear().destroy();
+} else {
+
+}
+
+
+
+                        $(document).ready(function() {    		
+                            var fs = function(){
+                              var dataObject = conteudo;
+
+
+                              var dataSet = [];
+                              $.each(dataObject, function(index,data){
+                                dataSet.push(
+                                    [
+  
+                                    data.cod,
+                                    data.alerta,
+                                    data.material,
+                                    data.descricao,   
+                                    data.categoria,  
+                                    data.estoque,  
+                                    data.quantidade_min,  
+                                    data.valor_total,  
+                                    data.valor_uni,  
+                                    data.estoque_adquirido,
+                                    data.estoque_doacao,
+                                    data.estoque_devolucao,
+                                    data.opcoes
+
+                                    
+
+
+                                ]);
+                              });
+                              $('#example').DataTable({
+                                order: [ [ 0, "desc" ] ],
+                                destroy: true,
+                                language: {
+            "lengthMenu": "Display _MENU_ records per page",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)"
+        },
+        responsive: {
+            details: {
+                type: 'column',
+                target: 'tr'
+            }
+        },
+        columnDefs: [ {
+            className: 'control',
+            orderable: false,
+           // targets: 0
+        } ],
+   
+                                data: dataSet,
+                                "bFilter": false,
+                                "bPaginate": false,
+                                columns: [
+                                  { title: 'Cod' },
+                                  { title: 'Alerta' },
+                                  { title: 'Material' },
+                                  { title: 'Descrição' },
+                                  { title: 'Categoria' },
+                                  { title: 'Estoque' },
+                                  { title: 'Minimo' },
+                                  { title: 'Valor Total' },
+                                  { title: 'Valor Unitário' },
+                                  { title: 'Estoque Comprado' },
+                                  { title: 'Estoque Doação' },
+                                  { title: 'Estoque Devolução' },
+                                  { title: 'Opções' }
+                                ]
+                              });	
+                            };
+                            fs();  		
+                          });
+
+                          var elementRef = document.getElementById("loading");
+
+elementRef = elementRef.style.display = "none";
+     
+                        }
+                 
+   
+
+function Page(operacao) {
+
+    var url = "/qtsPagina"
+    var paginas
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", url, true);
+
+    // subscribe to this event before you send your request.
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4) {
+
+            // And to view in firebug
+
+            conteudo = JSON.parse(xmlhttp.responseText)
+
+            pagina = conteudo[0].paginas
+
+            paginasArray = generateRange(pagina)
+
+
+            if (p < Math.ceil(paginasArray.length / 5) || operacao == 'diminuir') {
+
+                l(paginasArray, 5, operacao)
+
+            }
+
+            
+        }
+    }
+    xmlhttp.send(null)
+}
+
+
+//2 criar numero de paginas
+function generateRange(n) {
+    return Array.from({
+        length: n
+    }, (_, i) => i + 1);
+}
+
+//3 mostrar itens do array  
+function l(items, l, operacao) {
+
+    click(operacao)
+
+    function click(operacao) {
+        if (operacao == 'somar') {
+            p++;
+        }
+
+        if (operacao == 'diminuir') {
+            if (p > 1) {
+                p--;
+            }
+            if (p == 1) {
+
+                total = $("#lista li").length
+
+                for (var i = 0; i < total - 2; i++) {
+                    myFunction()
+
+                }
+            }
+        }
+
+
+        function myFunction() {
+            var list = document.getElementById("lista");
+            list.removeChild(list.childNodes[1, 3]);
+        }
+
+        console.log(p)
+
+
+
+        if (p > 1) {
+            total = $("#lista li").length
+
+            for (var i = 0; i < total - 2; i++) {
+
+                myFunction()
+
+            }
+        }
+
+
+
+
+        let result = [];
+        let tP = Math.ceil(items.length / l);
+        let count = (p * l) - l;
+        let delimiter = count + l;
+        if (p <= tP) {
+            for (let i = count; i < delimiter; i++) {
+                if (items[i] != null) {
+                    result.push(items[i]);
+                }
+                count++;
+            }
+        }
+
+        adicionarLi(result)
+
+        geral = result[0]
+
+        
+
+        li = document.getElementById(geral)
+        li.classList.value = 'page-item active'
+        ativaClass(geral)
+
+
+    }
+
+}
+
+function adicionarLi(myStringArray) {
+
+    var lista = document.getElementById("lista").innerHTML;
+
+
+
+    var arrayLength = myStringArray.length;
+    for (var i = 0; i < arrayLength; i++) {
+        lista = lista + "<li class='page-item' onclick='ativaClass(" + myStringArray[i] + ")' id=" + myStringArray[i] + " > <a class='page-link' href='#'>" + myStringArray[i] + "</a></li>";
+        document.getElementById("lista").innerHTML = lista;
+
+    }
+
+
+
+
+    var el = document.getElementById('proximo');
+    el.parentNode.removeChild(el);
+
+    voltar();
+
+
+
+
+    function voltar() {
+        var lista = document.getElementById("lista").innerHTML;
+
+        lista = lista + "<li class='page-item' onclick=Page('somar') id='proximo'><a class='page-link' href='#'>Próximo</a></li>";
+        document.getElementById("lista").innerHTML = lista;
+    }
+}; // fechamento limitador de paginas
+
+function ativaClass(id) {
+
+    var elementRef = document.getElementById("loading");
+
+    elementRef = elementRef.style.display = "block"
+
+
+    tabela(id, 'busca');
+    
+
+
+    li = document.getElementById(geral)
+    li.classList.value = 'page-item'
+
+    if (idAnterior == null) {
+        idAnterior = id
+    }
+
+    if (idAnterior != null) {
+
+        li = document.getElementById(idAnterior)
+        if (li == null) {
+            idAnterior = id
+            li = document.getElementById(idAnterior)
+            li.classList.value = 'page-item'
+        }
+
+        li.classList.value = 'page-item'
+    }
+
+
+    li = document.getElementById(id)
+
+    li.classList.value = 'page-item active'
+    idAnterior = id
+
+};
+
+                            </script>
+
+<ul class="pagination" id ="lista">
+    <li class="page-item" onclick="Page('diminuir')"><a class="page-link" href="#" tabindex="-1">Anterior</a></li>
+
+    <li class="page-item"  id="proximo">
+      <a class="page-link" onclick="Page('somar')" href="#">Próximo</a>
+    </li>
+
+    
+  </ul>
+
+                        <% if (DTMaterial.length > 0) {%>
+                            
+                        
+                        <% } else { %>
+                        <!-- Não existe dados na tabela -->
+                        <p class="text-center">Clique <a data-toggle="modal" data-target="#modalADD"
+                                style="cursor:pointer; color:rgb(79, 79, 255)"> aqui </a> para adicionar um novo
+                            registro.</p>
+                        <% } %>
+                    </div>
+                   
+
+                    <!-- ######################################################################### Modal para ADICIONAR -->
+                    <div class="modal fade" id="modalADD" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Adicionar</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form" action="/addMaterial_infantil" method="post" enctype="multipart/form-data" autocomplete="off">
+                                    <!-- Campos do formulário -->
+                                    <div class="modal-body">
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_ADD" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_ADD" id="cod_ADD" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row"> 
+                                            <!-- Conteúdo central do modal --> 
+                                            <div class="row">
+                                                <div class="col-sm-5" style="text-align: center;">
+                                                    <!-- Imagem -->
+                                                    <div class="form-group"
+                                                            style="align-items: center;display: inline-grid;">
+    
+                                                        <!-- Imagem e opção para zoom -->
+                                                        <img class="img-thumbnail-usuario mx-auto d-block" name="foto_ADD" id="foto_ADD" src="dist/img/materiais/sem_foto_big.jpg">
+                                                            
+                                                        <!-- Botão Upload que simula im clique no elemento input file oculto -->
+                                                        <button type="button"
+                                                            class="btn btn-default btn-xs"
+                                                            style="margin-top:5px;place-self: center;"
+                                                            onclick="document.getElementById('image_ADD').click()"><i
+                                                            class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload</button>
+    
+                                                        <!-- Elemento input file oculto -->
+                                                        <div class="custom-file" style="display: none;">
+                                                            <input type="file" class="custom-file-input form-control-sm"
+                                                                name="image_ADD" id="image_ADD" onclick="(function(){
+                                                                    document.getElementById('image_ADD').onchange = function (evt) {
+                                                                        var tgt = evt.target || window.event.srcElement,
+                                                                        files = tgt.files;                                 
+                                                                        if (FileReader && files && files.length) {
+                                                                            var fr = new FileReader();
+                                                                            fr.onload = function () {                                                                        
+                                                                            document.getElementById('foto_ADD').src = fr.result;                                                                
+                                                                            }                                  
+                                                                        fr.readAsDataURL(files[0]);
+                                                                        }
+                                                                    }
+                                                                })()">
+                                                            <label class="custom-file-label" for="image_ADD"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                                                          
+                                            
+                                            
+                                            <div class="col-sm-12">
+                                                <!-- Campos de cadastro -->
+                                                <div class="row">
+                                                    <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                                              
+                                                        <div class="row">
+                                                            <!-- Material -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="material_ADD" class="label">Material</label>
+                                                                    <input type="text"  autocomplete="off"  class="form-control form-control-sm"
+                                                                        name="material_ADD" id="material_ADD"
+                                                                        placeholder="Material" required>
+                                                                </div>
+                                                            </div>
+
+                                                       
+                                                        </div>
+
+                                                        <!-- Descrição -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="descricao_ADD" class="label">Descrição</label>
+                                                                    <input type="text"  autocomplete="off" class="form-control form-control-sm"
+                                                                        name="descricao_ADD" id="descricao_ADD"
+                                                                        placeholder="Descrição">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        
+                                                        
+
+                                                            <!-- Grupo -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="categoria_ADD" class="label">Categoria</label>
+                                                                    <select class="form-control form-control-sm select2"
+                                                                        style="width: 100%;" name="categoria_ADD" id="categoria_ADD">
+                                                                        <% DTGrupo.forEach((row, index) => { %>
+                                                                        <option value="<%= row.cod %>"><%= row.grupo %>
+                                                                        </option>
+                                                                        <% }) %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                                                                <!-- Botões -->
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                            class="btn btn-primary" id="btnSalvar_ADD">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                  
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ######################################################################### Modal para EDITAR -->
+                    <div class="modal fade" id="modalEDIT" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Produto</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form"
+                                    action="/editMaterial_infantil/ <?= document.getElementById('cod_EDIT').value ?>"
+                                    method="post" enctype="multipart/form-data">
+                                    <!-- Formulário para Editar usuário -->
+                                    <div class="modal-body">
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_EDIT" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_EDIT" id="cod_EDIT" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Campos de cadastro -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                                                        
+                                                        <div class="col-sm-6" style="text-align: center;">
+                                                            <!-- Imagem //-->
+                                                            <div class="form-group" style="align-items: center;display: inline-grid;">
+                                                                
+                                                                <a id="foto_ZOOM">                                               
+                                                                    <img class="img-thumbnail-material mx-auto d-block zoom" name="foto_EDIT" id="foto_EDIT">
+                                                                </a>
+                                                                
+                                                                <!-- Botão Upload que simula im clique no elemento input file oculto -->
+                                                                <button type="button" class="btn btn-default btn-xs"
+                                                                style="margin-top:5px;place-self: end;"
+                                                                    onclick="document.getElementById('image_EDIT').click()"><i
+                                                                        class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Alterar imagem</button>
+            
+                                                                <!-- Elemento input file oculto -->
+                                                                <div class="custom-file" style="display: none;">
+                                                                    <input type="file" class="custom-file-input form-control-sm"
+                                                                        name="image_EDIT" id="image_EDIT" onclick="(function(){
+                                                                            document.getElementById('image_EDIT').onchange = function (evt) {
+                                                                                var tgt = evt.target || window.event.srcElement,
+                                                                                files = tgt.files;                                 
+                                                                                if (FileReader && files && files.length) {
+                                                                                    var fr = new FileReader();
+                                                                                    fr.onload = function () {                                                   
+                                                                                    document.getElementById('foto_EDIT').src = fr.result;
+                                                                                    }                                  
+                                                                                fr.readAsDataURL(files[0]);
+                                                                                }
+                                                                            }
+                                                                        })()">
+                                                                    <label class="custom-file-label" for="image_EDIT"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <!-- Material -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="material_EDIT" class="label">Material</label>
+                                                                    <input type="text"  autocomplete="off" class="form-control form-control-sm"
+                                                                        name="material_EDIT" id="material_EDIT"
+                                                                        placeholder="Material" required>
+                                                                </div>
+                                                            </div>
+
+                                                          
+                                                        </div>
+
+                                                        <!-- Descrição -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="descricao_EDIT" class="label">Descrição</label>
+                                                                    <input type="text"  autocomplete="off" class="form-control form-control-sm"
+                                                                        name="descricao_EDIT" id="descricao_EDIT"
+                                                                        placeholder="Descrição">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Multiplo, valor, grupo -->
+                                                        <div class="row">
+                                                         <!-- calcula o campo valor unidade -->
+                                                            <script>
+                                                                function calc2()
+                                                                {
+                                                                var a = quantidade_EDIT.value;
+                                                                var b = valor_total_EDIT.value;
+
+                                                               c = parseFloat(b.replace(',','.'));
+                                                                
+
+                                                                resultado = parseFloat(c) / parseFloat(a);
+
+                                                                valor_uni_EDIT.value = resultado.toFixed(2) 
+
+                                                                }
+                                                            </script>
+
+                                                          
+
+                                                            <!-- estoque -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="estoque_EDIT" class="label">Estoque</label>
+                                                                    <input type="number"  autocomplete="off" class="form-control form-control-sm" 
+                                                                        name="estoque_EDIT" id="estoque_EDIT"
+                                                                        placeholder="Quantidade" required readonly="readonly">
+                                                                </div>
+                                                            </div>
+
+                                                                <!-- Estoque Mínima -->        
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="quantidade_min_EDIT" class="label">Estoque Mínimo</label>
+                                                                    <input type="text"  autocomplete="off" class="form-control form-control-sm"
+                                                                        name="quantidade_min_EDIT" id="quantidade_min_EDIT"
+                                                                        placeholder="Estoque Mínimo" required>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <!-- Valor total -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group"> 
+                                                                    <label for="valor_total_EDIT" class="label">R$ Valor Total </label> 
+                                                                    <input type="text"   autocomplete="off"  onkeyup="calc2()" step=".01"
+                                                                        class="form-control form-control-sm money"
+                                                                        name="valor_total_EDIT" id="valor_total_EDIT" placeholder="R$ Valor"
+                                                                        required readonly="readonly">
+                                                                </div>
+                                                            </div>
+
+                                                           <!-- Valor Unitario -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="valor_uni_EDIT" class="label">R$ Valor Unitário</label>
+                                                                    <input type="text"  autocomplete="off" 
+                                                                        class="form-control form-control-sm money"
+                                                                        name="valor_uni_EDIT" id="valor_uni_EDIT" placeholder="R$ Valor Unitário"
+                                                                        required readonly="readonly">
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Grupo -->
+                                                           <!-- Valor Unitario -->
+                                                           <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label for="categoria_EDIT" class="label">Categoria</label>
+                                                                <select class="form-control form-control-sm select2"
+                                                                    style="width: 100%;" name="categoria_EDIT" id="categoria_EDIT">
+                                                                    <% DTGrupo.forEach((row, index) => { %>
+                                                                    <option value="<%= row.grupo %>"><%= row.grupo %>
+                                                                    </option>
+                                                                    <% }) %>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+
+                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botões -->
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                            class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- #########################################################################adicionar produdos-->
+
+                    <div class="modal fade" id="modalEDITADD" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Entrada de Produto</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+
+                                
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form"
+                                    action="/editAdicionaMaterial_infantil/ <?= document.getElementById('cod_EDIT').value ?>"
+                                    method="post" enctype="multipart/form-data">
+                                    <!-- Formulário para Editar usuário -->
+                                    <div class="modal-body">
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_EDITADD" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_EDITADD" id="cod_EDITADD" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Campos de cadastro -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                                                        
+														
+                                                            <!-- Material -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="material_EDITADD" class="label">Material</label>
+                                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                                        name="material_EDITADD" id="material_EDITADD"
+                                                                        placeholder="Material" required disabled="disabled">
+                                                                </div>
+                                                            </div>
+                                                            <script>
+                                                                function calc()
+                                                                {
+                                                                var a1 = estoque_EDITADD.value;
+                                                                var b2 = entrada_EDITADD.value;
+
+                                                                console.log(estoque_EDITADD.value)
+                                                                console.log(entrada_EDITADD.value)
+
+                                                                resultado = Number(a1) + Number(b2);
+
+                                                                total_estoque_EDITADD.value = resultado
+
+                                                                
+                                                                     
+                                                                console.log(resultado)
+
+                                                                }
+                                                            </script>
+
+                                                          
+
+                                                            <!-- estoque -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="estoque_EDITADD" class="label">Estoque atual</label>
+                                                                    <input type="number" autocomplete="off" class="form-control form-control-sm" 
+                                                                        name="estoque_EDITADD" id="estoque_EDITADD"
+                                                                        placeholder="Quantidade" required readonly="readonly">
+                                                                </div>
+                                                            </div>
+
+
+                                                                    <script>
+                                                                        function myFunction() {
+
+
+                                                                    // Get the checkbox
+                                                                    var checkBox = document.getElementById("doacao_EDITADD");
+                                                                    // Get the output text
+                                                                    var text = document.getElementById("valor_uni_EDITADD");
+
+                                                                    // If the checkbox is checked, display the output text
+                                                                    if (checkBox.checked == false){
+                                                                        text.style.display = "block";
+                                                                        var checkbox = document.querySelector("#devolucao_EDITADD");
+                                                                        ativarCheckbox(checkbox);
+                                                                        
+                                                                    } else {
+                                                                        text.style.display = "none";
+                                                                        var checkbox = document.querySelector("#devolucao_EDITADD");
+                                                                        ativarCheckbox(checkbox);
+                                                                    }
+                                                                    }s
+
+                                                                    var checkbox = document.querySelector("#devolucao_EDITADD");
+                                                                    
+                                                                        function ativarCheckbox(checkbox) {
+                                                                            checkbox.checked = false;
+                                                                        }
+                                                                        
+
+                                                                    function myFunction2() {
+                                                                    // Get the checkbox
+                                                                    var checkBox = document.getElementById("devolucao_EDITADD");
+                                                                    // Get the output text
+                                                                    var text = document.getElementById("valor_uni_EDITADD");
+                                                                    var text2 = document.getElementById("doacao_EDITADD");
+
+                                                                    // If the checkbox is checked, display the output text
+                                                                    if (checkBox.checked == false){
+                                                                        text.style.display = "block";
+                                                                        var checkbox = document.querySelector("#doacao_EDITADD");
+                                                                        ativarCheckbox(checkbox);
+                                                                        
+                                                                    } else {
+                                                                        text.style.display = "none";
+                                                                        var checkbox = document.querySelector("#doacao_EDITADD");
+                                                                        ativarCheckbox(checkbox);
+                                                                    }
+                                                                    }
+                                                                    </script>          
+
+                                                          
+
+                                                            <!-- Doação -->
+                                                            <div class="col-sm-4" >
+                                                            <div class="custom-control custom-checkbox" >
+                                                                <input class="custom-control-input" type="checkbox" onclick="myFunction()" 
+                                                                    style="cursor: pointer" name="doacao_EDITADD" id="doacao_EDITADD">
+                                                                <label for="doacao_EDITADD" class="custom-control-label" 
+                                                                    style="cursor: pointer">Doação</label>
+                                                            </div>
+                                                        </div>
+
+                                                            <!-- Devolução -->
+                                                            <div class="col-sm-4" >
+                                                            <div class="custom-control custom-checkbox" >
+                                                                <input class="custom-control-input" type="checkbox" onclick="myFunction2()" 
+                                                                    style="cursor: pointer" name="devolucao_EDITADD" id="devolucao_EDITADD">
+                                                                <label for="devolucao_EDITADD" class="custom-control-label" 
+                                                                    style="cursor: pointer">Devolução</label>
+                                                            </div>
+                                                        </div>
+                                                    
+
+
+                                                            <!-- Entrada -->
+                                                            <div class="col-sm-4" >
+                                                                <div class="form-group">
+                                                                    <label for="entrada_EDITADD" class="label">Entrada</label>
+                                                                    <input type="number"  autocomplete="off"  class="form-control form-control-sm" 
+                                                                        name="entrada_EDITADD" id="entrada_EDITADD"
+                                                                        placeholder="Entrada" required onkeyup="calc()">
+                                                                </div>
+                                                            </div>
+                                                            <!-- Valor Unitário -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group" id='valor_uni_EDITADD' style = "display: block"> 
+                                                                    <label for="valor_uni_EDITADD" class="label" id='valor_uni_EDITADD'>R$ Valor Unitário </label> 
+                                                                    <input type="text"  autocomplete="off" id="valor_uni_EDITADD" step=".01"
+                                                                        class="form-control form-control-sm money"
+                                                                        name="valor_uni_EDITADD" id="valor_uni_EDITADD" placeholder="R$ Valor">                                                                        
+                                                                </div>
+                                                            </div>
+
+
+                                                               <!-- Total Estoque -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="total_estoque_EDITADD" class="label">Total Estoque</label>
+                                                                    <input type="number" autocomplete="off" class="form-control form-control-sm" 
+                                                                        name="total_estoque_EDITADD" id="total_estoque_EDITADD"
+                                                                        placeholder="Total Estoque" required readonly="readonly">
+                                                                </div>
+                                                            </div>
+                                                             <!-- observacao-->
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="observacao_EDITADD" class="label">Observação</label>
+                                                                    <input type="text"  autocomplete="off"  class="form-control form-control-sm"
+                                                                        name="observacao_EDITADD" id="observacao_EDITADD"
+                                                                        placeholder="Observação" required>
+                                                                </div>
+                                                            </div>
+
+                                                                                                <!-- Botões -->
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                            class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+
+                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    <!-- ########################Baixa de Produtos###################################-->
+                    <div class="modal fade" id="modalEDITBAIXA" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Baixa de Produto</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+
+                                
+
+                                <!-- Conteúdo central do modal -->
+                                <form role="form"
+                                    action="/editBaixaMaterial_infantil/ <?= document.getElementById('cod_EDIT').value ?>"
+                                    method="post" enctype="multipart/form-data" onsubmit="return valida_form(this)">
+                                    <!-- Formulário para Editar usuário -->
+                                    <div class="modal-body">
+
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="valor_uni_EDITBAIXA" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="valor_uni_EDITBAIXA" id="valor_uni_EDITBAIXA" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="cod_EDITBAIXA" class="label">Cod</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="cod_EDITBAIXA" id="cod_EDITBAIXA" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="id_valor_material_EDITBAIXA" class="label">id_valor_material_EDITBAIXA</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="id_valor_material_EDITBAIXA" id="id_valor_material_EDITBAIXA" placeholder="Cod" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Cod -->
+                                        <div class="row" style="display: none;">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="quantidade_min_EDITBAIXA" class="label">Estoque Mínimo</label>
+                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                        name="quantidade_min_EDITBAIXA" id="quantidade_min_EDITBAIXA" placeholder="Estoque Mínimo" readonly=“true”>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Campos de cadastro -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12" style="min-inline-size: -webkit-fill-available;">
+                                                        
+														
+                                                            <!-- Material -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="material_EDITBAIXA" class="label">Material</label>
+                                                                    <input type="text" autocomplete="off" class="form-control form-control-sm"
+                                                                        name="material_EDITBAIXA" id="material_EDITBAIXA"
+                                                                        placeholder="Material" required disabled="disabled">
+                                                                </div>
+                                                            </div>
+                                                            <script>
+                                                                function calc8()
+                                                                {
+                                                                var a1 = estoque_EDITBAIXA.value;
+                                                                var b2 = saida_EDITBAIXA.value;
+
+
+                                                                resultado = Number(a1) - Number(b2);
+
+                                                                total_estoque_EDITBAIXA.value = resultado
+
+                                                                
+                                                                     
+
+                                                                }
+
+                                                                function valida_form (){
+                                                                if(document.getElementById("total_estoque_EDITBAIXA").value < 0){
+                                                                alert('Baixa não pode ser maior do que estoque atual !');
+                                                                return false
+                                                                } else {
+                                                                    return true
+                                                                }
+                                                                }
+                                                            </script>
+
+                                                          
+
+                                                            <!-- estoque -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="estoque_EDITBAIXA" class="label">Estoque atual</label>
+                                                                    <input type="number" autocomplete="off" class="form-control form-control-sm" 
+                                                                        name="estoque_EDITBAIXA" id="estoque_EDITBAIXA"
+                                                                        placeholder="Quantidade" required readonly="readonly">
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Entrada -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="saida_EDITBAIXA" class="label">Saída</label>
+                                                                    <input type="number"  autocomplete="off"  class="form-control form-control-sm" 
+                                                                        name="saida_EDITBAIXA" id="saida_EDITBAIXA"
+                                                                        placeholder="Entrada" required onkeyup="calc8()">
+                                                                </div>
+                                                            </div>
+                                                               <!-- Total Estoque -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="total_estoque_EDITBAIXA" class="label">Total Estoque</label>
+                                                                    <input type="number" autocomplete="off" class="form-control form-control-sm" 
+                                                                        name="total_estoque_EDITBAIXA" id="total_estoque_EDITBAIXA"
+                                                                        placeholder="Total Estoque" required readonly="readonly">
+                                                                </div>
+                                                            </div>
+
+                                                                <!-- Classificação -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="classificacao_EDITBAIXA" class="label">Classificação</label>
+                                                                    <select class="form-control form-control-sm select2"
+                                                                        style="width: 100%;" name="classificacao_EDITBAIXA" id="classificacao_EDITBAIXA">     
+                                                                        <option value="EXTRAVIO">EXTRAVIO</option>
+                                                                        <option value="VALIDADE ">VALIDADE</option>
+                                                                        <option value="OUTROS">OUTROS</option>
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="observacao_EDITBAIXA" class="label">Observação</label>
+                                                                    <input type="text"  autocomplete="off"  class="form-control form-control-sm"
+                                                                        name="observacao_EDITBAIXA" id="observacao_EDITBAIXA"
+                                                                        placeholder="Observação" required>
+                                                                </div>
+                                                            </div>
+
+                                                            
+
+                                                                                                <!-- Botões -->
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="submit"
+                                            class="btn btn-primary" id="btnSalvar_EDIT">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+
+                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- #########################################################################fim-->
+
+                    <!-- ######################################################################### Modal para ELIMINAR -->
+                    <div class="modal fade" id="modalDEL" id="modal-danger" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-danger">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Atenção!</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Tem certeza que deseja eliminar o registro selecionado?</p>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">
+                                        Não, cancelar
+                                    </button>
+
+                                    <!-- Esse span é oculto pois apenas recebe o texto contendo o cod para eliminação na função abaixo -->
+                                    <span style="display:none" id="cod_DEL"></span>
+
+                                    <!-- Função anónima dentro da classe button que direciona para a route /delete/:id após o usuário clicar em sim no modal -->
+                                    <button type="button" class="btn btn-outline-light" onclick="(function() {
+                                            window.location = '/delMaterial_infantil/' + document.getElementById('cod_DEL').textContent;
+                                            })()" id="btnDeletar_DEL">Sim, eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Grava o texto recebido da variável status_Crud do routes/usuario
+           lá no "tails.ejs" tem uma função no final que verifica o que tem neste span"
+           e dispara uma função de alerta do toastr de acordo com o texto -->
+<span style="display:none" id='status_Crud'><%= status_Crud %></span>
+
+
+     
+  
